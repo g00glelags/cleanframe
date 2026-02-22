@@ -1,0 +1,294 @@
+@use "sass:math";
+@use "sass:color";
+@use "sass:string";
+@use "color-palette-default";
+@use "tweaks";
+@use "variables";
+
+// Legacy palette aliases for files still relying on global names via @import chains.
+$red-light: color-palette-default.$red-light;
+$red-: color-palette-default.$red-;
+$pink-light: color-palette-default.$pink-light;
+$pink-: color-palette-default.$pink-;
+$purple-light: color-palette-default.$purple-light;
+$purple-: color-palette-default.$purple-;
+$blue-light: color-palette-default.$blue-light;
+$blue-: color-palette-default.$blue-;
+$teal-light: color-palette-default.$teal-light;
+$teal-: color-palette-default.$teal-;
+$green-light: color-palette-default.$green-light;
+$green-: color-palette-default.$green-;
+$sea-light: color-palette-default.$sea-light;
+$sea-: color-palette-default.$sea-;
+$yellow-light: color-palette-default.$yellow-light;
+$yellow-: color-palette-default.$yellow-;
+$orange-light: color-palette-default.$orange-light;
+$orange-: color-palette-default.$orange-;
+$grey-050: color-palette-default.$grey-050;
+$grey-100: color-palette-default.$grey-100;
+$grey-150: color-palette-default.$grey-150;
+$grey-200: color-palette-default.$grey-200;
+$grey-250: color-palette-default.$grey-250;
+$grey-300: color-palette-default.$grey-300;
+$grey-350: color-palette-default.$grey-350;
+$grey-400: color-palette-default.$grey-400;
+$grey-450: color-palette-default.$grey-450;
+$grey-500: color-palette-default.$grey-500;
+$grey-550: color-palette-default.$grey-550;
+$grey-600: color-palette-default.$grey-600;
+$grey-650: color-palette-default.$grey-650;
+$grey-700: color-palette-default.$grey-700;
+$grey-750: color-palette-default.$grey-750;
+$grey-800: color-palette-default.$grey-800;
+$grey-850: color-palette-default.$grey-850;
+$grey-900: color-palette-default.$grey-900;
+$grey-950: color-palette-default.$grey-950;
+$white: color-palette-default.$white;
+$black: color-palette-default.$black;
+$surface-soft: color-palette-default.$surface-soft;
+$notebook-tab-inactive-bg: color-palette-default.$notebook-tab-inactive-bg;
+$notebook-tab-active-bg: color-palette-default.$notebook-tab-active-bg;
+$cinnamon-panel-bg: color-palette-default.$cinnamon-panel-bg;
+$cinnamon-panel-fg: color-palette-default.$cinnamon-panel-fg;
+$app-selection-bg: color-palette-default.$app-selection-bg;
+$app-selection-fg: color-palette-default.$app-selection-fg;
+$progress-bar-fill: color-palette-default.$progress-bar-fill;
+$button-accent: color-palette-default.$button-accent;
+$calc-cell-selection-bg: color-palette-default.$calc-cell-selection-bg;
+$calc-cell-selection-fg: color-palette-default.$calc-cell-selection-fg;
+$desktop-selection-bg: color-palette-default.$desktop-selection-bg;
+$desktop-selection-fg: color-palette-default.$desktop-selection-fg;
+$calendar-selected-bg: color-palette-default.$calendar-selected-bg;
+$calendar-selected-fg: color-palette-default.$calendar-selected-fg;
+$button-close: color-palette-default.$button-close;
+$button-max: color-palette-default.$button-max;
+$button-min: color-palette-default.$button-min;
+
+// When color definition differs for  and light variant,
+// it gets @if ed depending on $variant
+
+@function gtkalpha($c, $a) {
+  @return string.unquote("alpha(#{$c}, #{$a})");
+}
+
+@function gtkmix($c1,$c2,$r) {
+  $ratio: 1 -  math.div($r, 100%); // match SCSS mix()
+
+  @return string.unquote("mix(#{$c1},#{$c2},#{$ratio})");
+}
+
+@function gtkshade($c,$s) {
+  @return string.unquote("shade(#{$c},#{$s})");
+}
+
+@function gtkcolor($c) {
+  @return string.unquote("@#{$c}");
+}
+
+// Legacy helper kept for compatibility with existing theme sources.
+// "en" means "enlighten": slightly increase lightness by the provided amount.
+@function en($c, $amount) {
+  @return color.scale($c, $lightness: $amount);
+}
+
+// Global visual boost controls
+$visual-boost-factor: 1.3;
+$color-saturation-boost: 30%;
+$black-tone-boost: 30%;
+
+@function boost-alpha($alpha) {
+  @return math.min($alpha * $visual-boost-factor, 0.99);
+}
+
+@function boost-color($c) {
+  // Use scale to keep saturation in a valid 0-100% range for GTK CSS output.
+  @return color.scale($c, $saturation: $color-saturation-boost);
+}
+
+@function apply-black-tone($c) {
+  @return color.mix(black, $c, $black-tone-boost);
+}
+
+@function theme($color) {
+  @return boost-color(color-palette-default.$blue-);
+}
+
+@function background($type) {
+  @if $type == 'a' { @return color-palette-default.$white; }
+
+  @if $type == 'b' { @return $surface-soft; }
+
+  @if $type == 'c' { @return $surface-soft; }
+
+  @if $type == 'd' { @return apply-black-tone(color-palette-default.$grey-250); }
+
+  @if $type == 'e' { @return apply-black-tone(color-palette-default.$grey-800); }
+
+  @if $type == 'f' { @return apply-black-tone(color-palette-default.$grey-750); }
+
+  @if $type == 'g' { @return apply-black-tone(color-palette-default.$grey-700); }
+
+  @if $type == 'h' { @return apply-black-tone(color-palette-default.$grey-650); }
+}
+
+$background: background(c);
+$surface: background(a);
+$base: background(a);
+$base-alt: background(b);
+$tooltip: variables.rgb(background(h), 0.9);
+$osd: background(e);
+$scrim: background(f);
+$scrim-alt: background(g);
+$scrim-inverse: variables.rgb(white, 0.1);
+$titlebar: background(a);
+$titlebar-backdrop: background(b);
+
+@function on($color: $background, $state: 'primary') {
+  // Allow 'light' or '' to $color
+  @if $color == 'light' { $color: white; }
+
+  @if $color == '' or $color == null { $color: black; }
+
+  // Calculate color brightness according to https://www.w3.org/TR/AERT/#color-contrast
+  $brightness: (color.channel($color, 'red', $space: rgb) * 299 + color.channel($color, 'green', $space: rgb) * 587 + color.channel($color, 'blue', $space: rgb) * 114) * 0.001;
+
+  @if $brightness >= 156 {
+    @if $state == 'primary' { @return #000000; }
+
+    @if $state == 'secondary' { @return #000000; }
+
+    @if $state == 'disabled' { @return rgba(black, boost-alpha(0.38)); }
+
+    @if $state == 'secondary-disabled' { @return rgba(black, boost-alpha(0.26)); }
+
+    @if $state == 'track' { @return rgba(black, boost-alpha(0.26)); }
+
+    @if $state == 'track-disabled' { @return rgba(black, boost-alpha(0.15)); }
+
+    @if $state == 'divider' { @return rgba(black, boost-alpha(0.12)); }
+
+    @if $state == 'secondary-fill' { @return rgba(black, boost-alpha(0.104)); }
+
+    @if $state == 'fill' { @return rgba(black, boost-alpha(0.04)); }
+  } @else {
+    @if $state == 'primary' { @return #FFFFFF; }
+
+    @if $state == 'secondary' { @return #FFFFFF; }
+
+    @if $state == 'disabled' { @return rgba(white, boost-alpha(0.5)); }
+
+    @if $state == 'secondary-disabled' { @return rgba(white, boost-alpha(0.3)); }
+
+    @if $state == 'track' { @return rgba(white, boost-alpha(0.3)); }
+
+    @if $state == 'track-disabled' { @return rgba(white, boost-alpha(0.15)); }
+
+    @if $state == 'divider' { @return rgba(white, boost-alpha(0.12)); }
+
+    @if $state == 'secondary-fill' { @return rgba(white, boost-alpha(0.104)); }
+
+    @if $state == 'fill' { @return rgba(white, boost-alpha(0.04)); }
+  }
+}
+
+@function highlight($color) {
+  @if color.channel($color, 'lightness', $space: hsl) >= 80% { @return rgba(white, 0.4); } @else if color.channel($color, 'lightness', $space: hsl) >= 40% { @return rgba(white, 0.2); } @else { @return rgba(white, 0.1); }
+}
+
+//
+// Basic colors
+//
+
+$primary: theme(tweaks.$theme);
+$primary-fixed: theme(tweaks.$theme);
+$primary-overlay-20: rgba($primary, 0.2);
+$primary-overlay-30: rgba($primary, 0.3);
+$primary-overlay-35: rgba($primary, 0.35);
+$drop_target_color: boost-color(color-palette-default.$orange-);
+$keyboard: apply-black-tone(color-palette-default.$grey-050);
+$keyboard-alt: apply-black-tone(color-palette-default.$grey-300);
+$system: color-palette-default.$grey-750;
+$popover: background(a);
+$popover-floating-bg: if(sass(tweaks.$opacity == 'solid'): $popover; else: rgba($popover, 0.97));
+$panel-solid: background(c);
+$panel: rgba($panel-solid, 0.65);
+$shell: background(c);
+$button: gtkalpha(currentcolor, 0.05);
+$entry: gtkalpha(currentcolor, 0.05);
+
+//
+// Misc colors
+//
+
+$link: $primary;
+$link-visited: boost-color(color-palette-default.$purple-);
+$warning: boost-color(color-palette-default.$yellow-);
+$error: boost-color(color-palette-default.$red-);
+$success: boost-color(color-palette-default.$sea-);
+$suggested: $button-accent;
+$destructive: $error;
+$check_radio_primary: if(sass(tweaks.$check_radio == 'default'): $success; else: $primary);
+$frame: variables.rgb(black, boost-alpha(0.1));
+$border: variables.rgb(black, boost-alpha(0.12));
+$solid-border: rgba($background, 8%);
+$border-alt: variables.rgb(black, boost-alpha(0.16));
+$titlebar-indicator: $primary;
+
+//
+// Overlay state colors
+//
+
+$overlay-normal: gtkalpha(currentcolor, boost-alpha(0.05));
+$overlay-hover: gtkalpha(currentcolor, boost-alpha(0.104));
+$overlay-focus: gtkalpha(currentcolor, boost-alpha(0.104));
+$overlay-focus-hover: gtkalpha(currentcolor, boost-alpha(0.208));
+$overlay-active: gtkalpha(currentcolor, boost-alpha(0.12));
+$overlay-checked: gtkalpha(currentcolor, boost-alpha(0.10));
+$overlay-selected: gtkalpha(currentcolor, boost-alpha(0.06));
+
+//
+// Text and derivative colors
+//
+
+$text: on($background);
+$text-secondary: on($background, secondary);
+$text-disabled: on($background, disabled);
+$text-secondary-disabled: on($background, secondary-disabled);
+$track: on($background, track);
+$track-disabled: on($background, track-disabled);
+$divider: on($background, divider);
+$secondary-fill: on($background, secondary-fill);
+$fill: on($background, fill);
+$titlebar-text: on($titlebar);
+$titlebar-text-secondary: on($titlebar, secondary);
+$titlebar-text-disabled: on($titlebar, disabled);
+$titlebar-text-secondary-disabled: on($titlebar, secondary-disabled);
+$titlebar-track: on($titlebar, track);
+$titlebar-track-disabled: on($titlebar, track-disabled);
+$titlebar-divider: on($titlebar, divider);
+$titlebar-secondary-fill: on($titlebar, secondary-fill);
+$titlebar-fill: on($titlebar, fill);
+$primary-text: black;
+$primary-text-secondary: on($primary, secondary);
+$primary-text-disabled: on($primary, disabled);
+$primary-text-secondary-disabled: on($primary, secondary-disabled);
+$primary-track: on($primary, track);
+$primary-track-disabled: on($primary, track-disabled);
+$primary-divider: on($primary, divider);
+$primary-secondary-fill: on($primary, secondary-fill);
+$primary-fill: on($primary, fill);
+
+// App selection colors (desktop selection uses dedicated overrides/tokens)
+$selection-bg: $app-selection-bg;
+$selection-fg: $app-selection-fg;
+
+//
+// Titlebutton colors
+//
+
+$titlebutton-close: color-palette-default.$button-close;
+$titlebutton-max: color-palette-default.$button-max;
+$titlebutton-min: color-palette-default.$button-min;
+
+// workaround for GTK3 @placeholder_text_color which doesn't allow translucent colors
+$placeholder_text_color: color.mix(black, $base, 60%);

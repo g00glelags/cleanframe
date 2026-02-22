@@ -1,0 +1,74 @@
+@use "../../colors";
+@use "../../variables";
+
+/* App Switcher */
+
+.switcher-popup {
+  padding: 8px;
+  spacing: variables.$space-size * 4;
+}
+
+// switcher onscreen panel
+.switcher-list {
+  @extend %osd_panel !optional;
+
+  border-radius: variables.$material-radius + variables.$space-size * 2;
+
+  .item-box {
+    padding: 8px;
+    border-radius: variables.$material-radius;
+    border: none;
+    background-color: transparent;
+    color: colors.$text;
+
+    &:outlined {
+      background-color: colors.$secondary-fill;
+      color: colors.$text;
+    }
+
+    &:selected {
+      background-color: colors.$primary;
+      color: colors.on(colors.$primary);
+    }
+  }
+
+  // window thumbnails
+  .thumbnail-box {
+    padding: 2px;
+    spacing: variables.$space-size;
+  }
+
+  .thumbnail {
+    width: 256px;
+  }
+
+  .separator {
+    width: 1px;
+    background: colors.$border;
+  }
+
+  .switcher-list-item-container {
+    spacing: variables.$space-size * 2;
+  }
+}
+
+.switcher-arrow {
+  border-color: colors.on($state: secondary);
+  color: colors.on($state: secondary);
+
+  &:highlighted {
+    color: colors.on(colors.$primary);
+  }
+}
+
+// Input Source Switcher
+.input-source-switcher-symbol {
+  font-size: 34pt;
+  width: 96px;
+  height: 96px;
+}
+
+// Window cycler highlight
+.cycler-highlight {
+  border: 5px solid colors.$primary;
+}

@@ -1,0 +1,57 @@
+@use "sass:color";
+@use "../../colors";
+@use "../../tweaks";
+@use "../../variables";
+
+/* Window Picker */
+
+$window_picker_spacing: variables.$space-size; // 6px
+$window_picker_padding: variables.$space-size * 2; // 12px
+$window_close_button_size: 30px;
+$window_close_button_padding: 3px;
+
+// Window picker
+.window-picker {
+  // Space between window thumbnails
+  spacing: $window_picker_spacing;
+}
+
+// Window titles
+.window-caption {
+  color: colors.on();
+  background-color: colors.$tooltip;
+  border-radius: if(sass(tweaks.$corner-style == 'circular'): variables.$circular-radius; else: variables.$material-radius);
+  padding: variables.$space-size variables.$space-size * 2;
+  box-shadow: none;
+  border: none;
+}
+
+// Close button
+.window-close {
+  background-color: colors.$system;
+  color: colors.on();
+  border-radius: variables.$circular-radius;
+  padding: $window_close_button_padding;
+  height: $window_close_button_size;
+  width: $window_close_button_size;
+  box-shadow: -1px 1px 5px 0 variables.rgb(0,0,0,0.5);
+  transition-duration: 300ms;
+
+  & sticon { icon-size: 24px; }
+
+  &:hover {
+    background-color: color.adjust(colors.$system, $lightness: 15%);
+  }
+
+  &:active {
+    color: color.adjust(colors.on(), $alpha: -0.2);
+    background-color: en(colors.$system, 5%);
+  }
+}
+
+.workspace-background {
+  // keep in sync with BACKGROUND_CORNER_RADIUS_PIXELS in workspace.js
+  border-radius: 30px;
+  background-color: colors.$system;
+  box-shadow: 0 4px 16px 4px variables.rgb(black, 0.15);
+}

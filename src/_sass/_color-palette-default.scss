@@ -1,0 +1,103 @@
+// Default Theme Color Palette
+
+// Red
+$red-light: #F44336;
+$red-: #E53935;
+
+// Pink
+$pink-light: #F06292;
+$pink-: #EC407A;
+
+// Purple
+$purple-light: #BA68C8;
+$purple-: #AB47BC;
+
+// Blue
+$blue-light: #3281EA;
+$blue-: #1A73E8;
+
+// Teal
+$teal-light: #4DB6AC;
+$teal-: #009688;
+
+// Green
+$green-light: #66BB6A;
+$green-: #4CAF50;
+$sea-light: #81C995;
+$sea-: #0F9D58;
+
+// Yellow
+$yellow-light: #FBC02D;
+$yellow-: #FFD600;
+
+// Orange
+$orange-light: #FB8C00;
+$orange-: #F57C00;
+
+// Grey
+$grey-050: #FAFAFA;
+$grey-100: #F2F2F2;
+$grey-150: #EEE;
+$grey-200: #DDD;
+$grey-250: #CCC;
+$grey-300: #BFBFBF;
+$grey-350: #A0A0A0;
+$grey-400: #9E9E9E;
+$grey-450: #868686;
+$grey-500: #727272;
+$grey-550: #555;
+$grey-600: #464646;
+$grey-650: #3C3C3C;
+$grey-700: #2C2C2C;
+$grey-750: #242424;
+$grey-800: #212121;
+$grey-850: #121212;
+$grey-900: #0F0F0F;
+$grey-950: #030303;
+
+// White
+$white: #FFF;
+
+// Black
+$black: #000;
+
+// Semantic theme tokens
+// Used by GTK secondary window surfaces and sidebars (e.g. Thunar side pane).
+$surface-soft: #FAFAFA;
+
+// Used by GTK notebook inactive tabs (e.g. Thunar and GNOME Terminal tab strip).
+$notebook-tab-inactive-bg: #E6E6E6;
+
+// Used by focused/active tabs in GTK notebooks and tabbars (e.g. Thunar, Nemo, XFCE Terminal, GNOME Terminal).
+$notebook-tab-active-bg: #E6F7FF;
+
+// Used by Cinnamon panel/menu bar background.
+$cinnamon-panel-bg: #E2E2E2;
+$cinnamon-panel-fg: #000;
+
+// Used by GTK app selections (e.g. Nemo/Thunar list and icon selection).
+$app-selection-bg: #A6E4FF;
+$app-selection-fg: #000;
+
+// Used by progress bars across GTK/Cinnamon surfaces.
+$progress-bar-fill: #34A653;
+
+// Used by GTK button accent states (checked/suggested-action), isolated from border/focus primary.
+$button-accent: #35A854;
+
+// Used by LibreOffice Calc cell selection override (to avoid low contrast with light app selection).
+$calc-cell-selection-bg: #00B8FF;
+$calc-cell-selection-fg: #000;
+
+// Used by desktop selection (mouse drag rubberband + desktop icon selection).
+$desktop-selection-bg: #1A73E8;
+$desktop-selection-fg: #FFF;
+
+// Used by Cinnamon calendar selected day state.
+$calendar-selected-bg: #1F883D;
+$calendar-selected-fg: #FFF;
+
+// Windows Button
+$button-close: #fd5f51;
+$button-max: #38c76a;
+$button-min: #fdbe04;

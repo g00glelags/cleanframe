@@ -1,0 +1,162 @@
+@use "../../colors";
+@use "../../variables";
+@use "../drawing";
+
+/* Login Dialog */
+
+.login-dialog-banner-view {
+  padding-top: 24px;
+  max-width: 23em;
+}
+
+.login-dialog,
+.unlock-dialog {
+  // reset
+  border: none;
+  background-color: transparent;
+
+  stentry {
+    selection-background-color: colors.$selection-bg;
+    selected-color: colors.$selection-fg !important;
+
+    @include drawing.entry(normal, $fc:colors.on($state: track));
+    &:focus { @include drawing.entry(focus, $fc:colors.on()); }
+
+    &:insensitive {
+      @include drawing.entry(insensitive, $fc:colors.on($state: divider));
+    }
+  }
+
+  .modal-dialog-button-box { spacing: 3px; }
+
+  .modal-dialog-button {
+    padding: 4px 18px;
+    box-shadow: none;
+
+    @include drawing.button(flat-normal, $tc: colors.on());
+    &:hover,&:focus { @include drawing.button(flat-hover, $tc: colors.on()); }
+    &:active { @include drawing.button(flat-active, $tc: colors.on()); }
+    &:insensitive { @include drawing.button(flat-insensitive, $tc: colors.on()); }
+
+    &:default {
+      @include drawing.button(normal, $c: colors.$suggested, $tc: colors.on());
+      &:hover,&:focus { @include drawing.button(hover, $c: colors.$suggested, $tc: colors.on()); }
+      &:active { @include drawing.button(active, $c: colors.$suggested, $tc: colors.on()); }
+      &:insensitive { @include drawing.button(insensitive, $c: colors.on($state: divider), $tc: colors.on($state: disabled)); }
+    }
+  }
+
+  .cancel-button,
+  .switch-user-button,
+  .login-dialog-session-list-button {
+    padding: 0;
+    border-radius: 99px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-color: colors.on($state: divider);
+    color: colors.on($state: secondary);
+
+    &:hover,&:focus { color: colors.on(); }
+
+    &:active {
+      color: colors.on();
+      background-color: colors.on($state: track);
+    }
+
+    sticon { icon-size: variables.$base-icon-size; }
+  }
+
+  .caps-lock-warning-label,
+  .login-dialog-message-warning {
+    color: colors.on();
+  }
+}
+
+.login-dialog-logo-bin { padding: 24px 0; }
+.login-dialog-banner { color: colors.on($state: secondary); }
+.login-dialog-button-box { width: 23em; spacing: 5px; }
+.login-dialog-message { text-align: center; }
+.login-dialog-user-selection-box { padding: 100px 0; }
+
+.login-dialog-not-listed-label {
+  padding-left: 2px;
+  font-size: 1em;
+  font-weight: bold;
+  color: colors.on($state: secondary);
+  padding-top: 1em;
+  &:hover { color: colors.on(); }
+  &:focus { background-color: colors.on($state: divider); }
+
+  .login-dialog-not-listed-button:focus &,
+  .login-dialog-not-listed-button:hover & {
+    color: colors.on();
+  }
+}
+
+.login-dialog-user-list-view { -st-vfade-offset: 1em; }
+
+.login-dialog-user-list {
+  spacing: 12px;
+  width: 23em;
+  &:expanded .login-dialog-user-list-item:selected { background-color: colors.on($state: divider); color: colors.on(); }
+  &:expanded .login-dialog-user-list-item:hover { background-color: colors.on($state: divider); color: colors.on(); }
+  &:expanded .login-dialog-user-list-item:active { background-color: colors.on($state: track); color: colors.on(); }
+  &:expanded .login-dialog-user-list-item:logged-in { border-right: 2px solid colors.on(); }
+}
+
+.login-dialog-user-list-item {
+  border-radius: variables.$material-radius;
+  padding: 6px;
+  color: colors.on($state: secondary);
+  &:ltr { padding-right: 1em; }
+  &:rtl { padding-left: 1em; }
+  &:hover { background-color: colors.on($state: divider); color: colors.on(); }
+  &:active { background-color: colors.on($state: track); color: colors.on(); }
+
+  .login-dialog-timed-login-indicator {
+    height: 2px;
+    margin: 6px 0 0;
+    background-color: colors.on();
+  }
+  &:focus .login-dialog-timed-login-indicator { background-color: colors.on(); }
+}
+
+.user-widget-label {
+  color: colors.on();
+}
+
+.user-widget.horizontal .user-widget-label {
+  @include drawing.font(title);
+
+  font-weight: bold;
+  padding-left: 15px;
+
+  &:ltr { padding-left: 14px; text-align: left; }
+  &:rtl { padding-right: 14px; text-align: right; }
+}
+
+.user-widget.vertical .user-widget-label {
+  @include drawing.font(title);
+
+  text-align: center;
+  font-weight: normal;
+  padding-top: variables.$base-icon-size;
+}
+
+.login-dialog-prompt-layout {
+  padding-top: 24px;
+  padding-bottom: 12px;
+  spacing: variables.$space-size * 2;
+  width: 23em;
+}
+
+.login-dialog-prompt-entry {
+  height: 1.5em;
+}
+
+.login-dialog-prompt-label {
+  color: colors.on($state: disabled);
+  font-size: 1em;
+  padding-top: 1em;
+}

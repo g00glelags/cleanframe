@@ -1,0 +1,145 @@
+@use "../colors";
+@use "../tweaks";
+@use "../variables";
+@use "drawing";
+
+// This is the RIGHT PLACE to edit the stylesheet
+
+// let's start by telling people not to edit the generated CSS:
+$cakeisalie: "This stylesheet is generated, DO NOT EDIT";
+
+/* #{$cakeisalie} */
+
+stage {
+  @include drawing.font(body-1);
+
+  color: colors.$text;
+}
+
+%status_text {
+  @include drawing.font(display-2);
+
+  color: colors.on($state: disabled);
+}
+
+$bubble_button_radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius);
+
+%bubble_button {
+  border: none;
+  margin: 0;
+
+  @include drawing.button(normal);
+  @include drawing.font(button);
+
+  &:hover { @include drawing.button(hover); }
+  &:active { @include drawing.button(active); color: colors.$text !important; }
+  &:insensitive { @include drawing.button(insensitive); }
+  &:focus { @include drawing.button(focus); }
+
+  &:first-child {
+    border-radius: $bubble_button_radius 0 0 $bubble_button_radius;
+  }
+
+  &:last-child {
+    border-right-width: 0;
+    border-radius: 0 $bubble_button_radius $bubble_button_radius 0;
+  }
+
+  &:first-child:last-child {
+    border-right-width: 0;
+    border-radius: $bubble_button_radius;
+  }
+}
+
+%dialog_button {
+  border: none;
+  margin: 0;
+  border-radius: $bubble_button_radius;
+
+  @include drawing.button(normal);
+  @include drawing.font(button);
+
+  &:hover { @include drawing.button(hover); }
+  &:active { @include drawing.button(active); color: colors.$text !important; }
+  &:insensitive { @include drawing.button(insensitive); }
+  &:focus { @include drawing.button(focus); }
+}
+
+%osd_button {
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+
+  &:insensitive { @include drawing.button(insensitive, $c:colors.$system, $tc: colors.on($state: secondary-disabled)); }
+  &:focus { @include drawing.button(focus, $c:colors.$system, $tc: colors.on()); }
+  &:hover { @include drawing.button(hover, $c:colors.$system, $tc: colors.on()); }
+  &:active { @include drawing.button(active, $c:colors.$system, $tc: colors.on()); }
+  &:outlined, &:checked { @include drawing.button(checked); }
+}
+
+%osd_panel {
+  color: colors.on(colors.$popover);
+  background-color: colors.$popover;
+  border: none;
+  box-shadow: variables.$shell-shadow-z4;
+  padding: variables.$space-size * 2;
+}
+
+/* General Typography */
+
+%large_title {
+  font-weight: 300;
+
+  @include drawing.fontsize(24);
+}
+
+%title_1 {
+  font-weight: 800;
+
+  @include drawing.fontsize(20);
+}
+
+%title_2 {
+  font-weight: 800;
+
+  @include drawing.fontsize(15);
+}
+
+%title_3 {
+  font-weight: 700;
+
+  @include drawing.fontsize(15);
+}
+
+%title_4 {
+  font-weight: 700;
+
+  @include drawing.fontsize(13);
+}
+
+%heading {
+  font-weight: 700;
+
+  @include drawing.fontsize(11);
+}
+
+%caption_heading {
+  font-weight: 700;
+
+  @include drawing.fontsize(9);
+}
+
+%caption {
+  font-weight: 400;
+
+  @include drawing.fontsize(9);
+}
+
+%smaller {
+  font-weight: 400;
+
+  @include drawing.fontsize(8);
+}
+
+%monospace {font-family: monospace;}
+%numeric { font-feature-settings: "tnum";}

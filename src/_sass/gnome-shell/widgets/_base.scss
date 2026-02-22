@@ -1,0 +1,29 @@
+@use "../../colors";
+@use "../../variables";
+
+// Links
+.shell-link {
+  border-radius: variables.$material-radius;
+  color: colors.$link;
+  background-color: transparent;
+
+  &:hover {
+    color: colors.$link;
+    background-color: rgba(colors.$link, 0.3 * 0.5);
+  }
+
+  &:active {
+    color: colors.$link;
+    background-color: rgba(colors.$link, 0.3);
+  }
+}
+
+// Outline for low res icons
+.lowres-icon {
+  icon-shadow: 0 1px 2px variables.rgb(black, 0.1);
+}
+
+// Dropshadow for large icons
+.icon-dropshadow {
+  icon-shadow: 0 2px 5px variables.rgb(black, 0.15);
+}

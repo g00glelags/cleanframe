@@ -1,0 +1,109 @@
+@use "sass:color";
+@use "../../color-palette-default";
+@use "../../colors";
+@use "../../variables";
+
+/* On-screen Keyboard */
+
+$keyboard_hover_bg_color: en(colors.$keyboard, 10%);
+$keyboard_active_bg_color: en(colors.$keyboard, 20%);
+
+// draw keys using button function
+#keyboard {
+  background-color: variables.rgb(black, 0.85);
+  border: none;
+  border-top-width: 0;
+  box-shadow: none;
+
+  .page-indicator {
+    padding: variables.$space-size;
+
+    .page-indicator-icon {
+      width: 8px;
+      height: 8px;
+    }
+  }
+}
+
+// the container for individual keys
+.key-container {
+  padding: variables.$margin-size;
+  spacing: variables.$margin-size;
+}
+
+// the keys
+.keyboard-key {
+  min-height: 2em;
+  min-width: 2em;
+  font-size: 14pt;
+  font-weight: bold;
+  border-radius: variables.$material-radius;
+  border: none;
+  color: inherit;
+  background-color: colors.$keyboard;
+  box-shadow: 0 1px rgba(color-palette-default.$black, 0.2);
+
+  &:focus, &:hover { color: colors.$text; background-color: $keyboard_hover_bg_color; }
+  &:checked, &:active { color: colors.$text; background-color: $keyboard_active_bg_color; }
+
+  &:grayed { // FIXME
+    background-color: colors.$scrim;
+    color: colors.on();
+    border-color: colors.$scrim;
+  }
+
+  &.default-key {
+    background-color: colors.$keyboard-alt;
+    box-shadow: 0 1px rgba(color-palette-default.$black, 0.2);
+    &:focus, &:hover { color: colors.$text-secondary; background-color: colors.$keyboard; }
+    &:checked, &:active { color: colors.$text-secondary; background-color: colors.$track; }
+  }
+
+  &.enter-key {
+    background-color: colors.$primary;
+    color: colors.$text;
+
+    &:focus, &:hover { color: colors.$text; background-color: color.adjust(colors.$primary, $lightness: 5%); }
+    &:checked, &:active { color: colors.$text; background-color: colors.$secondary-fill; }
+  }
+
+  &.shift-key-uppercase { color: colors.$primary }
+
+  sticon { icon-size: 1.125em; }
+}
+
+// long press on a key popup
+.keyboard-subkeys {
+  color: inherit;
+  border-radius: variables.$material-radius;
+  -arrow-background-color: variables.rgb(black, 0.45);
+  -arrow-border-width: 0;
+  -arrow-border-color: transparent;
+  -arrow-base: 20px;
+  -arrow-rise: 10px;
+  -boxpointer-gap: 5px;
+  box-shadow: variables.$shell-shadow-z2;
+}
+
+// emoji
+.emoji-page {
+  .keyboard-key {
+    background-color: transparent;
+    border: none;
+    color: initial;
+  }
+}
+
+.emoji-panel {
+  .keyboard-key:latched {
+    border-color: color.adjust(colors.$primary, $lightness: 5%);
+    background-color: colors.$primary;
+  }
+}
+
+// suggestions
+.word-suggestions {
+  font-size: 14pt;
+  spacing: 12px;
+  min-height: 20pt;
+}

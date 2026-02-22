@@ -1,0 +1,41 @@
+@use "../../colors";
+@use "../../variables";
+
+/* Workspace Switcher */
+.workspace-switcher-group {
+  padding: variables.$space-size * 2;
+}
+
+.workspace-switcher-container {
+  @extend %osd_panel !optional;
+
+  border-radius: variables.$window-radius;
+}
+
+.workspace-switcher {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  spacing: variables.$space-size * 2;
+}
+
+.ws-switcher-box {
+  height: 50px;
+  background-size: 32px;
+  border: none;
+  background: colors.$secondary-fill;
+  border-radius: variables.$material-radius;
+}
+
+// active workspace in the switcher
+.ws-switcher-active-up,
+.ws-switcher-active-down,
+.ws-switcher-active-left,
+.ws-switcher-active-right {
+  height: 52px;
+  background-color: colors.$primary;
+  border: none;
+  border-radius: variables.$material-radius + variables.$space-size * 0.5;
+  color: colors.on();
+}

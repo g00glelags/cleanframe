@@ -1,0 +1,62 @@
+//
+// GNOME Shell 49 widgets bundle.
+// Keep imports explicit so 49-only selector adjustments can be made here
+// without affecting 48.
+//
+
+/* WIDGETS */
+
+// Primary widgets
+@use 'widgets/base';
+@use 'widgets/entries';
+@use 'widgets/buttons';
+@use 'widgets/check-box-47';
+@use 'widgets/switches-47';
+@use 'widgets/slider-47';
+@use 'widgets/scrollbars';
+
+// Popovers
+@use 'widgets/popovers';
+@use 'widgets/calendar-44';
+@use 'widgets/message-list-48';
+@use 'widgets/ibus-popup';
+@use 'widgets/quick-settings';
+
+// Notifications
+@use 'widgets/notifications-47';
+@use 'widgets/hotplug';
+
+// Dialogs
+@use 'widgets/dialogs-47';
+@use 'widgets/network-dialog';
+
+// OSDs
+@use 'widgets/osd-42';
+@use 'widgets/switcher-popup';
+@use 'widgets/workspace-switcher';
+
+// Panel
+@use 'widgets/panel';
+@use 'widgets/corner-ripple';
+
+// Overview
+@use 'widgets/overview';
+@use 'widgets/window-picker';
+@use 'widgets/search-entry';
+@use 'widgets/search-results-46';
+@use 'widgets/dash-46';
+@use 'widgets/app-grid-46';
+@use 'widgets/workspace-thumbnails';
+
+// A11y / misc
+@use 'widgets/a11y';
+@use 'widgets/misc';
+
+// // @import 'widgets/tiled-previews';
+@use 'widgets/keyboard';
+@use 'widgets/looking-glass';
+@use 'widgets/screenshot';
+
+// Lock / login screens
+@use 'widgets/login-dialog';
+@use 'widgets/screen-shield';

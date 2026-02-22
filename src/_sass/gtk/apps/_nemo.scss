@@ -1,0 +1,179 @@
+@use "sass:color";
+@use "sass:math";
+
+/********
+ * Nemo *
+ ********/
+// based css:
+// https://github.com/linuxmint/nemo/blob/master/gresources/nemo-style-fallback-mandatory.css
+// https://github.com/linuxmint/nemo/blob/master/gresources/nemo-style-fallback.css
+// hard-coded css:
+// https://github.com/linuxmint/nemo/blob/master/gresources/nemo-style-application.css
+
+.nemo-window {
+  .primary-toolbar {
+    background-color: $titlebar;
+    border-bottom: 1px solid $divider;
+
+    // FIXME: workaround for wrong size allocation of Nemo
+    entry {
+      min-height: 0;
+      margin: 0;
+
+      @extend %titlebar-entry;
+    }
+
+    button:not(.text-button) { @extend %titlebar-button; }
+
+    // instead of .path-bar button
+    button.text-button {
+      padding-left: 8px;
+      padding-right: 8px;
+      color: $titlebar-text-secondary;
+
+      &:hover, &:active, &:checked { color: $titlebar-text; }
+
+      &:disabled { color: $titlebar-text-disabled; }
+    }
+
+    // instead of .path-bar button.slider-button
+    button:not(.text-button, .image-button) {
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+  }
+
+  // .nemo-places-sidebar { }
+
+  scrolledwindow.frame {
+    border-style: none;
+
+    .view:not(:selected) { background-color: transparent; }
+  }
+
+  // infobar { margin-top: -6px; }
+
+  // Inactive F3 pane shading
+  .nemo-inactive-pane .view:not(:selected) { background-color: $base-alt; }
+
+  // Rename box styling in the icon view.
+  .nemo-window-pane widget.entry {
+    border-radius: $corner-radius;
+    background-color: $fill;
+
+    &:selected { @extend %selected_items_primary; }
+  }
+
+  .toolbar button { @extend %button-flat; }
+
+  .view {
+    selection,
+    &:selected {
+      @extend %selected_items_color;
+    }
+
+    // Differentiate hidden files/folders with subtler text color.
+    &.hidden,
+    &.dim-label,
+    .hidden,
+    label.hidden,
+    .dim-label {
+      color: #808080;
+    }
+
+    // Also dim hidden file/folder icons, not only labels.
+    & image.hidden,
+    & image.dim-label,
+    image.hidden,
+    image.dim-label,
+    .hidden image,
+    .dim-label image {
+      -gtk-icon-effect: dim;
+    }
+
+    &.hidden:selected,
+    &.dim-label:selected,
+    .hidden:selected,
+    label.hidden:selected,
+    .dim-label:selected {
+      color: $app-selection-fg;
+    }
+
+    & image.hidden:selected,
+    & image.dim-label:selected,
+    image.hidden:selected,
+    image.dim-label:selected,
+    .hidden:selected image,
+    .dim-label:selected image {
+      -gtk-icon-effect: none;
+    }
+  }
+
+  // Thicker selectors for GTK cell renderers used by Nemo list/icon views.
+  treeview.view.cell.dim-label,
+  treeview.view.cell.hidden,
+  iconview.view.cell.dim-label,
+  iconview.view.cell.hidden {
+    color: #808080;
+    -gtk-icon-effect: dim;
+  }
+
+  treeview.view.cell.dim-label:selected,
+  treeview.view.cell.hidden:selected,
+  iconview.view.cell.dim-label:selected,
+  iconview.view.cell.hidden:selected {
+    color: $app-selection-fg;
+    -gtk-icon-effect: none;
+  }
+
+  // Force Nemo app selection to follow system app-selection palette.
+  // This avoids desktop-selection bleed or app fallback CSS overriding to stale shades.
+  .view selection,
+  .view:selected,
+  treeview.view:selected,
+  iconview.view:selected,
+  flowbox > flowboxchild:selected,
+  entry > text > selection {
+    color: $app-selection-fg;
+    background-color: $app-selection-bg;
+    box-shadow: none;
+    text-shadow: none;
+  }
+}
+
+// For Places Sidebar diskfull indicators
+.places-treeview {
+  -NemoPlacesTreeView-disk-full-bg-color: color.mix($text, $background, math.percentage(0.3)); // Can't use translucent colors
+  -NemoPlacesTreeView-disk-full-fg-color: $blue-;
+  -NemoPlacesTreeView-disk-full-bar-width: 2px;
+  -NemoPlacesTreeView-disk-full-bar-radius: 0;
+  -NemoPlacesTreeView-disk-full-bottom-padding: 1px; // There is already hard-coded 1px bottom-padding
+  -NemoPlacesTreeView-disk-full-max-length: 80px;
+  padding-top: $space-size * 0.5;
+  padding-bottom: $space-size * 0.5;
+}
+
+.nemo-desktop.nemo-canvas-item {
+  @extend %desktop-canvas-item;
+
+  &:selected,
+  &:active,
+  &:checked {
+    color: $desktop-selection-fg;
+    background-color: rgba($desktop-selection-bg, 0.35);
+    background-image: none;
+    text-shadow: none;
+    box-shadow: none;
+  }
+}
+
+// Keep desktop drag-selection isolated from GTK app selection colors.
+window#desktopwindow {
+  .rubberband,
+  rubberband {
+    border: 1px solid $desktop-selection-bg;
+    background-color: rgba($desktop-selection-bg, 0.3);
+    background-image: none;
+    box-shadow: none;
+  }
+}

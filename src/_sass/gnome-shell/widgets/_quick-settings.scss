@@ -1,0 +1,223 @@
+@use "sass:color";
+@use "../../colors";
+@use "../../tweaks";
+@use "../../variables";
+@use "../drawing";
+
+.quick-settings {
+  padding: variables.$space-size * 3 !important;
+  border-radius: 8px + variables.$space-size * 5 !important;
+  margin-top: variables.$space-size * 0.5 !important;
+  border: none;
+
+  .icon-button, .button {
+    padding: variables.$space-size * 2;
+  }
+}
+
+.quick-settings-grid {
+  spacing-rows: variables.$space-size * 2;
+  spacing-columns: variables.$space-size * 2;
+}
+
+.quick-toggle {
+  border-radius: variables.$circular-radius;
+  min-width: 12em;
+  max-width: 12em;
+  min-height: variables.$space-size * 4 + variables.$base-icon-size;
+  border: none;
+  background-color: rgba(colors.$text, 0.06) !important;
+
+  &:hover {
+    background-color: rgba(colors.$text, 0.12) !important;
+  }
+
+  &:active {
+    background-color: rgba(colors.$text, 0.24) !important;
+  }
+
+  &:checked {
+    background-color: colors.$primary !important;
+    color: colors.on(colors.$primary) !important;
+
+    &:hover {
+      background-color: color.mix(colors.$text, colors.$primary, 10%) !important;
+      color: colors.on(colors.$primary) !important;
+    }
+
+    &:active {
+      background-color: color.mix(colors.$text, colors.$primary, 20%) !important;
+      color: colors.on(colors.$primary) !important;
+    }
+  }
+
+  & > stboxlayout { spacing: variables.$space-size; }
+
+  /* Move padding into the box; this is to allow menu arrows
+     to extend to the border */
+  &.button { padding: 0; }
+  & > stboxlayout { padding: 0 variables.$space-size * 2; }
+  &:ltr > stboxlayout { padding-left: variables.$space-size * 2.5; }
+  &:rtl > stboxlayout { padding-right: variables.$space-size * 2.5; }
+
+  .quick-toggle-label { font-weight: bold; }
+  .quick-toggle-icon, .quick-toggle-arrow { icon-size: variables.$base-icon-size; }
+}
+
+.quick-menu-toggle {
+  &:ltr > stboxlayout { padding-right: 0; }
+  &:rtl > stboxlayout { padding-left: 0; }
+
+  .quick-toggle-arrow {
+    background-color: colors.$secondary-fill !important;
+    padding: variables.$space-size variables.$space-size * 1.75;
+
+    &:active {
+      background-color: colors.$track !important;
+    }
+
+    &:ltr { border-radius: 0 variables.$circular-radius variables.$circular-radius 0; }
+    &:rtl { border-radius: variables.$circular-radius 0 0 variables.$circular-radius; }
+  }
+}
+
+.quick-slider {
+  padding: 0 variables.$space-size;
+
+  > stboxlayout { spacing: variables.$space-size; }
+
+  .slider-bin {
+    &:focus { @include drawing.button(focus); }
+
+    min-height: variables.$base-icon-size; // slider size
+    padding: variables.$space-size;
+    border-radius: variables.$circular-radius;
+  }
+
+  .quick-toggle-icon {
+    icon-size: variables.$base-icon-size;
+  }
+}
+
+.quick-toggle-menu {
+  border-radius: variables.$space-size * 5 !important;
+  padding: variables.$space-size * 2;
+  margin: variables.$space-size * 2 variables.$space-size * 3.5 0;
+
+  @if tweaks.$submenu_style == 'true' {
+    background-color: colors.$surface !important;
+    color: colors.$text-secondary !important;
+  } @else {
+    background-color: white !important;
+    color: variables.rgb(black, 0.65) !important;
+  }
+
+  .popup-menu-item {
+    padding: variables.$space-size + 2px !important;
+    border-radius: variables.$circular-radius !important;
+
+    @if tweaks.$submenu_style == 'true' {
+      color: colors.$text-secondary !important;
+
+      &:focus, &:hover, &.selected {
+        color: colors.$text !important;
+        background-color: colors.$secondary-fill !important;
+      }
+
+      &:active {
+        color: colors.$text !important;
+        background-color: colors.$divider !important;
+      }
+
+      &:insensitive {
+        color: colors.$text-secondary-disabled !important;
+      }
+    } @else {
+      color: variables.rgb(black, 0.65) !important;
+
+      &:focus, &:hover, &.selected {
+        color: variables.rgb(black, 0.75) !important;
+        background-color: variables.rgb(black, 0.1) !important;
+      }
+
+      &:active {
+        color: variables.rgb(black, 0.75) !important;
+        background-color: variables.rgb(black, 0.2) !important;
+      }
+
+      &:insensitive {
+        color: variables.rgb(black, 0.25) !important;
+      }
+    }
+
+    > sticon { -st-icon-style: symbolic; }
+
+    & > :first-child {
+      &:ltr {
+        padding-left: variables.$space-size  + variables.$margin-size !important;
+      }
+
+      &:rtl {
+        padding-right: variables.$space-size + variables.$margin-size !important;
+      }
+    }
+
+    .popup-separator-menu-item-separator {
+      margin: variables.$space-size variables.$space-size * 3 variables.$space-size 0 !important;
+
+      @if tweaks.$submenu_style == 'true' {
+        background-color: colors.$border !important;
+      } @else {
+        background-color: variables.rgb(black, 0.1) !important;
+      }
+    }
+
+
+  }
+
+  & .header {
+    spacing-rows: 0.5 * variables.$space-size;
+    spacing-columns: variables.$space-size * 2;
+    padding-bottom: 2 * variables.$space-size;
+
+    & .icon {
+      icon-size: 24px; // a non-standard symbolic size but ok
+      border-radius: variables.$circular-radius;
+      padding: 1.5 * variables.$space-size;
+      background-color: variables.rgb(black, 0.08) !important;
+
+      &.active {
+        background-color: colors.$primary !important;
+        color: colors.on(colors.$primary) !important;
+      }
+    }
+  }
+}
+
+.quick-settings-system-item {
+  & > stboxlayout { spacing: 2 * variables.$space-size; }
+
+  .icon-button {
+    background-color: rgba(colors.$text, 0.06);
+
+    &:hover { background-color: rgba(colors.$text, 0.12); }
+    &:active { background-color: rgba(colors.$text, 0.24); }
+
+    > sticon { -st-icon-style: symbolic; }
+  }
+
+  & .power-item {
+    min-height: 0;
+    min-width: 0;
+
+    &:insensitive {
+      @include drawing.button(normal);
+
+      background-color: transparent;
+    }
+  }
+}
+
+.nm-network-item {
+  .wireless-secure-icon { icon-size: 8px; }
+}

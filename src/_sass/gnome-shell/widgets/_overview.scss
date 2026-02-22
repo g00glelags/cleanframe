@@ -1,0 +1,18 @@
+@use "../../colors";
+@use "../../variables";
+
+/* OVERVIEW */
+
+.controls-manager, .secondary-monitor-workspaces {
+  spacing: variables.$space-size * 2;
+}
+
+#overviewGroup {
+  background-color: colors.$system;
+
+  @extend %scrollbar_on_ !optional;
+}
+
+.overview-controls {
+  padding-bottom: 32px;
+}

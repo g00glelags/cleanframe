@@ -1,0 +1,83 @@
+@use "sass:color";
+@use "../../colors";
+@use "../../variables";
+
+/* Screen Shield */
+
+.unlock-dialog-clock {
+  color: white;
+  font-weight: 300;
+  text-align: center;
+  spacing: 24px;
+  padding-bottom: 2.5em;
+}
+
+.unlock-dialog-clock-time {
+  font-size: 64pt;
+  padding-top: 42px;
+  font-feature-settings: "tnum";
+}
+
+.unlock-dialog-clock-date {
+  font-size: 16pt;
+  font-weight: normal;
+}
+
+.unlock-dialog-clock-hint {
+  font-weight: normal;
+  padding-top: 48px;
+}
+
+.unlock-dialog-notifications-container {
+  margin: 12px 0;
+  spacing: 6px;
+  width: 23em;
+  background-color: transparent;
+
+  .summary-notification-stack-scrollview {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .notification,
+  .unlock-dialog-notification-source {
+    padding: 12px 6px;
+    border: none;
+    background-color: colors.$tooltip;
+    color: colors.on();
+    border-radius: variables.$material-radius;
+
+    &.critical { background-color: color.adjust(colors.$system, $alpha: -0.1) }
+  }
+}
+
+.unlock-dialog-notification-label {
+  padding: 0 0 0 12px;
+}
+
+.unlock-dialog-notification-count-text {
+  weight: bold;
+  padding: 0 6px;
+  color: colors.$tooltip;
+  background-color: colors.on($state: secondary);
+  border-radius: 99px;
+  margin-right: 12px;
+
+}
+
+.screen-shield-background { // just the shadow, really
+  background: black;
+  box-shadow: 0 2px 4px variables.rgb(0,0,0,0.6);
+}
+
+#lockDialogGroup {
+  background-color: colors.$system;
+}
+
+#unlockDialogNotifications {
+  stbutton#vhandle, stbutton#hhandle {
+    background-color: color.adjust(colors.$tooltip, $alpha: -0.7);
+    &:hover, &:focus { background-color: color.adjust(colors.$tooltip,$alpha: -0.5); }
+    &:active { background-color: color.adjust(colors.$primary,$alpha: -0.5); }
+  }
+}

@@ -1,0 +1,366 @@
+// based css:
+// https://github.com/shimmerproject/Greybird/blob/master/gtk-3.0/_xfce.scss
+
+/**************
+ * Xfce4 Apps *
+ **************/
+.XfceHeading {
+  background-color: $base;
+}
+
+
+/***************
+ * xfce4-panel *
+ ***************/
+.xfce4-panel.background {
+  border: none; // Sadly the border is hard-coded
+  border-color: transparent;
+  background-color: $panel;
+  color: on($panel, secondary);
+  font-weight: 500;
+
+  button, button.flat {
+    @extend %button-flat;
+    @extend %button-on-;
+
+    color: on($panel, secondary);
+    min-height: 16px;
+    min-width: 16px;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .tasklist button {
+    color: on($panel, secondary);
+    border-image: image(transparent) 0 0 2 / 0 0 2px;
+
+    &:checked { border-image: image($primary) 0 0 2 / 0 0 2px; }
+
+    image { padding: 4px; }
+  }
+
+  // &.horizontal .tasklist button { margin: 0 1px; }
+
+  // &.vertical .tasklist button { margin: 1px 0; }
+}
+
+// Workspace switcher provided by libwnck
+wnck-pager {
+  &:hover { background-color: $overlay-hover; }
+
+  &:active { background-color: $overlay-active; }
+
+  &:selected { background-color: $primary; }
+}
+
+xfdesktopiconview.view {
+  border-radius: $menuitem-radius;
+  background-color: transparent;
+  color: on();
+  text-shadow: $text-shadow;
+
+  // XfdesktopIconView uses :active instead of :selected for selection
+  &:active, &:selected, &:checked {
+    @extend %selected_items_primary;
+
+    box-shadow: none;
+  }
+
+  // .label { text-shadow: $text-shadow; }
+
+  .rubberband {
+    @extend rubberband;
+
+    border-radius: 0;
+  }
+}
+
+#XfceNotifyWindow {
+  buttonbox { padding: 0; }
+
+  // button { }
+
+  label#summary { font-weight: bold; }
+
+  // progressbar {
+  //   progress { }
+  //
+  //   trough { }
+  // }
+}
+
+// Xfwm4's alt-tab dialog, aka "tabwin"
+#xfwm-tabwin {
+  padding: 12px;
+  border-radius: $corner-radius;
+
+  // Set the application icon- and preview-size to 64px
+  -XfwmTabwinWidget-icon-size: 64px;
+  -XfwmTabwinWidget-preview-size: 64px;
+}
+
+/***************
+ * Whiskermenu *
+ ***************/
+
+window#whiskermenu-window {
+  border-radius: 0;
+  background-color: $popover;
+  border: none;
+
+  entry.search {
+    border-radius: $menuitem-radius;
+
+    &:focus { background-color: $base; }
+  }
+
+  // Need to set Whisker menu background opacity less than 100
+  > frame > border {
+    border-radius: $window-radius;
+    padding: $space-size $space-size + 2px $space-size $space-size * 1.5;
+    margin: $space-size;
+    border: none;
+    background-color: $popover-floating-bg;
+    box-shadow: $shadow-z4, inset 0 1px highlight($popover);
+  }
+
+  box.categories > button.radio { // sidebar categories button
+    padding: $space-size * 0.5 $space-size;
+    margin: 1px 0;
+    border-radius: $menuitem-radius;
+
+    &:hover { background-color: $divider; }
+
+    &:checked, &:active {
+      background-color: $track;
+      color: $text;
+
+      &:hover { background-image: none; }
+    }
+  }
+
+  scrolledwindow.frame { // App list (tree)
+    padding: $space-size * 0.5;
+    background-color: $base;
+    border-radius: $menuitem-radius;
+
+    treeview.view {
+      border-radius: $menuitem-radius;
+
+      &:not(:hover, :selected) { background: none; }
+
+      &:selected:hover {
+        background-color: $divider;
+        color: $text;
+      }
+    }
+
+    iconview {
+      border-radius: $menuitem-radius;
+    }
+  }
+
+  scrollbar {
+    border: none;
+
+    &, &.overlay-indicator {
+      &,
+      &.dragging,
+      &.hovering { background-color: transparent; }
+    }
+  }
+
+  .title-area > .commands-area > button.flat.command-button { // Bottom command buttons
+    border-radius: $menuitem-radius;
+
+    &:checked, &:active {
+      background-color: $track;
+      color: $text;
+    }
+  }
+}
+
+
+/**********
+ * Thunar *
+ **********/
+.thunar {
+  toolbar { border-bottom: 1px solid $divider; }
+
+  headerbar.titlebar toolbar {
+    border: none;
+    padding: 0;
+    margin: 0;
+
+    &:not(.inline-toolbar, .osd) {
+      scale,
+      entry,
+      spinbutton,
+      button,
+      stackswitcher {
+        margin: 0 $space-size * 0.5;
+      }
+
+      button {
+        min-height: 0;
+        min-width: 0;
+      }
+
+      switch { margin: $space-size $space-size * 0.5; }
+    }
+  }
+
+  .standard-view.frame {
+    border: none;
+
+    widget.view {
+      padding: $space-size; // Not work ?
+      border-radius: 3px;
+      background-color: $base;
+      background-image: none;
+    }
+
+    .view {
+      background-color: $base;
+      background-image: none;
+
+      &:hover { color: $text; }
+
+      &:selected {
+        color: $selection-fg;
+        background: $selection-bg;
+      }
+
+      // Differentiate hidden files/folders with subtler text color.
+      &.hidden,
+      &.dim-label,
+      .hidden,
+      label.hidden,
+      .dim-label {
+        color: #808080;
+      }
+
+      // Also dim hidden file/folder icons, not only labels.
+      & image.hidden,
+      & image.dim-label,
+      image.hidden,
+      image.dim-label,
+      .hidden image,
+      .dim-label image {
+        -gtk-icon-effect: dim;
+      }
+
+      &.hidden:selected,
+      &.dim-label:selected,
+      .hidden:selected,
+      label.hidden:selected,
+      .dim-label:selected {
+        color: $selection-fg;
+      }
+
+      & image.hidden:selected,
+      & image.dim-label:selected,
+      image.hidden:selected,
+      image.dim-label:selected,
+      .hidden:selected image,
+      .dim-label:selected image {
+        -gtk-icon-effect: none;
+      }
+    }
+  }
+
+  // Thicker selectors for GTK cell renderers used by Thunar list/icon views.
+  treeview.view.cell.dim-label,
+  treeview.view.cell.hidden,
+  iconview.view.cell.dim-label,
+  iconview.view.cell.hidden {
+    color: #808080;
+    -gtk-icon-effect: dim;
+  }
+
+  treeview.view.cell.dim-label:selected,
+  treeview.view.cell.hidden:selected,
+  iconview.view.cell.dim-label:selected,
+  iconview.view.cell.hidden:selected {
+    color: $selection-fg;
+    -gtk-icon-effect: none;
+  }
+
+  paned paned paned > notebook.frame {
+    border: none;
+    border-radius: 0;
+
+    .standard-view.frame > widget.view {
+      border-radius: 0;
+      box-shadow: inset 0 0 0 3px rgba($primary, 0.25);
+    }
+  }
+
+  .sidebar {
+    border: none;
+
+    .view:not(:selected) {
+      background-color: $base;
+      background-image: none;
+    }
+  }
+
+  statusbar {
+    margin: 0 -10px;
+    padding: 0 $space-size;
+    border-top: 1px solid $divider;
+  }
+
+  > grid.horizontal > paned.horizontal > scrolledwindow.frame.sidebar.shortcuts-pane {
+    border-top: none;
+  }
+}
+
+window.background.csd.thunar {
+  > grid.horizontal > paned.horizontal > scrolledwindow.frame.sidebar.shortcuts-pane {
+    border-bottom-left-radius: $window-radius;
+
+    treeview.view:not(:hover, :active, :selected) {
+      background-color: $base;
+      background-image: none;
+    }
+  }
+}
+
+
+/***************
+ * xfsm dialog *
+ ***************/
+
+dialog.xfsm-logout-dialog {
+  box-shadow: none;
+  border: none;
+  border-radius: $window-radius;
+  background-color: $popover-floating-bg;
+}
+
+
+/**********************
+ * Xfce Notify Window *
+ **********************/
+
+#XfceNotifyWindow {
+  box-shadow: none;
+  border: none;
+  border-radius: $window-radius;
+  color: on($state: secondary);
+  background-color: rgb(black, 0.75);
+  padding: $space-size;
+
+  buttonbox { padding: 0; }
+
+  button { @extend %button-on-; }
+
+  label#summary { font-weight: bold; }
+
+  // progressbar {
+  //   progress { }
+
+  //   trough { }
+  // }
+}

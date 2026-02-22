@@ -1,0 +1,17 @@
+// Last-load override for LibreOffice Calc selection.
+// Keep this file imported as the final entry in GTK bundles.
+window.background.libreoffice-calc,
+window.background.libreoffice,
+window.background.soffice,
+window.background.calc,
+window.background#LibreOfficeMainWindow {
+  .view:selected,
+  .view:selected:focus,
+  .view text:selected,
+  .view text:selected:focus {
+    color: $calc-cell-selection-fg;
+    background-color: $calc-cell-selection-bg;
+    border-radius: 0;
+    -gtk-outline-radius: 0;
+  }
+}

@@ -1,0 +1,63 @@
+@use "../../colors";
+@use "../../variables";
+
+/* Check Boxes */
+
+.check-box {
+  stboxlayout { spacing: .8em; }
+
+  stbin {
+    width: 24px;
+    height: 24px;
+    padding: (variables.$medium-size - 24px) * 0.5;
+    border-radius: 100px;
+    background-image: url("assets/checkbox-off.svg");
+  }
+
+  &:focus stbin {
+    background-image: url("assets/checkbox-off.svg");
+  }
+
+  &:hover stbin {
+    background-color: colors.$secondary-fill;
+  }
+
+  &:active stbin {
+    background-color: colors.$track;
+  }
+
+  &:checked stbin {
+    background-image: url("assets/checkbox.svg");
+  }
+
+  &:focus:checked stbin {
+    background-image: url("assets/checkbox.svg");
+  }
+
+  &:hover:checked stbin {
+    background-color: rgba(colors.$primary, 0.3 * 0.5);
+  }
+
+  &:active:checked stbin {
+    background-color: colors.$primary-overlay-30;
+  }
+
+  sticon {
+    icon-size: 0;
+    padding: 0;
+    color: transparent;
+    border: none;
+  }
+
+  &:hover sticon,
+  &:active sticon {
+    border: none;
+  }
+
+  &:checked sticon,
+  &:checked:hover sticon,
+  &:checked:active sticon {
+    background-color: transparent;
+    color: transparent;
+  }
+}

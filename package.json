@@ -1,0 +1,21 @@
+{
+  "name": "cleanframe-theme-master-sem-dark-compc-tweak",
+  "version": "1.0.0",
+  "description": "To install the theme, run the following command:",
+  "main": "index.js",
+  "scripts": {
+    "lint:scss": "stylelint \"src/**/*.scss\"",
+    "lint:scss:fix": "stylelint \"src/**/*.scss\" --fix",
+    "build:scss:smoke": "bash scripts/scss-smoke.sh",
+    "audit:unused": "bash scripts/audit-unused-assets.sh",
+    "test": "npm run lint:scss && npm run build:scss:smoke"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "stylelint": "^17.3.0",
+    "stylelint-config-standard-scss": "^17.0.0"
+  }
+}

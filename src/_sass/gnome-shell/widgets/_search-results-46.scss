@@ -1,0 +1,123 @@
+@use "../../colors";
+@use "../../variables";
+
+/* Search */
+
+// search overview container
+#searchResults {
+  margin: 0 variables.$margin-size;
+}
+
+
+#searchResultsContent {
+  max-width: 1044px;
+}
+
+// search results sections "the boxes"
+.search-section {
+  // This should be equal to #searchResultsContent spacing
+  spacing: variables.$margin-size * 3;
+
+  // separator
+  .search-section-separator {
+    height: variables.$margin-size * 2; // use it as a spacer
+    background-color: transparent;
+  }
+}
+
+// content
+.search-section-content {
+  background-color: colors.on($state: divider);
+  border-radius: variables.$material-radius + variables.$space-size * 2;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+  color: colors.on();
+  padding: variables.$space-size * 2;
+  margin:0 variables.$margin-size * 3;
+}
+
+%search-section-content-item {
+  border-radius: variables.$material-radius;
+  background-color: transparent;
+  color: colors.on($state: secondary);
+
+  &:focus,
+  &:hover,
+  &:selected {
+    color: colors.on();
+    background-color: colors.on($state: divider);
+    transition-duration: 200ms;
+    border-radius: variables.$material-radius;
+  }
+
+  &:active,
+  &:checked {
+    color: colors.on();
+    background-color: colors.on($state: track);
+    border-radius: variables.$material-radius;
+  }
+}
+
+// "no results" text
+.search-statustext {
+  @extend %status_text !optional;
+
+  color: colors.on($state: secondary);
+}
+
+.grid-search-results {
+  spacing: variables.$space-size * 5;
+  margin: 0 variables.$margin-size * 3;
+}
+
+// Search results with icons
+.grid-search-result {
+  @extend .overview-tile !optional;
+}
+
+// search result provider
+.search-provider-icon {
+  @extend %search-section-content-item !optional;
+  &:ltr { margin-right: variables.$margin-size; }
+  &:rtl { margin-left: variables.$margin-size; }
+
+  // content
+  .list-search-provider-content {
+    spacing: variables.$space-size * 2;
+
+    // provider labels
+    .list-search-provider-details {
+      width: 120px;
+      margin-top: 0;
+      color: colors.on($state: secondary);
+    }
+  }
+}
+
+// search results list
+.list-search-results {
+  spacing: variables.$space-size;
+}
+
+// search result listitem
+.list-search-result {
+  @extend %search-section-content-item !optional;
+
+  // content
+  .list-search-result-content {
+    spacing: variables.$space-size;
+  }
+
+  // list item title (with leading icon)
+  .list-search-result-title {
+    spacing: variables.$space-size * 2;
+
+    // font-weight: bold;
+  }
+
+  // list item description
+  .list-search-result-description {
+    color: colors.on($state: disabled);
+  }
+}
