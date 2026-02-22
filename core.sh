@@ -79,7 +79,73 @@ normalize_gtk3_css() {
   fi
 }
 
+normalize_gtk4_css() {
+  local css_file="$1"
+
+  [[ -f "$css_file" ]] || return 0
+
+  # Some GTK4 builds reject modern CSS constructs used by upstream theme sources.
+  # Keep a conservative stylesheet to avoid parser cascades and transparency regressions.
+  if has_command perl; then
+    perl -0pi -e '
+      # Drop custom property block (unsupported in some GTK4 parser versions).
+      s/^:root\s*\{.*?\}\s*//s;
+      # GTK parser does not accept selector lists inside :not(...).
+      1 while s/:not\(([^()]*?),\s*([^()]+?)\)/:not($1):not($2)/g;
+      # Replace newer pseudo-classes with broad fallback.
+      s/:focus-within/:focus/g;
+      s/:focus-visible/:focus/g;
+      # Drop unsupported GTK3-only property if present.
+      s/^\h*-gtk-outline-radius:\h*[^;]+;\h*\n//mg;
+      # Remove declarations relying on unsupported CSS vars/functions.
+      s/^\h*--[a-zA-Z0-9_-]+:\h*[^;]+;\h*\n//mg;
+      # Drop property declarations containing unsupported functions,
+      # but never cross block braces or consume selectors.
+      s/^\h*[a-zA-Z_-][a-zA-Z0-9_-]*\h*:\h*(?:(?![{}]).)*?\bvar\(--(?:(?![{}]).)*?;\h*\n//msg;
+      s/^\h*[a-zA-Z_-][a-zA-Z0-9_-]*\h*:\h*(?:(?![{}]).)*?\bcolor-mix\((?:(?![{}]).)*?;\h*\n//msg;
+    ' "$css_file"
+  fi
+}
+
 detect_sass_compiler
+
+check_write_access() {
+  local path="$1"
+  local label="$2"
+
+  if [[ -e "$path" ]]; then
+    if [[ ! -w "$path" ]]; then
+      echo "ERROR: No write permission on ${label}: ${path}"
+      return 1
+    fi
+    return 0
+  fi
+
+  local parent
+  parent="$(dirname "$path")"
+  if [[ -d "$parent" && -w "$parent" ]]; then
+    return 0
+  fi
+
+  echo "ERROR: Cannot create ${label}: ${path}"
+  echo "       Parent is not writable: ${parent}"
+  return 1
+}
+
+ensure_install_permissions() {
+  local dest_root="${dest:-$DEST_DIR}"
+
+  check_write_access "$dest_root" "theme destination" || return 1
+  check_write_access "${dest_root}/CleanFrame-Light" "theme directory" || return 1
+  check_write_access "${dest_root}/CleanFrame-Light-hdpi" "theme directory" || return 1
+  check_write_access "${dest_root}/CleanFrame-Light-xhdpi" "theme directory" || return 1
+
+  if [[ "${apply_snap_preset:-false}" == "true" ]]; then
+    check_write_access "${HOME}/.config/environment.d" "environment.d directory" || return 1
+  fi
+
+  return 0
+}
 
 install() {
   local dest="$1"
@@ -146,6 +212,7 @@ install() {
   cp -r "$SRC_DIR/gtk/assets$theme$ctype"                                                    "$THEME_DIR/gtk-4.0/assets"
   cp -r "$SRC_DIR/gtk/scalable"                                                              "$THEME_DIR/gtk-4.0/assets"
   compile_scss "$SRC_DIR/gtk/4.0/gtk$color$size.scss"                                        "$THEME_DIR/gtk-4.0/gtk.css"
+  normalize_gtk4_css "$THEME_DIR/gtk-4.0/gtk.css"
 
   mkdir -p                                                                                   "$THEME_DIR/xfwm4"
   cp -r "$SRC_DIR/xfwm4/xpm/assets/"*.xpm                                                    "$THEME_DIR/xfwm4"
@@ -388,6 +455,15 @@ apply_sandbox_theme_preset() {
 
 install_theme() {
   check_shell
+
+  if ! ensure_install_permissions; then
+    cat << EOF
+Permission fix suggestion:
+  sudo chown -R "$USER:$USER" "${dest:-$DEST_DIR}/CleanFrame-Light" "${dest:-$DEST_DIR}/CleanFrame-Light-hdpi" "${dest:-$DEST_DIR}/CleanFrame-Light-xhdpi" "${HOME}/.config/environment.d"
+  chmod -R u+rwX "${dest:-$DEST_DIR}/CleanFrame-Light" "${dest:-$DEST_DIR}/CleanFrame-Light-hdpi" "${dest:-$DEST_DIR}/CleanFrame-Light-xhdpi" "${HOME}/.config/environment.d"
+EOF
+    exit 1
+  fi
 
   for theme in "${themes[@]}"; do
     for color in "${colors[@]}"; do
