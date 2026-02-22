@@ -80,7 +80,7 @@ $theme_list_radius: $window-radius - $space-size;
               }
             }
 
-            &:drop(active) {
+            &:hover {
               border-radius: 0;
 
               @if $topbar == '' {
@@ -172,7 +172,7 @@ $theme_list_radius: $window-radius - $space-size;
       background-color: transparent;
       border-radius: $window-radius;
 
-      treeview.view:not(:hover, :active, :selected) {
+      treeview.view:not(:hover):not(:active):not(:selected) {
         background-color: transparent;
         border-radius: 0;
 
@@ -195,7 +195,7 @@ $theme_list_radius: $window-radius - $space-size;
         tab {
           color: $titlebar-text-secondary;
 
-          &:hover:not(:checked, :active) {
+          &:hover:not(:checked):not(:active) {
             color: $titlebar-text;
             background-color: transparent;
           }
@@ -226,7 +226,7 @@ $theme_list_radius: $window-radius - $space-size;
         border-radius: $window-radius - 2px;
       }
 
-      scrolledwindow > .view:not(:selected, :hover, :checked) {
+      scrolledwindow > .view:not(:selected):not(:hover):not(:checked) {
         background-color: transparent;
       }
 
@@ -284,7 +284,7 @@ $theme_list_radius: $window-radius - $space-size;
   border-radius: $circular-radius;
   margin: $space-size 0;
 
-  button:not(.suggested-action, .destructive-action) {
+  button:not(.suggested-action):not(.destructive-action) {
     margin-top: 0;
     margin-bottom: 0;
     border-radius: $circular-radius;
@@ -330,7 +330,7 @@ $theme_list_radius: $window-radius - $space-size;
   animation: nautilus-operations-button-needs-attention $ripple-fade-out-duration $ease 6 alternate;
 }
 
-.linked:not(.vertical) > button:not(.suggested-action, .destructive-action, :only-child).disclosure-button { @extend %circular-button; }
+.linked:not(.vertical) > button:not(.suggested-action):not(.destructive-action):not(:only-child).disclosure-button { @extend %circular-button; }
 
 // Path bar
 .path-bar-box {
@@ -358,7 +358,7 @@ $theme_list_radius: $window-radius - $space-size;
   }
 
   // for 3.32
-  .linked.nautilus-path-bar button:not(.suggested-action, .destructive-action) {
+  .linked.nautilus-path-bar button:not(.suggested-action):not(.destructive-action) {
     padding-left: ($medium-size - 12px) * 0.5;
     padding-right: ($medium-size - 12px) * 0.5;
     margin-left: 1px;
@@ -536,7 +536,7 @@ window.background.csd {
     > scrolledwindow { // raised widget
       border-bottom-left-radius: $window-radius;
 
-      treeview.view:not(:hover, :selected) {
+      treeview.view:not(:hover):not(:selected) {
         background: none;
       }
     }
@@ -848,7 +848,7 @@ window.background.csd {
         list { // left-pane
           background-color: transparent;
 
-          row.activatable:not(:hover, :active, :selected) {
+          row.activatable:not(:hover):not(:active):not(:selected) {
             background-color: transparent;
           }
         }
@@ -918,7 +918,7 @@ hdyleaflet, leaflet, box.horizontal > stack.background {
   frame > border { border: none; }
 
   > box.vertical > scrolledwindow > viewport.frame {
-    list:not(.view, .tweak-group) {
+    list:not(.view):not(.tweak-group) {
       row.activatable {
         @extend %sidebar_row;
       }
@@ -944,7 +944,7 @@ window#gnome-system-monitor.background.csd {
 
     > box.vertical {
       > scrolledwindow {
-        treeview.view:not(.progressbar, .trough, :hover, :active, :selected) {
+        treeview.view:not(.progressbar):not(.trough):not(:hover):not(:active):not(:selected) {
           background: none;
         }
       }
@@ -1168,7 +1168,7 @@ window.background > box.vertical > toolbar.primary-toolbar {
     }
 
     > box.horizontal:not(.linked) > button.toggle,
-    > .linked > button:not(.toggle, .raised, .flat) {
+    > .linked > button:not(.toggle):not(.raised):not(.flat) {
       @extend %circular-button;
       @extend %image-button;
     }
@@ -1285,7 +1285,7 @@ popover.popover-selector list {
 omnibar {
   &.linked:not(.vertical) entry { border-radius: $corner-radius; }
 
-  &:not(:hover, :active) entry { color: $text-secondary; }
+  &:not(:hover):not(:active) entry { color: $text-secondary; }
 }
 
 popover.omnibar list row:not(:last-child) {
@@ -1677,7 +1677,7 @@ box.vertical > revealer > toolbar.search-bar {
 .documents-scrolledwin {
   background-color: transparent;
 
-  .content-view:not(:selected, :hover) {
+  .content-view:not(:selected):not(:hover) {
     background-color: transparent;
 
     // border-radius: 0 0 $window-radius $window-radius;
@@ -1686,7 +1686,7 @@ box.vertical > revealer > toolbar.search-bar {
   viewport.frame { // Documents
     background-color: transparent;
 
-    widget > frame.content-view:not(:selected, :hover) {
+    widget > frame.content-view:not(:selected):not(:hover) {
       border { border: none; }
 
       background-color: transparent;
@@ -1719,7 +1719,7 @@ dialog.background {
 window.background.csd {
   > box.vertical {
     > paned.horizontal > box.vertical > scrolledwindow {
-      > treeview.view:not(:hover, :active, :selected) { background-color: transparent; }
+      > treeview.view:not(:hover):not(:active):not(:selected) { background-color: transparent; }
     }
   }
 
@@ -1753,15 +1753,15 @@ window.background.fr-window {
 
       // Keep list viewport opaque to avoid hover gray leaking into full pane.
       treeview.view,
-      treeview.view:not(:hover, :active, :selected),
+      treeview.view:not(:hover):not(:active):not(:selected),
       treeview.view:hover,
       treeview.view:active,
-      treeview.view:drop(active) {
+      treeview.view:hover {
         background-color: $base;
         background-image: none;
       }
 
-      > treeview.view:not(:hover, :active, :selected) {
+      > treeview.view:not(:hover):not(:active):not(:selected) {
         background-color: $base;
       }
     }
@@ -1776,10 +1776,10 @@ window.background.fr-window {
         background-color: $background;
 
         treeview.view,
-        treeview.view:not(:hover, :active, :selected),
+        treeview.view:not(:hover):not(:active):not(:selected),
         treeview.view:hover,
         treeview.view:active,
-        treeview.view:drop(active) {
+        treeview.view:hover {
           background-color: $background;
           background-image: none;
         }
@@ -1794,7 +1794,7 @@ window.background.fr-window {
   treeview.view,
   treeview.view:hover,
   treeview.view:active,
-  treeview.view:drop(active) {
+  treeview.view:hover {
     background-image: none;
   }
 
@@ -1814,7 +1814,7 @@ window.background.fr-window {
 window.background.csd {
   > box.vertical > paned.horizontal {
     > scrolledwindow {
-      treeview.view:not(:hover, :active, :selected) {
+      treeview.view:not(:hover):not(:active):not(:selected) {
         background-color: transparent;
       }
     }
@@ -2167,7 +2167,7 @@ dialog.background.csd {
         border-radius: 0 0 $window-radius $window-radius;
         background-color: $base;
 
-        iconview.view:not(:hover, :selected, :active) { // Wallpaper setting window
+        iconview.view:not(:hover):not(:selected):not(:active) { // Wallpaper setting window
           // @extend %view;
           background-color: transparent;
         }
@@ -2179,14 +2179,14 @@ dialog.background.csd {
         > list {
           border-radius: 0 0 $window-radius $window-radius;
 
-          row.activatable:not(:hover, :selected, :active) {
+          row.activatable:not(:hover):not(:selected):not(:active) {
             background-color: transparent;
           }
         }
       }
 
       > box.vertical > stack.view {
-        > scrolledwindow > treeview.view:not(:hover, :selected, :active) {
+        > scrolledwindow > treeview.view:not(:hover):not(:selected):not(:active) {
           background-color: transparent;
         }
       }
@@ -2219,7 +2219,7 @@ dialog.background.csd {
         }
       }
 
-      treeview.view:not(:hover, :active, :selected) { background: none; }
+      treeview.view:not(:hover):not(:active):not(:selected) { background: none; }
     }
 
     viewport.frame {

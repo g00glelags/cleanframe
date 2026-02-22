@@ -147,7 +147,7 @@ window#whiskermenu-window {
     treeview.view {
       border-radius: $menuitem-radius;
 
-      &:not(:hover, :selected) { background: none; }
+      &:not(:hover):not(:selected) { background: none; }
 
       &:selected:hover {
         background-color: $divider;
@@ -192,7 +192,7 @@ window#whiskermenu-window {
     padding: 0;
     margin: 0;
 
-    &:not(.inline-toolbar, .osd) {
+    &:not(.inline-toolbar):not(.osd) {
       scale,
       entry,
       spinbutton,
@@ -320,7 +320,7 @@ window.background.csd.thunar {
   > grid.horizontal > paned.horizontal > scrolledwindow.frame.sidebar.shortcuts-pane {
     border-bottom-left-radius: $window-radius;
 
-    treeview.view:not(:hover, :active, :selected) {
+    treeview.view:not(:hover):not(:active):not(:selected) {
       background-color: $base;
       background-image: none;
     }
