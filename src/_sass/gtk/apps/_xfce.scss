@@ -147,7 +147,7 @@ window#whiskermenu-window {
     treeview.view {
       border-radius: $menuitem-radius;
 
-      &:not(:hover):not(:selected) { background: none; }
+      &:not(:hover, :selected) { background: none; }
 
       &:selected:hover {
         background-color: $divider;
@@ -192,7 +192,7 @@ window#whiskermenu-window {
     padding: 0;
     margin: 0;
 
-    &:not(.inline-toolbar):not(.osd) {
+    &:not(.inline-toolbar, .osd) {
       scale,
       entry,
       spinbutton,
@@ -314,13 +314,52 @@ window#whiskermenu-window {
   > grid.horizontal > paned.horizontal > scrolledwindow.frame.sidebar.shortcuts-pane {
     border-top: none;
   }
+
+  // Thunar uses mixed nodes (.view / treeview cell renderers / rows) and some
+  // selections fall back to default GTK blue unless we style them explicitly.
+  .view selection,
+  .view:selected,
+  .view:selected:focus,
+  treeview.view:selected,
+  treeview.view:selected:focus,
+  treeview.view.cell:selected,
+  treeview.view.cell:selected:focus,
+  iconview.view:selected,
+  iconview.view:selected:focus,
+  iconview.view.cell:selected,
+  iconview.view.cell:selected:focus,
+  row:selected,
+  row:selected:focus,
+  entry > text > selection {
+    color: $app-selection-fg;
+    background-color: $app-selection-bg;
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+  }
+
+  .view:selected *,
+  .view:selected:focus *,
+  treeview.view:selected *,
+  treeview.view:selected:focus *,
+  treeview.view.cell:selected *,
+  treeview.view.cell:selected:focus *,
+  iconview.view:selected *,
+  iconview.view:selected:focus *,
+  iconview.view.cell:selected *,
+  iconview.view.cell:selected:focus *,
+  row:selected *,
+  row:selected:focus * {
+    color: $app-selection-fg;
+    text-shadow: none;
+  }
 }
 
 window.background.csd.thunar {
   > grid.horizontal > paned.horizontal > scrolledwindow.frame.sidebar.shortcuts-pane {
     border-bottom-left-radius: $window-radius;
 
-    treeview.view:not(:hover):not(:active):not(:selected) {
+    treeview.view:not(:hover, :active, :selected) {
       background-color: $base;
       background-image: none;
     }

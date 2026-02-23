@@ -461,7 +461,7 @@
     background-color: transparent;
     color: on($panel);
 
-    button:not(.suggested-action):not(.destructive-action) {
+    button:not(.suggested-action, .destructive-action) {
       color: on($panel, secondary);
 
       &:hover,

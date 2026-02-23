@@ -90,8 +90,9 @@ $calc-cell-selection-bg: #00B8FF;
 $calc-cell-selection-fg: #000;
 
 // Used by desktop selection (mouse drag rubberband + desktop icon selection).
-$desktop-selection-bg: #1A73E8;
-$desktop-selection-fg: #FFF;
+// Keep aligned with app selection to avoid blue Adwaita-like leaks across file managers.
+$desktop-selection-bg: #A6E4FF;
+$desktop-selection-fg: #000;
 
 // Used by Cinnamon calendar selected day state.
 $calendar-selected-bg: #1F883D;

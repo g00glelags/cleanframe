@@ -7,6 +7,7 @@
     "lint:scss": "stylelint \"src/**/*.scss\"",
     "lint:scss:fix": "stylelint \"src/**/*.scss\" --fix",
     "build:scss:smoke": "bash scripts/scss-smoke.sh",
+    "audit:gaps": "bash scripts/audit-theme-gaps.sh",
     "audit:unused": "bash scripts/audit-unused-assets.sh",
     "test": "npm run lint:scss && npm run build:scss:smoke"
   },

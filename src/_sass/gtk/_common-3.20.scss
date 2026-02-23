@@ -25,6 +25,7 @@
 
   outline: transparent solid 2px;
   outline-offset: -4px;
+  -gtk-outline-radius: $corner-radius;
   -gtk-secondary-caret-color: $primary;
 
   &:focus { outline-color: $overlay-checked; }
@@ -277,7 +278,7 @@ entry {
 
     &:focus { @include entry(checked); }
 
-    &:hover { @include entry(hover); }
+    &:drop(active) { @include entry(hover); }
 
     &:disabled { @include entry(disabled); }
 
@@ -355,7 +356,7 @@ entry {
 
   &:focus { @include entry(raised-focus); }
 
-  &:hover { @include entry(raised-hover); }
+  &:drop(active) { @include entry(raised-hover); }
 
   &:disabled { @include entry(raised-disabled); }
 
@@ -425,7 +426,7 @@ treeview entry {
     box-shadow: none;
     background-color: transparent;
 
-    &:not(:hover):not(:active) { color: $text-secondary; }
+    &:not(:hover, :active) { color: $text-secondary; }
   }
 }
 
@@ -500,7 +501,7 @@ button {
   // font-weight: 500;
   @extend %button-basic;
 
-  &:hover { @include button(hover); }
+  &:drop(active) { @include button(hover); }
 
   @at-root %button-flat, &.flat {
     @at-root %button-flat-simple, & {
@@ -796,7 +797,7 @@ spinbutton {
       border: solid $space-size transparent;
 
       // Remove unwanted focus indicator
-      &:focus:not(:hover):not(:active):not(:disabled) {
+      &:focus:not(:hover, :active, :disabled) {
         box-shadow: inset 0 0 0 9999px transparent;
         color: $text-secondary;
       }
@@ -845,7 +846,7 @@ spinbutton {
       border: solid $space-size transparent;
 
       // Remove unwanted focus indicator
-      &:focus:not(:hover):not(:active) {
+      &:focus:not(:hover, :active) {
         box-shadow: inset 0 0 0 9999px transparent;
         color: $text-secondary;
       }
@@ -1026,7 +1027,7 @@ toolbar {
   &.horizontal > separator { margin: 2px; }
   &.vertical > separator { margin: 2px; }
 
-  &:not(.inline-toolbar):not(.osd) {
+  &:not(.inline-toolbar, .osd) {
     scale,
     entry,
     spinbutton,
@@ -1089,7 +1090,7 @@ searchbar > revealer > box {
 
   color: $titlebar-text-secondary;
 
-  .linked:not(.vertical):not(.path-bar) > & {
+  .linked:not(.vertical, .path-bar) > & {
     border-radius: $circular-radius;
   }
 
@@ -1183,7 +1184,7 @@ searchbar > revealer > box {
     background-color: $titlebar-divider;
   }
 
-  button:not(.suggested-action):not(.destructive-action) {
+  button:not(.suggested-action, .destructive-action) {
     @extend %titlebar-button;
   }
 
@@ -1215,13 +1216,13 @@ searchbar > revealer > box {
     border-radius: $circular-radius;
     margin: $space-size 0;
 
-    &.linked:not(.vertical) > button:not(.suggested-action):not(.destructive-action).text-button {
+    &.linked:not(.vertical) > button:not(.suggested-action, .destructive-action).text-button {
       border-radius: $circular-radius;
     }
   }
 
   // FIXME: Ugly overriding
-  .path-bar button:not(.suggested-action):not(.destructive-action) {
+  .path-bar button:not(.suggested-action, .destructive-action) {
     color: $titlebar-text-secondary;
     border-radius: 3px;
 
@@ -1251,7 +1252,7 @@ searchbar > revealer > box {
 
     .subtitle:link { color: on($primary); }
 
-    button:not(.suggested-action):not(.destructive-action) {
+    button:not(.suggested-action, .destructive-action) {
       border-image: radial-gradient(circle closest-corner at center calc(100% - 1px),
                                     currentcolor 0%,
                                     transparent 0%)
@@ -1397,7 +1398,7 @@ headerbar {
   }
 
   &.windowhandle {
-    viewswitcher button:not(.titlebutton):not(.suggested-action):not(.destructive-action) {
+    viewswitcher button:not(.titlebutton, .suggested-action, .destructive-action) {
       border-radius: 0;
       margin-top: 0;
       margin-bottom: 0;
@@ -1548,7 +1549,7 @@ headerbar {
     }
   }
 
-  button.titlebutton:not(.suggested-action):not(.destructive-action) {
+  button.titlebutton:not(.suggested-action, .destructive-action) {
     @extend %circular-button;
 
     border-radius: 9999px;
@@ -1659,6 +1660,7 @@ treeview.view {
 
   border-left-color: $track; // this is actually the tree lines color,
   border-top-color: $divider; // while this is the grid lines color, better then nothing
+  -gtk-outline-radius: 3px;
 
   // FIXME: Avoid transparency background-color being slightly er
   &:selected {
@@ -1677,7 +1679,7 @@ treeview.view {
   }
 
   // FIXME: box-shadow, background-color and background-image are not available here.
-  &:hover {
+  &:drop(active) {
     border-style: solid none;
     border-width: 9999px;
     border-color: $drop_target_color;
@@ -1731,7 +1733,7 @@ treeview.view {
       border-radius: 0;
       background-clip: border-box;
 
-      &:not(:focus):not(:hover):not(:active) { color: $text-secondary; }
+      &:not(:focus, :hover, :active) { color: $text-secondary; }
 
       &, &:disabled { background-color: $base; }
 
@@ -2318,13 +2320,13 @@ notebook {
     tab {
       @extend %tabs_tab;
 
-      // FIXME: The tab node doesn't have :hover, instead its child box has it.
+      // FIXME: The tab node doesn't have :drop(active), instead its child box has it.
       > box {
         transition: background-color $duration $ease-out;
         margin: -$space-size -12px;
         padding: $space-size 12px;
 
-        &:hover {
+        &:drop(active) {
           background-color: $divider;
           color: $text;
         }
@@ -2435,7 +2437,7 @@ scrollbar {
       transition-property: background-color, min-height, min-width;
     }
 
-    &:not(.dragging):not(.hovering) {
+    &:not(.dragging, .hovering) {
       border-color: transparent;
       background-color: transparent;
 
@@ -2627,7 +2629,7 @@ radio {
       background-image: none;
     }
 
-    &:not(:checked):not(:indeterminate):not(:disabled) { color: $text-secondary; }
+    &:not(:checked, :indeterminate, :disabled) { color: $text-secondary; }
 
     &.left:dir(rtl) {
       margin-left: -12px;
@@ -2649,7 +2651,7 @@ radio {
 
     &:dir(rtl) { margin-left: 8px; }
 
-    &:not(:checked):not(:indeterminate):not(:disabled) { color: $text-secondary; }
+    &:not(:checked, :indeterminate, :disabled) { color: $text-secondary; }
 
     &, &:hover, &:disabled {
       box-shadow: none;
@@ -3098,9 +3100,9 @@ actionbar > revealer > box {
     border-radius: 0;
   }
 
-  button:not(.suggested-action):not(.destructive-action) { @extend %button-flat; }
+  button:not(.suggested-action, .destructive-action) { @extend %button-flat; }
 
-  .linked > button:not(.suggested-action):not(.destructive-action) { @extend %button-basic; }
+  .linked > button:not(.suggested-action, .destructive-action) { @extend %button-basic; }
 }
 
 scrolledwindow {
@@ -3419,12 +3421,6 @@ messagedialog { // Message Dialog styling
 }
 
 filechooser {
-  // Force opaque surfaces in GtkFileChooserDialog.
-  &, > box, > stack, > paned, scrolledwindow, viewport, viewport.frame, .view {
-    background-color: $base;
-    background-image: none;
-  }
-
   .csd & {
     background-color: $base;
     border-radius: 0 0 $window-radius $window-radius;
@@ -3451,7 +3447,7 @@ filechooser {
 
       list { background-color: transparent; }
 
-      treeview.view:not(:hover):not(:active):not(:selected) {
+      treeview.view:not(:hover, :active, :selected) {
         background-color: transparent;
       }
     }
@@ -3483,7 +3479,7 @@ filechooser {
   }
 }
 
-// filechooserbutton:hover {
+// filechooserbutton:drop(active) {
 //   box-shadow: none;
 // }
 
@@ -3625,7 +3621,7 @@ placessidebar.sidebar {
       image.sidebar-icon { color: $primary; }
     }
 
-    &:hover {
+    &:drop(active) {
       transition: $transition,
                   box-shadow 0ms,
                   background-size $ripple-fade-out-duration $ease-out,
@@ -4054,7 +4050,7 @@ cursor-handle {
   font-size: smaller;
 }
 
-:not(decoration):not(window):hover { // FIXME needs to be done widget by widget, this wildcard should really die
+:not(decoration, window):drop(active) { // FIXME needs to be done widget by widget, this wildcard should really die
   caret-color: $primary;
 }
 
@@ -4064,7 +4060,7 @@ stackswitcher {
   border-radius: $circular-radius;
   background-color: $overlay-normal;
 
-  &:not(.vertical) > button:not(.suggested-action):not(.destructive-action) {
+  &:not(.vertical) > button:not(.suggested-action, .destructive-action) {
     margin: 0;
     background-color: transparent;
 

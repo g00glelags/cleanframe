@@ -37,7 +37,7 @@
     }
 
     // instead of .path-bar button.slider-button
-    button:not(.text-button):not(.image-button) {
+    button:not(.text-button, .image-button) {
       padding-left: 4px;
       padding-right: 4px;
     }

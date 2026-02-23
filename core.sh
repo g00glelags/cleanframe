@@ -84,23 +84,18 @@ normalize_gtk4_css() {
 
   [[ -f "$css_file" ]] || return 0
 
-  # Some GTK4 builds reject modern CSS constructs used by upstream theme sources.
-  # Keep a conservative stylesheet to avoid parser cascades and transparency regressions.
+  # GTK4 parser compatibility pass for older/libadwaita runtimes:
+  # - remove unsupported custom property blocks and declarations
+  # - split selector lists inside :not(...)
+  # - replace newer pseudo-classes with broader fallbacks
   if has_command perl; then
     perl -0pi -e '
-      # Drop custom property block (unsupported in some GTK4 parser versions).
       s/^:root\s*\{.*?\}\s*//s;
-      # GTK parser does not accept selector lists inside :not(...).
       1 while s/:not\(([^()]*?),\s*([^()]+?)\)/:not($1):not($2)/g;
-      # Replace newer pseudo-classes with broad fallback.
       s/:focus-within/:focus/g;
       s/:focus-visible/:focus/g;
-      # Drop unsupported GTK3-only property if present.
       s/^\h*-gtk-outline-radius:\h*[^;]+;\h*\n//mg;
-      # Remove declarations relying on unsupported CSS vars/functions.
       s/^\h*--[a-zA-Z0-9_-]+:\h*[^;]+;\h*\n//mg;
-      # Drop property declarations containing unsupported functions,
-      # but never cross block braces or consume selectors.
       s/^\h*[a-zA-Z_-][a-zA-Z0-9_-]*\h*:\h*(?:(?![{}]).)*?\bvar\(--(?:(?![{}]).)*?;\h*\n//msg;
       s/^\h*[a-zA-Z_-][a-zA-Z0-9_-]*\h*:\h*(?:(?![{}]).)*?\bcolor-mix\((?:(?![{}]).)*?;\h*\n//msg;
     ' "$css_file"
@@ -108,44 +103,6 @@ normalize_gtk4_css() {
 }
 
 detect_sass_compiler
-
-check_write_access() {
-  local path="$1"
-  local label="$2"
-
-  if [[ -e "$path" ]]; then
-    if [[ ! -w "$path" ]]; then
-      echo "ERROR: No write permission on ${label}: ${path}"
-      return 1
-    fi
-    return 0
-  fi
-
-  local parent
-  parent="$(dirname "$path")"
-  if [[ -d "$parent" && -w "$parent" ]]; then
-    return 0
-  fi
-
-  echo "ERROR: Cannot create ${label}: ${path}"
-  echo "       Parent is not writable: ${parent}"
-  return 1
-}
-
-ensure_install_permissions() {
-  local dest_root="${dest:-$DEST_DIR}"
-
-  check_write_access "$dest_root" "theme destination" || return 1
-  check_write_access "${dest_root}/CleanFrame-Light" "theme directory" || return 1
-  check_write_access "${dest_root}/CleanFrame-Light-hdpi" "theme directory" || return 1
-  check_write_access "${dest_root}/CleanFrame-Light-xhdpi" "theme directory" || return 1
-
-  if [[ "${apply_snap_preset:-false}" == "true" ]]; then
-    check_write_access "${HOME}/.config/environment.d" "environment.d directory" || return 1
-  fi
-
-  return 0
-}
 
 install() {
   local dest="$1"
@@ -212,6 +169,7 @@ install() {
   cp -r "$SRC_DIR/gtk/assets$theme$ctype"                                                    "$THEME_DIR/gtk-4.0/assets"
   cp -r "$SRC_DIR/gtk/scalable"                                                              "$THEME_DIR/gtk-4.0/assets"
   compile_scss "$SRC_DIR/gtk/4.0/gtk$color$size.scss"                                        "$THEME_DIR/gtk-4.0/gtk.css"
+  echo "Normalizing GTK4 CSS for parser compatibility..."
   normalize_gtk4_css "$THEME_DIR/gtk-4.0/gtk.css"
 
   mkdir -p                                                                                   "$THEME_DIR/xfwm4"
@@ -384,13 +342,41 @@ backup_file() {
   fi
 }
 
+set_gtk3_settings_theme() {
+  local theme_name="$1"
+  local gtk3_dir="${HOME}/.config/gtk-3.0"
+  local gtk3_settings="${gtk3_dir}/settings.ini"
+
+  mkdir -p "$gtk3_dir"
+
+  if [[ -f "$gtk3_settings" ]]; then
+    if grep -q '^[[:space:]]*gtk-theme-name[[:space:]]*=' "$gtk3_settings"; then
+      sed -i "s/^[[:space:]]*gtk-theme-name[[:space:]]*=.*/gtk-theme-name=${theme_name}/" "$gtk3_settings"
+    else
+      if ! grep -q '^\[Settings\]' "$gtk3_settings"; then
+        printf '\n[Settings]\n' >> "$gtk3_settings"
+      fi
+      printf 'gtk-theme-name=%s\n' "$theme_name" >> "$gtk3_settings"
+    fi
+  else
+    cat > "$gtk3_settings" <<EOF
+[Settings]
+gtk-theme-name=${theme_name}
+EOF
+  fi
+}
+
 refresh_theme() {
+  local target_theme_name="${1:-}"
   echo -e "\nRefreshing theme settings..."
 
   if has_command gsettings; then
     local current_gtk_theme=""
 
-    current_gtk_theme="$(gsettings get org.gnome.desktop.interface gtk-theme 2> /dev/null | tr -d "'" || true)"
+    current_gtk_theme="${target_theme_name}"
+    if [[ -z "$current_gtk_theme" ]]; then
+      current_gtk_theme="$(gsettings get org.gnome.desktop.interface gtk-theme 2> /dev/null | tr -d "'" || true)"
+    fi
     if [[ -n "$current_gtk_theme" ]]; then
       gsettings set org.gnome.desktop.interface gtk-theme "$current_gtk_theme" 2> /dev/null || true
       gsettings set org.cinnamon.desktop.interface gtk-theme "$current_gtk_theme" 2> /dev/null || true
@@ -401,10 +387,19 @@ refresh_theme() {
   if has_command xfconf-query; then
     local current_xfce_theme=""
 
-    current_xfce_theme="$(xfconf-query -c xsettings -p /Net/ThemeName 2> /dev/null || true)"
-    if [[ -n "$current_xfce_theme" ]]; then
-      xfconf-query -c xsettings -p /Net/ThemeName -s "$current_xfce_theme" 2> /dev/null || true
+    current_xfce_theme="${target_theme_name}"
+    if [[ -z "$current_xfce_theme" ]]; then
+      current_xfce_theme="$(xfconf-query -c xsettings -p /Net/ThemeName 2> /dev/null || true)"
     fi
+    if [[ -n "$current_xfce_theme" ]]; then
+      xfconf-query -c xsettings -p /Net/ThemeName -s "$current_xfce_theme" 2> /dev/null \
+        || xfconf-query -c xsettings -p /Net/ThemeName -n -t string -s "$current_xfce_theme" 2> /dev/null \
+        || true
+    fi
+  fi
+
+  if [[ -n "$target_theme_name" ]]; then
+    set_gtk3_settings_theme "$target_theme_name"
   fi
 }
 
@@ -429,9 +424,19 @@ apply_flatpak_theme_override() {
 apply_snap_theme_preset() {
   local theme_name="$1"
   local envd_dir="${HOME}/.config/environment.d"
-  local preset_file="${envd_dir}/90-cleanframe-theme.conf"
+  local preset_file="${envd_dir}/99-cleanframe-theme.conf"
 
   mkdir -p "${envd_dir}"
+  rm -f "${envd_dir}/90-cleanframe-theme.conf" 2> /dev/null || true
+
+  local conflict_files=""
+  conflict_files="$(grep -RIl '^[[:space:]]*GTK_THEME=' "${envd_dir}" 2> /dev/null | grep -vFx "${preset_file}" || true)"
+  if [[ -n "${conflict_files}" ]]; then
+    echo "WARNING: conflicting GTK_THEME preset(s) detected in '${envd_dir}':"
+    echo "${conflict_files}" | sed 's/^/  - /'
+    echo "         '${preset_file##*/}' will override on next login/session reload."
+  fi
+
   cat > "${preset_file}" << EOF
 # Generated by CleanFrame install.sh
 GTK_THEME=${theme_name}
@@ -455,15 +460,6 @@ apply_sandbox_theme_preset() {
 
 install_theme() {
   check_shell
-
-  if ! ensure_install_permissions; then
-    cat << EOF
-Permission fix suggestion:
-  sudo chown -R "$USER:$USER" "${dest:-$DEST_DIR}/CleanFrame-Light" "${dest:-$DEST_DIR}/CleanFrame-Light-hdpi" "${dest:-$DEST_DIR}/CleanFrame-Light-xhdpi" "${HOME}/.config/environment.d"
-  chmod -R u+rwX "${dest:-$DEST_DIR}/CleanFrame-Light" "${dest:-$DEST_DIR}/CleanFrame-Light-hdpi" "${dest:-$DEST_DIR}/CleanFrame-Light-xhdpi" "${HOME}/.config/environment.d"
-EOF
-    exit 1
-  fi
 
   for theme in "${themes[@]}"; do
     for color in "${colors[@]}"; do
@@ -498,7 +494,7 @@ EOF
   local selected_theme_name="${_name:-$THEME_NAME}${themes[0]}${colors[0]}${sizes[0]}${ctype}"
   apply_sandbox_theme_preset "${selected_theme_name}"
 
-  refresh_theme
+  refresh_theme "${selected_theme_name}"
 }
 
 uninstall_theme() {

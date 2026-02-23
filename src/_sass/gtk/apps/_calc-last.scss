@@ -12,43 +12,6 @@ window.background#LibreOfficeMainWindow {
     color: $calc-cell-selection-fg;
     background-color: $calc-cell-selection-bg;
     border-radius: 0;
+    -gtk-outline-radius: 0;
   }
-}
-
-// Final GTK3 DnD fallback (wx/FileZilla grids may expose nonstandard nodes).
-// Keep this last to beat earlier generic app rules.
-window.background *:drop(active) {
-  background-color: rgba($drop_target_color, 0.12);
-  background-image: none;
-  box-shadow: inset 0 0 0 1px $drop_target_color;
-  color: $text;
-  text-shadow: none;
-}
-
-// TEMP(FileZilla wx grid DnD): aggressive fallback to catch custom/generic grid nodes
-// that ignore the app-specific selectors in `_misc.scss`.
-// Remove this block later if it proves unnecessary or causes regressions.
-window.background.filezilla *:drop(active),
-window.background.FileZilla *:drop(active),
-window.background#filezilla *:drop(active),
-window.background#FileZilla *:drop(active) {
-  background-color: rgba($drop_target_color, 0.16);
-  background-image: none;
-  box-shadow: inset 0 0 0 1px $drop_target_color;
-  color: $text;
-  text-shadow: none;
-}
-
-// TEMP(FileZilla wx grid selection): force readable selection colors for generic descendants.
-// Remove if upstream selectors become sufficient.
-window.background.filezilla *:selected,
-window.background.filezilla *:selected:focus,
-window.background.FileZilla *:selected,
-window.background.FileZilla *:selected:focus,
-window.background#filezilla *:selected,
-window.background#filezilla *:selected:focus,
-window.background#FileZilla *:selected,
-window.background#FileZilla *:selected:focus {
-  background-color: #a6e4ff;
-  color: #000000;
 }

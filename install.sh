@@ -1,21 +1,5 @@
 #! /usr/bin/env bash
 
-set -Ee -o pipefail
-
-on_install_error() {
-  local exit_code="$1"
-  local line_no="$2"
-  local cmd="${3:-unknown}"
-
-  echo
-  echo "ERROR: install.sh aborted (exit=${exit_code})"
-  echo "Line: ${line_no}"
-  echo "Command: ${cmd}"
-  echo "Hint: check permissions in '~/.themes' and '~/.config/environment.d' if the failure mentions 'Permission denied'."
-}
-
-trap 'on_install_error "$?" "$LINENO" "$BASH_COMMAND"' ERR
-
 REPO_DIR="$(dirname "$(readlink -m "${0}")")"
 source "${REPO_DIR}/core.sh"
 
