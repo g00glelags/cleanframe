@@ -94,6 +94,13 @@ $calc-cell-selection-fg: #000;
 $desktop-selection-bg: #A6E4FF;
 $desktop-selection-fg: #000;
 
+// Used only for GTK drag-and-drop drop target highlight (folder/file destination).
+// Keep independent from normal selection to allow fine-tuning readability.
+$drag-drop-target-bg: #E3DCD5;
+$drag-drop-target-fg: #000;
+$drag-drop-target-outline: #B8ACA1;
+$drag-drop-target-fill-alpha: 0.58;
+
 // Used by Cinnamon calendar selected day state.
 $calendar-selected-bg: #1F883D;
 $calendar-selected-fg: #FFF;

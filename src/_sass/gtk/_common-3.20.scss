@@ -1681,8 +1681,14 @@ treeview.view {
   // FIXME: box-shadow, background-color and background-image are not available here.
   &:drop(active) {
     border-style: solid none;
+    // Fill the whole drop destination area in GTK3 treeviews.
+    // Text readability is preserved by the row/cell/label drop overrides below.
     border-width: 9999px;
-    border-color: $drop_target_color;
+    // Use the theme app-selection palette for drop targets so folder names
+    // remain readable in file managers (Thunar/Nemo) and the highlight stays
+    // aligned with current theme colors.
+    border-color: $file_dnd_target_fill;
+    color: $file_dnd_target_fg;
 
     &.after { border-top-style: none; }
 
@@ -1798,6 +1804,37 @@ menubar,
 
     label:disabled { color: inherit; } // to inherit the above color
   }
+}
+
+// Generic GTK3 drop-target readability patch for file/list/icon views.
+// Some apps (e.g. Thunar/Nemo) style the actual destination on row/cell nodes
+// and may bypass app-specific window class selectors.
+treeview.view:drop(active),
+treeview.view cell:drop(active),
+treeview.view.cell:drop(active),
+iconview.view:drop(active),
+iconview.view cell:drop(active),
+iconview.view.cell:drop(active),
+row:drop(active) {
+  color: $file_dnd_target_fg !important;
+  background-color: $file_dnd_target_fill !important;
+  background-image: none !important;
+  border-color: $file_dnd_target_outline !important;
+  text-shadow: none !important;
+}
+
+treeview.view:drop(active) *,
+treeview.view cell:drop(active) *,
+treeview.view.cell:drop(active) *,
+iconview.view:drop(active) *,
+iconview.view cell:drop(active) *,
+iconview.view.cell:drop(active) *,
+row:drop(active) * {
+  color: $file_dnd_target_fg !important;
+  text-shadow: none !important;
+  border-color: $file_dnd_target_outline !important;
+  background-color: transparent !important;
+  -gtk-icon-effect: none !important;
 }
 
 // Needed to make the border-radius of menus work

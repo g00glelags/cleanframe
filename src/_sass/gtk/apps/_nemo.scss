@@ -139,6 +139,46 @@
     box-shadow: none;
     text-shadow: none;
   }
+
+  // Keep drag destination highlight aligned with theme selection colors and
+  // preserve destination label readability while dragging folders/files.
+  .view:drop(active),
+  .view:drop(active):focus,
+  treeview.view:drop(active),
+  treeview.view cell:drop(active),
+  treeview.view.cell:drop(active),
+  iconview.view:drop(active),
+  iconview.view cell:drop(active),
+  iconview.view.cell:drop(active),
+  row:drop(active),
+  flowbox > flowboxchild:drop(active) {
+    color: $file_dnd_target_fg !important;
+    background-color: $file_dnd_target_fill !important;
+    background-image: none !important;
+    border-color: $file_dnd_target_outline !important;
+    box-shadow: inset 0 0 0 1px $file_dnd_target_outline !important;
+    text-shadow: none !important;
+  }
+
+  .view:drop(active) *,
+  .view:drop(active):focus *,
+  treeview.view:drop(active) *,
+  treeview.view cell:drop(active) *,
+  treeview.view.cell:drop(active) *,
+  iconview.view:drop(active) *,
+  iconview.view cell:drop(active) *,
+  iconview.view.cell:drop(active) *,
+  row:drop(active) *,
+  flowbox > flowboxchild:drop(active) *,
+  label:drop(active),
+  cell:drop(active),
+  .cell:drop(active) {
+    color: $file_dnd_target_fg !important;
+    text-shadow: none !important;
+    background-color: transparent !important;
+    border-color: $file_dnd_target_outline !important;
+    -gtk-icon-effect: none !important;
+  }
 }
 
 // For Places Sidebar diskfull indicators

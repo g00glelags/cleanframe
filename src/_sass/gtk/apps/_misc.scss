@@ -82,9 +82,9 @@ window.background#FileZilla {
   treeview.view.cell:drop(active),
   iconview.view:drop(active),
   .view:drop(active) {
-    background-color: rgba($drop_target_color, 0.12);
-    box-shadow: inset 0 0 0 1px $drop_target_color;
-    color: $text;
+    background-color: $file_dnd_target_fill;
+    box-shadow: inset 0 0 0 1px $file_dnd_target_outline;
+    color: $file_dnd_target_fg;
   }
 
   treeview.view entry,
