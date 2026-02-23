@@ -50,10 +50,13 @@ $notebook-tab-inactive-bg: color-palette-default.$notebook-tab-inactive-bg;
 $notebook-tab-active-bg: color-palette-default.$notebook-tab-active-bg;
 $cinnamon-panel-bg: color-palette-default.$cinnamon-panel-bg;
 $cinnamon-panel-fg: color-palette-default.$cinnamon-panel-fg;
+$cinnamon-windowlist-focus-indicator: color-palette-default.$cinnamon-windowlist-focus-indicator;
 $app-selection-bg: color-palette-default.$app-selection-bg;
 $app-selection-fg: color-palette-default.$app-selection-fg;
+$edit-focus-border: color-palette-default.$edit-focus-border;
 $progress-bar-fill: color-palette-default.$progress-bar-fill;
 $button-accent: color-palette-default.$button-accent;
+$button-accent-fg: color-palette-default.$button-accent-fg;
 $calc-cell-selection-bg: color-palette-default.$calc-cell-selection-bg;
 $calc-cell-selection-fg: color-palette-default.$calc-cell-selection-fg;
 $desktop-selection-bg: color-palette-default.$desktop-selection-bg;
@@ -203,8 +206,10 @@ $titlebar-backdrop: background(b);
 // Basic colors
 //
 
-$primary: $app-selection-bg;
-$primary-fixed: $app-selection-bg;
+// Separate selection (file/item highlight) from control/input accents.
+// $primary is the generic focus/accent used by entries, outlines and links.
+$primary: $edit-focus-border;
+$primary-fixed: $edit-focus-border;
 $primary-overlay-20: rgba($primary, 0.2);
 $primary-overlay-30: rgba($primary, 0.3);
 $primary-overlay-35: rgba($primary, 0.35);
@@ -234,6 +239,7 @@ $warning: boost-color(color-palette-default.$yellow-);
 $error: boost-color(color-palette-default.$red-);
 $success: boost-color(color-palette-default.$sea-);
 $suggested: $button-accent;
+$suggested-fg: $button-accent-fg;
 $destructive: $error;
 $check_radio_primary: if(sass(tweaks.$check_radio == 'default'): $success; else: $primary);
 $frame: variables.rgb(black, boost-alpha(0.1));

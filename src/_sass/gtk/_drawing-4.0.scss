@@ -133,7 +133,7 @@
   @if $t == checked {
     box-shadow: none;
     background-color: $suggested;
-    color: on($suggested);
+    color: $suggested-fg;
   }
 
   @if $t == checked-hover {

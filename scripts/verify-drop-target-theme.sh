@@ -154,7 +154,7 @@ validate_global_treeview_drop() {
     echo "[FAIL] Global treeview.view:drop(active): ainda contem #f57c00." >&2
     fail=1
   fi
-  if ! grep -Eq 'border-color:[^;]*#' <<<"$block"; then
+  if ! grep -Eq 'border-color:[^;]*(#|rgba?\()' <<<"$block"; then
     echo "[FAIL] Global treeview.view:drop(active): border-color nao encontrado." >&2
     fail=1
   fi

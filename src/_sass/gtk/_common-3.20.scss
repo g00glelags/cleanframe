@@ -618,11 +618,11 @@ button {
   // .osd & { }
 
   // Suggested and Destructive Action buttons
-  @each $b_type, $b_color in (suggested-action, $suggested),
-                             (destructive-action, $destructive) {
+  @each $b_type, $b_color, $b_fg in (suggested-action, $suggested, $suggested-fg),
+                                    (destructive-action, $destructive, on($destructive)) {
     &.#{$b_type} {
       background-color: $b_color;
-      color: on($b_color);
+      color: $b_fg;
       box-shadow: none;
 
       &:disabled { @include button(disabled); }
@@ -632,9 +632,13 @@ button {
                     0 2px (4px * .6) -1px rgba($b_color, 0.2),
                     0 4px (5px * .6) 0 rgba($b_color, 0.14),
                     0 1px (10px * .6) 0 rgba($b_color, 0.12);
+        color: $b_fg;
       }
 
-      &:checked { background-color: color.mix(on($b_color), $b_color, math.percentage(0.3)); }
+      &:checked {
+        background-color: color.mix(on($b_color), $b_color, math.percentage(0.3));
+        color: $b_fg;
+      }
 
       &:checked:hover {
         box-shadow: inset 0 0 0 9999px transparent,
@@ -4113,8 +4117,8 @@ stackswitcher {
     }
 
     &:checked {
-      background-color: $primary;
-      color: on($primary);
+      background-color: $suggested;
+      color: $suggested-fg;
     }
   }
 

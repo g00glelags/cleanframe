@@ -75,15 +75,22 @@ $notebook-tab-active-bg: #E6F7FF;
 $cinnamon-panel-bg: #E2E2E2;
 $cinnamon-panel-fg: #000;
 
+// Used by Cinnamon window list active/focused indicator detail.
+$cinnamon-windowlist-focus-indicator: #2DFF3D;
+
 // Used by GTK app selections (e.g. Nemo/Thunar list and icon selection).
 $app-selection-bg: #A6E4FF;
 $app-selection-fg: #000;
 
+// Used by focused/editable field borders (entries, spinbuttons, text inputs).
+$edit-focus-border: #00B8FF;
+
 // Used by progress bars across GTK/Cinnamon surfaces.
 $progress-bar-fill: #34A653;
 
-// Used by GTK button accent states (checked/suggested-action), isolated from border/focus primary.
+// Used by GTK button accent states (checked/suggested-action), isolated from selection and input focus.
 $button-accent: #35A854;
+$button-accent-fg: #FFF;
 
 // Used by LibreOffice Calc cell selection override (to avoid low contrast with light app selection).
 $calc-cell-selection-bg: #00B8FF;

@@ -1611,7 +1611,7 @@ $cinnamon_menu_spacing_factor: 1.45;
 // Window list (windowList.js)
 //
 
-$windowlist-focus-indicator-color: #1f883d;
+$windowlist-focus-indicator-color: $cinnamon-windowlist-focus-indicator;
 $windowlist-focus-indicator-size: 2.6px; // ~30% wider than previous 2px
 
 .window-list {

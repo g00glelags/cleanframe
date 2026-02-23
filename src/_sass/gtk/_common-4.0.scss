@@ -604,30 +604,33 @@ button {
   }
 
   // Suggested and Destructive Action buttons
-  @each $b_type, $b_color in (suggested-action, $suggested),
-                             (destructive-action, $destructive) {
+  @each $b_type, $b_color, $b_fg in (suggested-action, $suggested, $suggested-fg),
+                                    (destructive-action, $destructive, on($destructive)) {
     &.#{$b_type} {
       background-color: $b_color;
-      color: on($b_color);
+      color: $b_fg;
       box-shadow: none;
 
       &:disabled {
-        color: rgba(on($b_color), 0.45);
+        color: rgba($b_fg, 0.45);
         background-color: rgba($b_color, 0.25);
       }
 
       &:hover {
-        color: on($b_color);
+        color: $b_fg;
         background-color: color.mix(on($b_color), $b_color, math.percentage(0.1));
         box-shadow: none;
       }
 
       &:active {
-        color: on($b_color);
+        color: $b_fg;
         background-color: color.mix(on($b_color), $b_color, math.percentage(0.2));
       }
 
-      &:checked { background-color: color.mix(on($b_color), $b_color, math.percentage(0.15)); }
+      &:checked {
+        background-color: color.mix(on($b_color), $b_color, math.percentage(0.15));
+        color: $b_fg;
+      }
 
       &:focus { box-shadow: 0 0 0 2px rgba($b_color, 0.35); }
 
@@ -4913,8 +4916,8 @@ stackswitcher {
     &.text-button { min-width: 100px; }
 
     &:checked {
-      background-color: $primary;
-      color: $primary-text;
+      background-color: $suggested;
+      color: $suggested-fg;
     }
   }
 
