@@ -275,8 +275,8 @@ stscrollbar {
 
 $menu_bg: $popover-floating-bg;
 $submenu_item_radius: $popup-radius - $space-size;
-$cinnamon_menu_spacing_factor: 1.45 * 1.1 * 0.9;
-$cinnamon_menu_font_scale: 1.05 * 0.9;
+$cinnamon_menu_spacing_factor: 1.45 * 1.1 * 0.9 * 1.1;
+$cinnamon_menu_font_scale: 1.05 * 0.9 * 1.1;
 
 .menu,
 .popup-menu,
@@ -295,7 +295,7 @@ $cinnamon_menu_font_scale: 1.05 * 0.9;
     box-shadow: none;
 
     @if $submenu_style == 'true' {
-      color: $text !important;
+      color: $menu-text !important;
       background-color: $fill !important;
     } @else {
       color: rgb(black, 0.75) !important;
@@ -304,14 +304,14 @@ $cinnamon_menu_font_scale: 1.05 * 0.9;
 
     .popup-menu-item {
       @if $submenu_style == 'true' {
-        color: $text !important;
+        color: $menu-text !important;
       } @else {
         color: rgb(black, 0.75) !important;
       }
 
       &:active {
         @if $submenu_style == 'true' {
-          color: $text !important;
+          color: $menu-text !important;
           background-color: $divider !important;
         } @else {
           color: rgb(black, 0.85) !important;
@@ -321,7 +321,7 @@ $cinnamon_menu_font_scale: 1.05 * 0.9;
 
       &:active .popup-inactive-menu-item {
         @if $submenu_style == 'true' {
-          color: $text-disabled !important;
+          color: $menu-text-disabled !important;
         } @else {
           color: rgb(black, 0.45) !important;
         }
@@ -329,7 +329,7 @@ $cinnamon_menu_font_scale: 1.05 * 0.9;
 
       &:insensitive {
         @if $submenu_style == 'true' {
-          color: $text-secondary-disabled !important;
+          color: $menu-text-secondary-disabled !important;
         } @else {
           color: rgb(black, 0.35) !important;
         }
@@ -338,7 +338,7 @@ $cinnamon_menu_font_scale: 1.05 * 0.9;
 
     .popup-inactive-menu-item {
       @if $submenu_style == 'true' {
-        color: $text-secondary-disabled !important;
+        color: $menu-text-secondary-disabled !important;
       } @else {
         color: rgb(black, 0.35) !important;
       }
@@ -351,7 +351,7 @@ $cinnamon_menu_font_scale: 1.05 * 0.9;
   }
 
   .popup-menu-content {
-    color: $text;
+    color: $menu-text;
     padding: $space-size;
     background-color: $menu_bg;
     border-radius: $popup-radius;
@@ -366,23 +366,23 @@ $cinnamon_menu_font_scale: 1.05 * 0.9;
     border-radius: if($corner_style == 'circular', $circular-radius, $submenu_item_radius);
 
     &:hover, &:active {
-      color: $text;
+      color: $menu-text;
       background-color: $divider;
     }
 
     &:insensitive {
-      color: $text-disabled;
+      color: $menu-text-disabled;
       background: none;
     }
   }
 
   .popup-inactive-menu-item { // all icons and other graphical elements
-    color: $text-disabled;
+    color: $menu-text-disabled;
 
     &:insensitive { color: $track-disabled; }
   }
 
-  .popup-menu-item:active .popup-inactive-menu-item { color: $text-disabled; }
+  .popup-menu-item:active .popup-inactive-menu-item { color: $menu-text-disabled; }
 
   &-icon { icon-size: 16px; }
 }
@@ -1622,7 +1622,7 @@ $cinnamon_menu_font_scale: 1.05 * 0.9;
 //
 
 $windowlist-focus-indicator-color: $cinnamon-windowlist-focus-indicator;
-$windowlist-focus-indicator-size: 4px; // thicker active-window indicator bar
+$windowlist-focus-indicator-size: 5px; // thicker active-window indicator bar
 
 .window-list {
   &-box {
@@ -1669,7 +1669,8 @@ $windowlist-focus-indicator-size: 4px; // thicker active-window indicator bar
                        (right) {
       .panel-#{$position} & {
         border-#{$position}: $windowlist-focus-indicator-size solid transparent;
-        sticon, stbin, #appMenuIcon { padding: 2px; padding-#{$position}: 0; }
+        // Keep a small gap from the focus indicator bar when it gets thicker.
+        sticon, stbin, #appMenuIcon { padding: 2px; padding-#{$position}: 1px; }
       }
     }
 
@@ -1817,15 +1818,17 @@ $windowlist-focus-indicator-size: 4px; // thicker active-window indicator bar
 
     &.top, &.bottom {
       border-bottom: $windowlist-focus-indicator-size solid transparent;
-      padding: 0 2px;
+      padding: 0 2px 1px;
     }
 
     &.left {
       border-left: $windowlist-focus-indicator-size solid transparent;
+      padding-left: 1px;
     }
 
     &.right {
       border-right: $windowlist-focus-indicator-size solid transparent;
+      padding-right: 1px;
     }
 
     &:hover {

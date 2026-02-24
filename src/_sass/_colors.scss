@@ -150,6 +150,10 @@ $scrim-inverse: variables.rgb(white, 0.1);
 $titlebar: #fafafa;
 $titlebar-backdrop: #fafafa;
 
+// Variant-specific readability override for light-toned menu palettes.
+$theme_id_for_match: string.to-lower-case("#{tweaks.$colorscheme} #{tweaks.$theme}");
+$force-black-menu-text: string.index($theme_id_for_match, "ancient") != null or string.index($theme_id_for_match, "material") != null;
+
 @function on($color: $background, $state: 'primary') {
   // Allow 'light' or '' to $color
   @if $color == 'light' { $color: white; }
@@ -291,6 +295,10 @@ $primary-track-disabled: on($primary, track-disabled);
 $primary-divider: on($primary, divider);
 $primary-secondary-fill: on($primary, secondary-fill);
 $primary-fill: on($primary, fill);
+$menu-text: if($force-black-menu-text, #000000, $text);
+$menu-text-secondary: if($force-black-menu-text, #000000, $text-secondary);
+$menu-text-disabled: if($force-black-menu-text, rgba(black, boost-alpha(0.38)), $text-disabled);
+$menu-text-secondary-disabled: if($force-black-menu-text, rgba(black, boost-alpha(0.26)), $text-secondary-disabled);
 
 // App selection colors (desktop selection uses dedicated overrides/tokens)
 $selection-bg: $app-selection-bg;

@@ -2,8 +2,8 @@
 @use "sass:math";
 
 $titlebar-height-scale: 1.1;
-$menu-font-scale: 1.05 * 0.9;
-$menu-spacing-scale: 1.1 * 0.9;
+$menu-font-scale: 1.05 * 0.9 * 1.1;
+$menu-spacing-scale: 1.1 * 0.9 * 1.1;
 $submenu-font-scale: $menu-font-scale;
 $submenu-spacing-scale: $menu-spacing-scale;
 $window-frame-outline-color: color.mix($grey-600, $grey-550, 70%);
@@ -1895,7 +1895,7 @@ menu {
     min-height: 20px * $submenu-spacing-scale;
     min-width: 40px;
     padding: ((($space-size * 0.5 + 1px) * 1.38) * $submenu-spacing-scale) ($space-size * 1.5 * $submenu-spacing-scale);
-    color: $text;
+    color: $menu-text;
     font: initial;
     font-size: $submenu-font-scale * 1em;
     text-shadow: none;
@@ -1904,10 +1904,10 @@ menu {
     &:hover {
       // transition: background-color $duration $ease-out;
       background-color: $overlay-hover;
-      color: $text;
+      color: $menu-text;
     }
 
-    &:disabled { color: $text-disabled; }
+    &:disabled { color: $menu-text-disabled; }
 
     // submenu indicators
     arrow {
@@ -1974,9 +1974,9 @@ menu {
 }
 
 menuitem {
-  accelerator { color: $text-secondary; }
+  accelerator { color: $menu-text-secondary; }
 
-  &:disabled accelerator { color: $text-secondary-disabled; }
+  &:disabled accelerator { color: $menu-text-secondary-disabled; }
 }
 
 

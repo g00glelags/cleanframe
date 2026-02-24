@@ -4,8 +4,8 @@
 
 /* Popovers/Menus */
 
-$menu-font-scale: 1.05 * 0.9;
-$menu-spacing-scale: 1.1 * 0.9;
+$menu-font-scale: 1.05 * 0.9 * 1.1;
+$menu-spacing-scale: 1.1 * 0.9 * 1.1;
 
 // .the popover itself
 .popup-menu-boxpointer {
@@ -22,7 +22,7 @@ $menu-spacing-scale: 1.1 * 0.9;
 // container of the popover menu
 .popup-menu {
   min-width: 15em;
-  color: colors.$text;
+  color: colors.$menu-text;
 
   // .popup-status-menu-item { font-weight: normal;  color: pink; } //dunno what that is
   &.panel-menu {
@@ -48,7 +48,7 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
   padding: variables.$space-size * 1.38 * $menu-spacing-scale;
   margin: 0 variables.$space-size * $menu-spacing-scale;
   font-size: $menu-font-scale * 1em;
-  color: colors.$text;
+  color: colors.$menu-text;
   background-color: transparent;
   background-image: none;
   transition-duration: variables.$shorter-duration;
@@ -64,7 +64,7 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
     box-shadow: none;
 
     @if tweaks.$submenu_style == 'true' {
-      color: colors.$text-secondary;
+      color: colors.$menu-text-secondary;
       background-color: colors.$fill;
     } @else {
       background-color: variables.rgb(black, 0.15);
@@ -73,7 +73,7 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
 
     &.selected {
       @if tweaks.$submenu_style == 'true' {
-        color: colors.$text;
+        color: colors.$menu-text;
         background-color: colors.$secondary-fill;
       } @else {
         background-color: variables.rgb(black, 0.2);
@@ -83,7 +83,7 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
 
       &:active {
         @if tweaks.$submenu_style == 'true' {
-          color: colors.$text;
+          color: colors.$menu-text;
           background-color: colors.$divider;
         } @else {
           background-color: colors.$base-alt;
@@ -106,23 +106,23 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
 
   &.selected {
     background-color: colors.$secondary-fill;
-    color: colors.$text;
+    color: colors.$menu-text;
     transition-duration: 0ms;
   }
 
   &:active {
     background-color: colors.$track;
-    color: colors.$text;
+    color: colors.$menu-text;
     transition-duration: variables.$longer-duration;
   }
 
-  &.selected:active { color: colors.$text; }
-  &:insensitive { color: colors.$text-disabled; }
+  &.selected:active { color: colors.$menu-text; }
+  &:insensitive { color: colors.$menu-text-disabled; }
 }
 
 // all icons and other graphical elements
 .popup-inactive-menu-item {
-  color: colors.$text;
+  color: colors.$menu-text;
 
   &:insensitive { color: colors.$text-disabled; }
 }
@@ -140,7 +140,7 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
   background-image: none;
 
   @if tweaks.$submenu_style == 'true' {
-    color: colors.$text;
+    color: colors.$menu-text;
     background-color: colors.$fill;
   } @else {
     color: variables.rgb(black, 0.75);
@@ -153,14 +153,14 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
     background-image: none;
 
     @if tweaks.$submenu_style == 'true' {
-      color: colors.$text;
+      color: colors.$menu-text;
     } @else {
       color: variables.rgb(black, 0.75);
     }
 
     &:hover {
       @if tweaks.$submenu_style == 'true' {
-        color: colors.$text;
+        color: colors.$menu-text;
         background-color: colors.$secondary-fill;
       } @else {
         color: variables.rgb(black, 0.85);
@@ -170,7 +170,7 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
 
     &:active {
       @if tweaks.$submenu_style == 'true' {
-        color: colors.$text;
+        color: colors.$menu-text;
         background-color: colors.$divider;
       } @else {
         color: variables.rgb(black, 0.85);
@@ -182,14 +182,14 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
       color: variables.rgb(black, 0.75);
 
       @if tweaks.$submenu_style == 'true' {
-        color: colors.$text !important;
+        color: colors.$menu-text !important;
         background-color: colors.$base !important;
       }
     }
 
     &:insensitive {
       @if tweaks.$submenu_style == 'true' {
-        color: colors.$text-secondary-disabled;
+        color: colors.$menu-text-secondary-disabled;
       } @else {
         color: variables.rgb(black, 0.35);
       }

@@ -2,8 +2,8 @@
 @use "sass:math";
 
 $titlebar-height-scale: 1.1;
-$menu-font-scale: 1.05 * 0.9;
-$menu-spacing-scale: 1.1 * 0.9;
+$menu-font-scale: 1.05 * 0.9 * 1.1;
+$menu-spacing-scale: 1.1 * 0.9 * 1.1;
 $submenu-font-scale: $menu-font-scale;
 $submenu-spacing-scale: $menu-spacing-scale;
 $window-frame-outline-color: color.mix($grey-600, $grey-550, 70%);
@@ -1931,6 +1931,10 @@ menubar {
  **********************/
 
 popover.menu {
+  color: $menu-text;
+  > contents,
+  > arrow { color: $menu-text; }
+
   box.inline-buttons {
     padding: 0 $space-size + 8px;
 
@@ -2075,11 +2079,11 @@ popover.background {
     }
 
     accelerator {
-      color: $text-disabled;
+      color: $menu-text-disabled;
       margin-left: $space-size * 5;
 
       &:disabled {
-        color: $divider;
+        color: $menu-text-secondary-disabled;
       }
     }
 

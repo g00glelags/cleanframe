@@ -797,8 +797,8 @@ $mdborder_color: transparent;
 // Popovers/Menus
 //
 
-$menu-font-scale: 1.05 * 0.9;
-$menu-spacing-scale: 1.1 * 0.9;
+$menu-font-scale: 1.05 * 0.9 * 1.1;
+$menu-spacing-scale: 1.1 * 0.9 * 1.1;
 $submenu_item_radius: $popup-radius - $space-size;
 
 .popup-menu {
@@ -850,7 +850,7 @@ $submenu_item_radius: $popup-radius - $space-size;
     margin: 0 $space-size;
     padding: 8.28px * $menu-spacing-scale;
     font-size: $menu-font-scale * 1em;
-    color: $text;
+    color: $menu-text;
     transition-duration: $shorter-duration;
     border-radius: if($corner_style == 'circular', $circular-radius, $submenu_item_radius);
     background-image: none;
@@ -887,23 +887,23 @@ $submenu_item_radius: $popup-radius - $space-size;
 
     &.selected {
       background-color: $secondary-fill;
-      color: $text;
+      color: $menu-text;
       transition-duration: 0ms;
     }
 
     &:active {
       background-color: $track;
-      color: $text;
+      color: $menu-text;
       transition-duration: $longer-duration;
     }
 
-    &.selected:active { color: $text; }
+    &.selected:active { color: $menu-text; }
 
-    &:insensitive { color: $text-disabled; }
+    &:insensitive { color: $menu-text-disabled; }
   }
 
   .popup-inactive-menu-item { // all icons and other graphical elements
-    color: $text;
+    color: $menu-text;
 
     &:insensitive { color: $text-disabled; }
   }
