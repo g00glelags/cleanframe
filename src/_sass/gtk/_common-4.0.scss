@@ -1,6 +1,13 @@
 @use "sass:color";
 @use "sass:math";
 
+$titlebar-height-scale: 1.1;
+$menu-font-scale: 1.05;
+$menu-spacing-scale: 1.1;
+$submenu-font-scale: 1 + (($menu-font-scale - 1) * 0.5);
+$submenu-spacing-scale: 1 + (($menu-spacing-scale - 1) * 0.5);
+$window-frame-outline-color: color.mix($grey-600, $grey-550, 70%);
+
 
 /***************
  * Base States *
@@ -648,6 +655,10 @@ button {
     }
   }
 
+  &.suggested-action {
+    font-weight: 500;
+  }
+
   stackswitcher > & {
     // to position the needs attention dot, padding is added to the button
     // child, a label needs just lateral padding while an icon needs vertical
@@ -769,6 +780,10 @@ list > row button.image-button:not(.flat) {
       background-color: $b_color;
       color: on($b_color);
     }
+  }
+
+  &.suggested-action {
+    font-weight: 500;
   }
 }
 
@@ -1229,7 +1244,7 @@ headerbar {
   transition: background-color $duration $ease-out, color $duration $ease-out;
   box-shadow: inset 0 -1px $divider, inset 0 1px highlight($titlebar);
   color: $titlebar-text;
-  min-height: $large-size;
+  min-height: $large-size * $titlebar-height-scale;
   padding: 0;
   margin: 0;
   background-color: $titlebar;
@@ -1500,7 +1515,7 @@ headerbar {
   }
 
   &.default-decoration {
-    min-height: $small-size;
+    min-height: $small-size * $titlebar-height-scale;
     padding: 0;
     background-image: none;
     background-color: $titlebar;
@@ -1872,6 +1887,7 @@ menubar {
   // box-shadow: inset 0 -1px $divider;
   background-color: $titlebar;
   color: $titlebar-text;
+  font-size: $menu-font-scale * 1em;
 
   &:backdrop {
     background-color: $titlebar-backdrop;
@@ -1885,6 +1901,8 @@ menubar {
     min-height: 20px;
     padding: 4px 8px;
     color: $titlebar-text-secondary;
+    font-size: $menu-font-scale * 1em;
+    font-weight: 500;
 
     &:selected { // Seems like it :hover even with keyboard focus
       transition: none;
@@ -2039,14 +2057,15 @@ popover.background {
 
   modelbutton {
     transition: background-color $duration $ease-out;
-    min-height: $menuitem-size - $space-size;
+    min-height: ($menuitem-size - $space-size) * $submenu-spacing-scale;
     min-width: $menuitem-size * 2;
-    padding: $space-size * 0.69 $space-size * 1.5;
+    padding: ($space-size * 0.69 * $submenu-spacing-scale) ($space-size * 1.5 * $submenu-spacing-scale);
     border-radius: $menuitem-radius;
     color: $text;
     font: initial;
+    font-size: $submenu-font-scale * 1em;
     text-shadow: none;
-    border-spacing: $space-size;
+    border-spacing: $space-size * $submenu-spacing-scale;
 
     @extend %button-flat-simple;
 
@@ -4760,9 +4779,9 @@ window {
     border-radius: $window-radius;
 
     @if $variant == 'light' and $topbar == '' {
-      box-shadow: 0 0 0 1px #4a4a4a, $shadow-z16, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent, inset 0 1px $titlebar;
+      box-shadow: 0 0 0 1px $window-frame-outline-color, $shadow-z16, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent, inset 0 1px $titlebar;
     } @else {
-      box-shadow: 0 0 0 1px #4a4a4a, $shadow-z16, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
+      box-shadow: 0 0 0 1px $window-frame-outline-color, $shadow-z16, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
     }
 
     &:backdrop {
@@ -4773,9 +4792,9 @@ window {
       transition: $transition-shadow;
 
       @if $variant == 'light' and $topbar == '' {
-        box-shadow: 0 0 0 1px #4a4a4a, $shadow-z4, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent, inset 0 1px $titlebar-backdrop;
+        box-shadow: 0 0 0 1px $window-frame-outline-color, $shadow-z4, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent, inset 0 1px $titlebar-backdrop;
       } @else {
-        box-shadow: 0 0 0 1px #4a4a4a, $shadow-z4, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
+        box-shadow: 0 0 0 1px $window-frame-outline-color, $shadow-z4, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
       }
     }
 
@@ -4783,10 +4802,10 @@ window {
 
     @if $variant == 'light' and $topbar == '' {
       &.about, &.messagedialog, &.message {
-        box-shadow: 0 0 0 1px #4a4a4a, $shadow-z16, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
+        box-shadow: 0 0 0 1px $window-frame-outline-color, $shadow-z16, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
 
         &:backdrop {
-          box-shadow: 0 0 0 1px #4a4a4a, $shadow-z4, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
+          box-shadow: 0 0 0 1px $window-frame-outline-color, $shadow-z4, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
         }
       }
     }
@@ -4798,7 +4817,7 @@ window {
     &.tiled-bottom {
       border-radius: 0;
       outline: none;
-      box-shadow: inset 0 0 0 1px #4a4a4a;
+      box-shadow: inset 0 0 0 1px $window-frame-outline-color;
     }
 
     &.maximized,
@@ -4819,10 +4838,13 @@ window {
     margin: 0;
     padding: 2px;
     border-radius: 0;
-    box-shadow: none;
+    box-shadow: inset 0 0 0 1px $border;
     background-color: $titlebar;
 
-    &:backdrop { background-color: $titlebar-backdrop; }
+    &:backdrop {
+      box-shadow: inset 0 0 0 1px $border;
+      background-color: $titlebar-backdrop;
+    }
   }
 
   // server-side decorations as used by mutter
@@ -4919,6 +4941,7 @@ stackswitcher {
     &:checked {
       background-color: $suggested;
       color: $suggested-fg;
+      font-weight: 500;
     }
   }
 

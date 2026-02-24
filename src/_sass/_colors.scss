@@ -147,8 +147,8 @@ $osd: background(e);
 $scrim: background(f);
 $scrim-alt: background(g);
 $scrim-inverse: variables.rgb(white, 0.1);
-$titlebar: background(a);
-$titlebar-backdrop: background(b);
+$titlebar: #fafafa;
+$titlebar-backdrop: #fafafa;
 
 @function on($color: $background, $state: 'primary') {
   // Allow 'light' or '' to $color
@@ -273,8 +273,8 @@ $track-disabled: on($background, track-disabled);
 $divider: on($background, divider);
 $secondary-fill: on($background, secondary-fill);
 $fill: on($background, fill);
-$titlebar-text: on($titlebar);
-$titlebar-text-secondary: on($titlebar, secondary);
+$titlebar-text: #000;
+$titlebar-text-secondary: #000;
 $titlebar-text-disabled: on($titlebar, disabled);
 $titlebar-text-secondary-disabled: on($titlebar, secondary-disabled);
 $titlebar-track: on($titlebar, track);

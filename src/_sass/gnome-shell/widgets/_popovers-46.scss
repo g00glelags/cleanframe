@@ -1,5 +1,8 @@
 /* Popovers/Menus */
 
+$menu-font-scale: 1.05;
+$menu-spacing-scale: 1.1;
+
 // .the popover itself
 .popup-menu-boxpointer {
   border-radius: $popup-radius;
@@ -25,7 +28,7 @@
 }
 
 .popup-menu-content {
-  padding: $space-size 0;
+  padding: $space-size * $menu-spacing-scale 0;
   margin: $space-size 10px 13px 10px;
   background-color: $popover-floating-bg;
   border-radius: $popup-radius;
@@ -36,9 +39,10 @@ $submenu_item_radius: $popup-radius - $space-size;
 
 // menu items
 .popup-menu-item {
-  spacing: $space-size;
-  padding: $space-size * 1.38;
-  margin: 0 $space-size;
+  spacing: $space-size * $menu-spacing-scale;
+  padding: $space-size * 1.38 * $menu-spacing-scale;
+  margin: 0 $space-size * $menu-spacing-scale;
+  font-size: $menu-font-scale * 1em;
   color: $text;
   background-color: transparent;
   background-image: none;
@@ -124,7 +128,7 @@ $submenu_item_radius: $popup-radius - $space-size;
 
 // popover submenus
 .popup-sub-menu {
-  margin: 0 $space-size;
+  margin: 0 $space-size * $menu-spacing-scale;
   border-radius: 0 0 $submenu_item_radius $submenu_item_radius;
   border: none;
   box-shadow: none;

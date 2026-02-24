@@ -4,6 +4,10 @@
 /**************
  * Xfce4 Apps *
  **************/
+$xfce-menu-font-scale: 1.05;
+$xfce-menu-spacing-scale: 1.1;
+$xfce-tasklist-focus-indicator-size: 2.8px;
+
 .XfceHeading {
   background-color: $base;
 }
@@ -32,9 +36,9 @@
 
   .tasklist button {
     color: on($panel, secondary);
-    border-image: image(transparent) 0 0 2 / 0 0 2px;
+    border-image: image(transparent) 0 0 $xfce-tasklist-focus-indicator-size / 0 0 $xfce-tasklist-focus-indicator-size;
 
-    &:checked { border-image: image($primary) 0 0 2 / 0 0 2px; }
+    &:checked { border-image: image($primary) 0 0 $xfce-tasklist-focus-indicator-size / 0 0 $xfce-tasklist-focus-indicator-size; }
 
     image { padding: 4px; }
   }
@@ -107,6 +111,7 @@ window#whiskermenu-window {
   border-radius: 0;
   background-color: $popover;
   border: none;
+  font-size: $xfce-menu-font-scale * 1em;
 
   entry.search {
     border-radius: $menuitem-radius;
@@ -117,7 +122,10 @@ window#whiskermenu-window {
   // Need to set Whisker menu background opacity less than 100
   > frame > border {
     border-radius: $window-radius;
-    padding: $space-size $space-size + 2px $space-size $space-size * 1.5;
+    padding: ($space-size * $xfce-menu-spacing-scale)
+             (($space-size + 2px) * $xfce-menu-spacing-scale)
+             ($space-size * $xfce-menu-spacing-scale)
+             ($space-size * 1.5 * $xfce-menu-spacing-scale);
     margin: $space-size;
     border: none;
     background-color: $popover-floating-bg;
@@ -125,8 +133,8 @@ window#whiskermenu-window {
   }
 
   box.categories > button.radio { // sidebar categories button
-    padding: $space-size * 0.5 $space-size;
-    margin: 1px 0;
+    padding: ($space-size * 0.5 * $xfce-menu-spacing-scale) ($space-size * $xfce-menu-spacing-scale);
+    margin: (1px * $xfce-menu-spacing-scale) 0;
     border-radius: $menuitem-radius;
 
     &:hover { background-color: $divider; }
@@ -140,7 +148,7 @@ window#whiskermenu-window {
   }
 
   scrolledwindow.frame { // App list (tree)
-    padding: $space-size * 0.5;
+    padding: $space-size * 0.5 * $xfce-menu-spacing-scale;
     background-color: $base;
     border-radius: $menuitem-radius;
 

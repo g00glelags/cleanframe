@@ -275,7 +275,8 @@ stscrollbar {
 
 $menu_bg: $popover-floating-bg;
 $submenu_item_radius: $popup-radius - $space-size;
-$cinnamon_menu_spacing_factor: 1.45;
+$cinnamon_menu_spacing_factor: 1.45 * 1.1;
+$cinnamon_menu_font_scale: 1.05;
 
 .menu,
 .popup-menu,
@@ -359,6 +360,7 @@ $cinnamon_menu_spacing_factor: 1.45;
   }
 
   .popup-menu-item {
+    font-size: $cinnamon_menu_font_scale * 1em;
     padding: $space-size * $cinnamon_menu_spacing_factor $space-size * 2;
     spacing: $space-size * 2;
     border-radius: if($corner_style == 'circular', $circular-radius, $submenu_item_radius);
@@ -425,6 +427,7 @@ $cinnamon_menu_spacing_factor: 1.45;
 .popup-device-menu-item { spacing: .5em; }
 
 .popup-subtitle-menu-item { font-weight: normal; }
+.popup-subtitle-menu-item { font-size: $cinnamon_menu_font_scale * 1em; }
 
 .nm-menu-item-icons { spacing: .5em; }
 
@@ -496,7 +499,7 @@ $cinnamon_menu_spacing_factor: 1.45;
     font-size: 1em;
     padding: 0;
     background-color: $cinnamon-panel-bg;
-    box-shadow: 0 0 5px rgba(black, 0.5), 0 0 16px rgba(black, 0.24);
+    box-shadow: 0 0 5px rgb(black, 0.5), 0 0 16px rgb(black, 0.24);
 
     .panel-button,
     .panel-status-button {
@@ -1436,6 +1439,7 @@ $cinnamon_menu_spacing_factor: 1.45;
   &-applications-outer-box { padding: $space-size * 1.5 $space-size * 1.5 0 $space-size * 1.5; }
 
   &-application-button {
+    font-size: $cinnamon_menu_font_scale * 1em;
     padding: $space-size * $cinnamon_menu_spacing_factor;
     border-radius: $corner-radius;
     border: none;
@@ -1444,6 +1448,8 @@ $cinnamon_menu_spacing_factor: 1.45;
     &:highlighted { font-weight: bold; }
 
     &-selected {
+      font-size: $cinnamon_menu_font_scale * 1em;
+
       @include button(hover);
 
       padding: $space-size * $cinnamon_menu_spacing_factor;
@@ -1506,10 +1512,12 @@ $cinnamon_menu_spacing_factor: 1.45;
   }
 
   &-category-button {
+    font-size: $cinnamon_menu_font_scale * 1em;
     padding: $space-size * $cinnamon_menu_spacing_factor;
     border-radius: $corner-radius;
 
     &-selected {
+      font-size: $cinnamon_menu_font_scale * 1em;
       padding: $space-size * $cinnamon_menu_spacing_factor;
     }
 
@@ -1520,6 +1528,7 @@ $cinnamon_menu_spacing_factor: 1.45;
     }
 
     &-greyed {
+      font-size: $cinnamon_menu_font_scale * 1em;
       padding: $space-size * $cinnamon_menu_spacing_factor;
       color: $text-disabled;
     }
@@ -1612,7 +1621,7 @@ $cinnamon_menu_spacing_factor: 1.45;
 //
 
 $windowlist-focus-indicator-color: $cinnamon-windowlist-focus-indicator;
-$windowlist-focus-indicator-size: 2.6px; // ~30% wider than previous 2px
+$windowlist-focus-indicator-size: 4px; // thicker active-window indicator bar
 
 .window-list {
   &-box {
@@ -1730,7 +1739,7 @@ $windowlist-focus-indicator-size: 2.6px; // ~30% wider than previous 2px
     background-color: $base;
     border-radius: $corner-radius;
     color: $text;
-    box-shadow: 0 3px 5px rgba(black, 0.35), 0 3px 12px rgba(black, 0.16);
+    box-shadow: 0 3px 5px rgb(black, 0.35), 0 3px 12px rgb(black, 0.16);
   }
 }
 

@@ -1,6 +1,13 @@
 @use "sass:color";
 @use "sass:math";
 
+$titlebar-height-scale: 1.1;
+$menu-font-scale: 1.05;
+$menu-spacing-scale: 1.1;
+$submenu-font-scale: 1 + (($menu-font-scale - 1) * 0.5);
+$submenu-spacing-scale: 1 + (($menu-spacing-scale - 1) * 0.5);
+$window-frame-outline-color: color.mix($grey-600, $grey-550, 70%);
+
 * {
   // padding: 0;
   background-clip: padding-box;
@@ -660,6 +667,10 @@ button {
     }
   }
 
+  &.suggested-action {
+    font-weight: 500;
+  }
+
   .stack-switcher > & {
     // to position the needs attention dot, padding is added to the button
     // child, a label needs just lateral padding while an icon needs vertical
@@ -720,8 +731,9 @@ button {
 // menu buttons
 modelbutton.flat,
 .menuitem.button.flat {
-  min-height: $menuitem-size;
-  padding: 0 8px;
+  min-height: $menuitem-size * $menu-spacing-scale;
+  padding: 0 (8px * $menu-spacing-scale);
+  font-size: $menu-font-scale * 1em;
   border-radius: $menuitem-radius;
   color: $text;
 
@@ -897,9 +909,10 @@ combobox {
 
   menu {
     menuitem { // reset
-      min-height: 20px;
+      min-height: 20px * $submenu-spacing-scale;
       min-width: 40px;
-      padding: $space-size * 0.5 $space-size * 1.5;
+      padding: ($space-size * 0.5 * $submenu-spacing-scale) ($space-size * 1.5 * $submenu-spacing-scale);
+      font-size: $submenu-font-scale * 1em;
     }
   }
 
@@ -1315,7 +1328,7 @@ searchbar > revealer > box {
   }
 
   &.default-decoration {
-    min-height: $medium-size;
+    min-height: $medium-size * $titlebar-height-scale;
     box-shadow: inset 0 1px highlight($titlebar);
     border-radius: $window-radius $window-radius 0 0;
     border: none;
@@ -1361,7 +1374,7 @@ searchbar > revealer > box {
 
 headerbar {
   // The sizing factor needs to be defined in the headerbar node for the case of split headerbars
-  min-height: $large-size;
+  min-height: $large-size * $titlebar-height-scale;
   padding: 0 $space-size;
 
   &:not(.titlebar) { box-shadow: none; }
@@ -1443,7 +1456,7 @@ headerbar {
 
 window.background.csd {
   > widget > headerbar:not(.titlebar) {
-    min-height: $medium-size;
+    min-height: $medium-size * $titlebar-height-scale;
     border: none;
     box-shadow: none;
 
@@ -1685,9 +1698,11 @@ treeview.view {
   // FIXME: box-shadow, background-color and background-image are not available here.
   &:drop(active) {
     border-style: solid none;
+
     // Fill the whole drop destination area in GTK3 treeviews.
     // Text readability is preserved by the row/cell/label drop overrides below.
     border-width: 9999px;
+
     // Use the theme app-selection palette for drop targets so folder names
     // remain readable in file managers (Thunar/Nemo) and the highlight stays
     // aligned with current theme colors.
@@ -1778,6 +1793,7 @@ menubar,
   box-shadow: inset 0 -1px $titlebar-divider;
   background-color: $titlebar;
   color: $titlebar-text;
+  font-size: $menu-font-scale * 1em;
 
   &:backdrop {
     background-color: $titlebar-backdrop;
@@ -1796,6 +1812,8 @@ menubar,
     min-height: 20px;
     padding: 2px 8px;
     color: $titlebar-text-secondary;
+    font-size: $menu-font-scale * 1em;
+    font-weight: 500;
     border-radius: 5px;
 
     &:hover { // Seems like it :hover even with keyboard focus
@@ -1874,11 +1892,12 @@ menu {
 
   menuitem {
     transition: none;
-    min-height: 20px;
+    min-height: 20px * $submenu-spacing-scale;
     min-width: 40px;
-    padding: (($space-size * 0.5 + 1px) * 1.38) $space-size * 1.5;
+    padding: ((($space-size * 0.5 + 1px) * 1.38) * $submenu-spacing-scale) ($space-size * 1.5 * $submenu-spacing-scale);
     color: $text;
     font: initial;
+    font-size: $submenu-font-scale * 1em;
     text-shadow: none;
     border-radius: $menu-radius - $space-size;
 
@@ -3977,7 +3996,7 @@ colorchooser .popover.osd {
  **********************/
 decoration {
   border-radius: $window-radius;
-  box-shadow: 0 0 0 1px #4a4a4a, $shadow-z16, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
+  box-shadow: 0 0 0 1px $window-frame-outline-color, $shadow-z16, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
   border: none;
 
   // FIXME rationalize shadows
@@ -3990,7 +4009,7 @@ decoration {
     // change when we go to backdrop, to prevent jumping windows.
     // The biggest shadow should be in the same order then in the active state
     // or the jumping will happen during the transition.
-    box-shadow: 0 0 0 1px #4a4a4a, $shadow-z4, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
+    box-shadow: 0 0 0 1px $window-frame-outline-color, $shadow-z4, 0 16px 16px 2px transparent, 0 6px 18px 5px transparent;
     transition: $transition-shadow;
   }
 
@@ -4007,7 +4026,7 @@ decoration {
   .tiled-right &,
   .tiled-bottom &,
   .tiled-left & {
-    box-shadow: inset 0 0 0 1px #4a4a4a;
+    box-shadow: inset 0 0 0 1px $window-frame-outline-color;
   }
 
   .maximized &,
@@ -4017,7 +4036,7 @@ decoration {
   // server-side decorations as used by mutter
   .ssd & {
     border-radius: $window-radius $window-radius 0 0;
-    box-shadow: none; // just doing borders, wm draws actual shadows
+    box-shadow: inset 0 0 0 1px $window-frame-outline-color; // keep a visible frame while wm draws shadows
     margin: 0;
 
     &, &:backdrop {
@@ -4027,7 +4046,7 @@ decoration {
 
   .csd.popup & {
     border-radius: $menu-radius;
-    box-shadow: 0 0 0 1px #4a4a4a, $shadow-z4;
+    box-shadow: 0 0 0 1px $window-frame-outline-color, $shadow-z4;
   }
 
   tooltip.csd & {
@@ -4047,11 +4066,13 @@ decoration {
     margin: 0;
     padding: 1px;
     border-radius: 0;
-    box-shadow: none;
-    box-shadow: inset 0 1px highlight($titlebar);
+    box-shadow: inset 0 0 0 1px $window-frame-outline-color, inset 0 1px highlight($titlebar);
     background-color: $titlebar;
 
-    &:backdrop { background-color: $titlebar-backdrop; }
+    &:backdrop {
+      box-shadow: inset 0 0 0 1px $window-frame-outline-color;
+      background-color: $titlebar-backdrop;
+    }
   }
 }
 
@@ -4127,6 +4148,7 @@ stackswitcher {
     &:checked {
       background-color: $suggested;
       color: $suggested-fg;
+      font-weight: 500;
     }
   }
 
