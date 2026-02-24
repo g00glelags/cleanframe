@@ -446,8 +446,8 @@ $cinnamon_menu_spacing_factor: 1.45;
 
     &:dnd {
       background-gradient-direction: vertical;
-      background-gradient-start: rgb(255,0,0,0.05);
-      background-gradient-end: rgb(255,0,0,0.2);
+      background-gradient-start: rgba($error, 0.05);
+      background-gradient-end: rgba($error, 0.2);
     }
 
     &:ltr { padding-right: 4px; }
@@ -464,8 +464,8 @@ $cinnamon_menu_spacing_factor: 1.45;
   &Right {
     &:dnd {
       background-gradient-direction: vertical;
-      background-gradient-start: rgb(0,0,255,0.05);
-      background-gradient-end: rgb(0,0,255,0.2);
+      background-gradient-start: rgba($primary, 0.05);
+      background-gradient-end: rgba($primary, 0.2);
     }
 
     &:ltr { padding-left: $space-size; spacing: 0; }
@@ -484,8 +484,8 @@ $cinnamon_menu_spacing_factor: 1.45;
 
     &:dnd {
       background-gradient-direction: vertical;
-      background-gradient-start: rgb(0,255,0,0.05);
-      background-gradient-end: rgb(0,255,0,0.2);
+      background-gradient-start: rgba($success, 0.05);
+      background-gradient-end: rgba($success, 0.2);
     }
   }
 }
@@ -496,7 +496,7 @@ $cinnamon_menu_spacing_factor: 1.45;
     font-size: 1em;
     padding: 0;
     background-color: $cinnamon-panel-bg;
-    box-shadow: 0 0 5px rgba(#000, 0.5), 0 0 16px rgba(#000, 0.24);
+    box-shadow: 0 0 5px rgba(black, 0.5), 0 0 16px rgba(black, 0.24);
 
     .panel-button,
     .panel-status-button {
@@ -659,8 +659,8 @@ $cinnamon_menu_spacing_factor: 1.45;
 }
 
 .workspace-thumbnail-indicator {
-  outline: 2px solid red;
-  border: 1px solid green;
+  outline: 2px solid $primary;
+  border: 1px solid $divider;
 }
 
 .window-close:rtl {
@@ -691,7 +691,7 @@ $cinnamon_menu_spacing_factor: 1.45;
 
   &-uuid {
     font-size: 10px;
-    color: #888;
+    color: $text-secondary;
   }
 
   &-icon {
@@ -720,7 +720,7 @@ $cinnamon_menu_spacing_factor: 1.45;
   &-version {
     padding-left: 7px;
     font-size: 10px;
-    color: #888;
+    color: $text-secondary;
   }
 }
 
@@ -1321,7 +1321,7 @@ $cinnamon_menu_spacing_factor: 1.45;
   }
 
   &-item {
-    color: #ccc;
+    color: $text-secondary;
 
     &:hover { color: white }
 
@@ -1730,7 +1730,7 @@ $windowlist-focus-indicator-size: 2.6px; // ~30% wider than previous 2px
     background-color: $base;
     border-radius: $corner-radius;
     color: $text;
-    box-shadow: 0 3px 5px rgba(#000, 0.35), 0 3px 12px rgba(#000, 0.16);
+    box-shadow: 0 3px 5px rgba(black, 0.35), 0 3px 12px rgba(black, 0.16);
   }
 }
 

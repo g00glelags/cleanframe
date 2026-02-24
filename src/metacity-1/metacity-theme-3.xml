@@ -23,6 +23,7 @@
 <constant name="C_wm_button_max_active_bg" value="gtk:custom(wm_button_max_active_bg,gtk:bg[ACTIVE])"/>
 <constant name="C_wm_button_min_hover_bg" value="gtk:custom(wm_button_min_hover_bg,gtk:bg[PRELIGHT])"/>
 <constant name="C_wm_button_min_active_bg" value="gtk:custom(wm_button_min_active_bg,gtk:bg[ACTIVE])"/>
+<constant name="C_frame_border_black" value="#4A4A4A"/>
 
 <!-- geometries -->
 
@@ -45,11 +46,11 @@
 </frame_geometry>
 
 <frame_geometry name="tiled_left" parent="max">
-  <distance name="right_width" value="0"/>
+  <distance name="right_width" value="1"/>
 </frame_geometry>
 
 <frame_geometry name="tiled_right" parent="max">
-  <distance name="left_width" value="0"/>
+  <distance name="left_width" value="1"/>
 </frame_geometry>
 
 <frame_geometry name="nobuttons" hide_buttons="true" parent="normal">
@@ -120,6 +121,22 @@
 
 <draw_ops name="entire_background_unfocused">
   <rectangle color="C_titlebar_unfocused" x="0" y="0" width="width" height="height" filled="true"/>
+</draw_ops>
+
+<draw_ops name="frame_background_focused">
+  <rectangle color="C_titlebar_focused" x="0" y="0" width="width" height="height" filled="true"/>
+  <line color="C_frame_border_black" x1="0" y1="0" x2="width - 1" y2="0"/>
+  <line color="C_frame_border_black" x1="0" y1="height - 1" x2="width - 1" y2="height - 1"/>
+  <line color="C_frame_border_black" x1="0" y1="0" x2="0" y2="height - 1"/>
+  <line color="C_frame_border_black" x1="width - 1" y1="0" x2="width - 1" y2="height - 1"/>
+</draw_ops>
+
+<draw_ops name="frame_background_unfocused">
+  <rectangle color="C_titlebar_unfocused" x="0" y="0" width="width" height="height" filled="true"/>
+  <line color="C_frame_border_black" x1="0" y1="0" x2="width - 1" y2="0"/>
+  <line color="C_frame_border_black" x1="0" y1="height - 1" x2="width - 1" y2="height - 1"/>
+  <line color="C_frame_border_black" x1="0" y1="0" x2="0" y2="height - 1"/>
+  <line color="C_frame_border_black" x1="width - 1" y1="0" x2="width - 1" y2="height - 1"/>
 </draw_ops>
 
 <draw_ops name="highlight_focused">
@@ -404,7 +421,7 @@
 <!-- frame styles -->
 
 <frame_style name="normal_focused" geometry="normal">
-  <piece position="entire_background" draw_ops="entire_background_focused"/>
+  <piece position="entire_background" draw_ops="frame_background_focused"/>
   <piece position="titlebar" draw_ops="titlebar_focused"/>
   <piece position="title" draw_ops="title_focused"/>
   <button function="close" state="normal" draw_ops="close_focused"/>
@@ -447,7 +464,7 @@
 </frame_style>
 
 <frame_style name="normal_unfocused" geometry="normal">
-  <piece position="entire_background" draw_ops="entire_background_unfocused"/>
+  <piece position="entire_background" draw_ops="frame_background_unfocused"/>
   <piece position="titlebar" draw_ops="titlebar_unfocused"/>
   <piece position="title" draw_ops="title_unfocused"/>
   <button function="close" state="normal" draw_ops="close_unfocused"/>

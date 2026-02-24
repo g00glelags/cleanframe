@@ -874,7 +874,7 @@ $submenu_item_radius: $popup-radius - $space-size;
       }
 
       &:active {
-        background-color: #dfdfdf;
+        background-color: $base-alt;
         color: rgb(black, 0.75);
       }
 

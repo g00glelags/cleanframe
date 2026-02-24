@@ -3,7 +3,7 @@ static char *button_inactive[] = {
 /* columns rows colors chars-per-pixel */
 "51 51 3 1 ",
 "  c None",
-". c gray20 s inactive_color_1",
+". c gray35 s inactive_color_1",
 "X c #343434",
 /* pixels */
 "                                                   ",

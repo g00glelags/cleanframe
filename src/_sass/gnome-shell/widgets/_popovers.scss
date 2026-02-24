@@ -76,15 +76,15 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
       }
     }
 
-    &:active {
-      @if tweaks.$submenu_style == 'true' {
-        color: colors.$text;
-        background-color: colors.$divider;
-      } @else {
-        background-color: #dfdfdf;
-        color: variables.rgb(black, 0.75);
+      &:active {
+        @if tweaks.$submenu_style == 'true' {
+          color: colors.$text;
+          background-color: colors.$divider;
+        } @else {
+          background-color: colors.$base-alt;
+          color: variables.rgb(black, 0.75);
+        }
       }
-    }
 
       &.selected:active {
         background-color: colors.$track;

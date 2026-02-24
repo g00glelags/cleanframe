@@ -77,7 +77,7 @@ $submenu_item_radius: $popup-radius - $space-size;
         color: $text;
         background-color: $divider;
       } @else {
-        background-color: #dfdfdf;
+        background-color: $base-alt;
         color: rgb(black, 0.75);
       }
     }
