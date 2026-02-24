@@ -1675,6 +1675,13 @@ $windowlist-focus-indicator-size: 5px; // thicker active-window indicator bar
       }
     }
 
+    // Lower window-list contents a bit in horizontal panels for better centering.
+    .panel-bottom &,
+    .panel-top & {
+      padding-top: 2px;
+      padding-bottom: 0;
+    }
+
     &:hover {
       color: $text-secondary;
       background-gradient-direction: none;
@@ -1819,7 +1826,7 @@ $windowlist-focus-indicator-size: 5px; // thicker active-window indicator bar
 
     &.top, &.bottom {
       border-bottom: $windowlist-focus-indicator-size solid transparent;
-      padding: 0 2px 1px;
+      padding: 2px 2px 0;
     }
 
     &.left {
