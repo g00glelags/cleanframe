@@ -65,27 +65,28 @@
 
 // message bubbles
 .message {
-  border-radius: $material-radius;
+  border-radius: $popup-radius;
   padding: 0;
   margin: 0;
   box-shadow: $shell-shadow-z2;
   color: $text;
-  background-color: rgba($base, 0.96);
+  background-color: $base;
+  border: 1px solid $border;
 
   // border-width: 0; // can not set this ?
 
-  &:hover, &:focus, &:active { background-color: $base; }
+  &:hover, &:focus { background-color: $fill; }
+  &:active { background-color: $track; }
 
   .popup-menu & {
     @extend .events-button !optional;
 
-    border: 1px solid transparent;
-    border-left: none;
-    border-bottom: none;
+    border: 1px solid $border;
     padding: 0;
     box-shadow: none;
     margin: $margin-size;
     color: $text-secondary;
+    background-color: $base;
   }
 
   // subtract side padding to accommodate the close button's border

@@ -83,51 +83,54 @@
   .message-collapse-button {
     @extend .icon-button !optional;
 
-    color: rgba(colors.$primary-text, 0.8);
-    background-color: rgba(colors.$primary, 0.8);
+    color: colors.$primary-text;
+    background-color: rgba(colors.$primary, 0.9);
     padding: 4px !important;
     border: 4px transparent solid;
 
     &:hover {
       color: colors.$primary-text;
-      background-color: rgba(colors.$primary, 0.7);
+      background-color: colors.$primary;
     }
 
     &:active {
-      color: rgba(colors.$primary-text, 0.8);
-      background-color: rgba(colors.$primary, 0.8);
+      color: colors.$primary-text;
+      background-color: rgba(colors.$primary, 0.85);
     }
   }
 }
 
 // message bubbles
 .message {
-  border-radius: variables.$material-radius;
+  border-radius: variables.$popup-radius;
   padding: variables.$space-size;
   margin: 0;
+  border: 1px solid colors.$border;
+  background-color: colors.$base;
 
   .popup-menu & {
     box-shadow: none;
     margin: variables.$margin-size;
     color: colors.$text-secondary;
-    background-color: color.mix(colors.$text, colors.$base, 6%) !important;
+    background-color: colors.$base !important;
+    border: 1px solid colors.$border;
 
     &:hover {
-      background-color: color.mix(colors.$text, colors.$base, 10%) !important;
+      background-color: colors.$fill !important;
     }
 
     &:active {
-      background-color: color.mix(colors.$text, colors.$base, 15%) !important;
+      background-color: colors.$track !important;
     }
   }
 
   &:second-in-stack {
-    background-color: color.mix(colors.$text, colors.$base, 9%) !important;
+    background-color: colors.$fill !important;
     box-shadow: none;
   }
 
   &:lower-in-stack {
-    background-color: color.mix(colors.$text, colors.$base, 12%) !important;
+    background-color: colors.$secondary-fill !important;
     box-shadow: none;
   }
 

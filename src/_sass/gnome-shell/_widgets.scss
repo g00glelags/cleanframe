@@ -50,7 +50,9 @@
 // A11y / misc
 @import 'widgets/a11y';
 @import 'widgets/misc';
-@import 'widgets/tiled-previews';
+
+// Legacy bundles do not ship tiled-previews partial in this repo.
+// @import 'widgets/tiled-previews';
 @import 'widgets/keyboard';
 @import 'widgets/looking-glass';
 

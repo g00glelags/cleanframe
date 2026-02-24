@@ -275,8 +275,8 @@ stscrollbar {
 
 $menu_bg: $popover-floating-bg;
 $submenu_item_radius: $popup-radius - $space-size;
-$cinnamon_menu_spacing_factor: 1.45 * 1.1;
-$cinnamon_menu_font_scale: 1.05;
+$cinnamon_menu_spacing_factor: 1.45 * 1.1 * 0.9;
+$cinnamon_menu_font_scale: 1.05 * 0.9;
 
 .menu,
 .popup-menu,
@@ -1035,7 +1035,8 @@ $cinnamon_menu_font_scale: 1.05;
   margin-from-right-edge-of-screen: $space-size*3;
   width: 28em;
   color: $text;
-  background-color: rgba($base, 0.8);
+  background-color: $base;
+  border: 1px solid $border;
   box-shadow: 0 5px 12px rgb(black, 0.35);
   margin: 7px 12px 17px;
 
@@ -1049,14 +1050,14 @@ $cinnamon_menu_font_scale: 1.05;
 
   .menu &,
   .popup-menu & {
-    border: none;
+    border: 1px solid $border;
     border-radius: $corner-radius;
-    background-color: rgba($text, 0.05);
+    background-color: $base;
     box-shadow: none;
     margin: 0;
 
     &:hover {
-      background-color: rgba($text, 0.1);
+      background-color: $fill;
       box-shadow: 0 3px 8px rgb(black, 0.15);
     }
 

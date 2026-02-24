@@ -9,9 +9,15 @@ $notification_banner_width: 34em;
   width: $notification_banner_width;
   font-size: 1em;
   margin: $space-size;
+  padding: $space-size;
   border-radius: $popup-radius;
-  border-left: none;
-  border-bottom: none;
+  color: $text;
+  background-color: $base;
+  border: 1px solid $border;
+  box-shadow: $shell-shadow-z2;
+
+  &:hover { background-color: $fill; }
+  &:focus, &:active { background-color: $base; }
 }
 
 .notification-buttons-bin {

@@ -53,13 +53,13 @@
 
 // message bubbles
 .message {
-  background-color: rgb(black, 0.04);
-  border: none;
-  border-radius: $material-radius;
+  background-color: $base;
+  border: 1px solid $border;
+  border-radius: $popup-radius;
   color: $text-secondary;
   text-shadow: none;
 
-  &:hover, &:focus { background-color: $secondary-fill; }
+  &:hover, &:focus { background-color: $fill; }
   &:active { background-color: $track; }
 
   .popup-menu & { box-shadow: none; }

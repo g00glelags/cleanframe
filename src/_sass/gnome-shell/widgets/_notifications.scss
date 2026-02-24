@@ -9,13 +9,13 @@ $notification_banner_width: 34em;
   width: $notification_banner_width;
   font-size: 1em;
   margin: 8px 8px 12px;
-  border-radius: $material-radius;
+  border-radius: $popup-radius;
   color: $text;
-  background-color: rgba($base, 0.92);
-  border: none;
+  background-color: $base;
+  border: 1px solid $border;
   box-shadow: $shell-shadow-z2;
 
-  &:hover { background-color: rgba($base, 0.95); }
+  &:hover { background-color: $fill; }
   &:focus { background-color: $base; }
 
   .notification-actions {
@@ -30,11 +30,11 @@ $notification_banner_width: 34em;
     font-weight: 500;
     border-top: 1px solid $border !important;
 
-    &:first-child { border-radius: 0 0 0 $material-radius; }
+    &:first-child { border-radius: 0 0 0 $popup-radius; }
 
-    &:last-child { border-radius: 0 0 $material-radius; }
+    &:last-child { border-radius: 0 0 $popup-radius; }
 
-    &:only-child, &:first-child:last-child { border-radius: 0 0 $material-radius $material-radius; }
+    &:only-child, &:first-child:last-child { border-radius: 0 0 $popup-radius $popup-radius; }
 
     &:focus {
       background-color: transparent;

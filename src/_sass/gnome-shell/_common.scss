@@ -80,7 +80,7 @@ $bubble_button_radius: if(sass(tweaks.$corner_style == 'circular'): variables.$c
 %osd_panel {
   color: colors.on(colors.$popover);
   background-color: colors.$popover;
-  border: none;
+  border: 1px solid colors.$border;
   box-shadow: variables.$shell-shadow-z4;
   padding: variables.$space-size * 2;
 }

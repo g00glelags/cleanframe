@@ -99,8 +99,8 @@
       color: on($system);
       background-color: rgb(white, 0.15);
       caret-color: on($system);
-      selection-background-color: colors.$selection-bg !important;
-      selected-color: colors.$selection-fg !important;
+      selection-background-color: $selection-bg !important;
+      selected-color: $selection-fg !important;
       width: 300px;
 
       &:focus {

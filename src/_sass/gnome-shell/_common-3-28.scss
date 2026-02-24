@@ -797,6 +797,8 @@ $mdborder_color: transparent;
 // Popovers/Menus
 //
 
+$menu-font-scale: 1.05 * 0.9;
+$menu-spacing-scale: 1.1 * 0.9;
 $submenu_item_radius: $popup-radius - $space-size;
 
 .popup-menu {
@@ -841,12 +843,13 @@ $submenu_item_radius: $popup-radius - $space-size;
     }
   }
 
-  .popup-menu-content { padding: $space-size 0; }
+  .popup-menu-content { padding: $space-size * $menu-spacing-scale 0; }
 
   .popup-menu-item {
-    spacing: 12px;
+    spacing: 12px * $menu-spacing-scale;
     margin: 0 $space-size;
-    padding: 8.28px;
+    padding: 8.28px * $menu-spacing-scale;
+    font-size: $menu-font-scale * 1em;
     color: $text;
     transition-duration: $shorter-duration;
     border-radius: if($corner_style == 'circular', $circular-radius, $submenu_item_radius);
@@ -932,6 +935,7 @@ $submenu_item_radius: $popup-radius - $space-size;
   .popup-menu-content {
     margin-left: $space-size * 1.5;
     background-color: $surface;
+    border: 1px solid $border;
     border-radius: $material-radius;
     box-shadow: $shell-shadow-z3;
   }
@@ -1166,7 +1170,7 @@ $submenu_item_radius: $popup-radius - $space-size;
 %osd-panel {
   color: $text;
   background-color: $base;
-  border: none;
+  border: 1px solid $border;
   box-shadow: $shell-shadow-z3;
   border-radius: $material-radius;
   padding: 12px;
@@ -1720,13 +1724,13 @@ gjs_ui_panel_activitiesbutton.panel-button {
 
 .message {
   // min-height: $menuitem-size * 2;
-  background-color: rgb(black, 0.04);
-  border: none;
+  background-color: $base;
+  border: 1px solid $border;
   border-radius: $material-radius;
   color: $text-secondary;
   text-shadow: none;
 
-  &:hover, &:focus { background-color: $secondary-fill; }
+  &:hover, &:focus { background-color: $fill; }
   &:active { background-color: $track; }
 }
 
@@ -2478,11 +2482,11 @@ stwidget.focused .app-well-app-running-dot {
   margin: 5px;
   border-radius: $material-radius;
   color: $text;
-  background-color: rgba($base, 0.92);
-  border: none;
+  background-color: $base;
+  border: 1px solid $border;
   box-shadow: $shell-shadow-z2;
 
-  &:hover { background-color: rgba($base, 0.95); }
+  &:hover { background-color: $fill; }
   &:focus { background-color: $base; }
 
   .notification-icon { padding: 5px; }

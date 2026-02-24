@@ -65,9 +65,11 @@
 
 // message bubbles
 .message {
-  border-radius: $material-radius;
+  border-radius: $popup-radius;
   padding: $space-size;
   margin: 0;
+  border: 1px solid $border;
+  background-color: $base;
 
   // border-width: 0; // can not set this ?
 
@@ -78,6 +80,11 @@
     padding: $space-size;
     margin: $margin-size;
     color: $text-secondary;
+    border: 1px solid $border;
+    background-color: $base;
+
+    &:hover, &:focus { background-color: $fill; }
+    &:active { background-color: $track; }
   }
 
   // subtract side padding to accommodate the close button's border

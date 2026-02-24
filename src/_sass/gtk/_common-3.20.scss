@@ -2,10 +2,10 @@
 @use "sass:math";
 
 $titlebar-height-scale: 1.1;
-$menu-font-scale: 1.05;
-$menu-spacing-scale: 1.1;
-$submenu-font-scale: 1 + (($menu-font-scale - 1) * 0.5);
-$submenu-spacing-scale: 1 + (($menu-spacing-scale - 1) * 0.5);
+$menu-font-scale: 1.05 * 0.9;
+$menu-spacing-scale: 1.1 * 0.9;
+$submenu-font-scale: $menu-font-scale;
+$submenu-spacing-scale: $menu-spacing-scale;
 $window-frame-outline-color: color.mix($grey-600, $grey-550, 70%);
 
 * {

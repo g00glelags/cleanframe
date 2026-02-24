@@ -13,13 +13,13 @@ $notification_banner_width: 34em;
   margin: variables.$space-size;
   padding: variables.$space-size;
   border-radius: variables.$popup-radius;
-  border-left: none;
-  border-bottom: none;
+  border: 1px solid colors.$border;
   box-shadow: variables.$shell-shadow-z2;
   color: colors.$text;
-  background-color: rgba(colors.$base, 0.96);
+  background-color: colors.$base;
 
-  &:hover, &:focus, &:active { background-color: colors.$base; }
+  &:hover { background-color: colors.$fill; }
+  &:focus, &:active { background-color: colors.$base; }
 }
 
 .notification-buttons-bin {

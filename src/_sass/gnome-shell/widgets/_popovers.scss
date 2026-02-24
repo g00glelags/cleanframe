@@ -4,8 +4,8 @@
 
 /* Popovers/Menus */
 
-$menu-font-scale: 1.05;
-$menu-spacing-scale: 1.1;
+$menu-font-scale: 1.05 * 0.9;
+$menu-spacing-scale: 1.1 * 0.9;
 
 // .the popover itself
 .popup-menu-boxpointer {
@@ -35,6 +35,7 @@ $menu-spacing-scale: 1.1;
   padding: variables.$space-size * $menu-spacing-scale 0;
   margin: variables.$space-size 10px 13px 10px;
   background-color: colors.$popover-floating-bg;
+  border: 1px solid colors.$border;
   border-radius: variables.$popup-radius;
   box-shadow: variables.$shell-shadow-z3;
 }
