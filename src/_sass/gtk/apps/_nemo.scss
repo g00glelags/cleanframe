@@ -11,6 +11,8 @@
 // https://github.com/linuxmint/nemo/blob/master/gresources/nemo-style-application.css
 
 .nemo-window {
+  $_hidden-item-fg: rgba($text, 0.58);
+
   .primary-toolbar {
     background-color: $titlebar;
     border-bottom: 1px solid $divider;
@@ -76,9 +78,13 @@
     &.hidden,
     &.dim-label,
     .hidden,
+    row.hidden,
+    row.dim-label,
+    cell.hidden,
+    cell.dim-label,
     label.hidden,
     .dim-label {
-      color: #808080;
+      color: $_hidden-item-fg !important;
     }
 
     // Also dim hidden file/folder icons, not only labels.
@@ -88,15 +94,19 @@
     image.dim-label,
     .hidden image,
     .dim-label image {
-      -gtk-icon-effect: dim;
+      -gtk-icon-effect: dim !important;
     }
 
     &.hidden:selected,
     &.dim-label:selected,
     .hidden:selected,
+    row.hidden:selected,
+    row.dim-label:selected,
+    cell.hidden:selected,
+    cell.dim-label:selected,
     label.hidden:selected,
     .dim-label:selected {
-      color: $app-selection-fg;
+      color: $app-selection-fg !important;
     }
 
     & image.hidden:selected,
@@ -105,25 +115,40 @@
     image.dim-label:selected,
     .hidden:selected image,
     .dim-label:selected image {
-      -gtk-icon-effect: none;
+      -gtk-icon-effect: none !important;
     }
   }
 
   // Thicker selectors for GTK cell renderers used by Nemo list/icon views.
   treeview.view.cell.dim-label,
   treeview.view.cell.hidden,
+  treeview.view row.dim-label,
+  treeview.view row.hidden,
   iconview.view.cell.dim-label,
-  iconview.view.cell.hidden {
-    color: #808080;
-    -gtk-icon-effect: dim;
+  iconview.view.cell.hidden,
+  iconview.view row.dim-label,
+  iconview.view row.hidden {
+    color: $_hidden-item-fg !important;
+    -gtk-icon-effect: dim !important;
   }
 
   treeview.view.cell.dim-label:selected,
   treeview.view.cell.hidden:selected,
+  treeview.view row.dim-label:selected,
+  treeview.view row.hidden:selected,
   iconview.view.cell.dim-label:selected,
-  iconview.view.cell.hidden:selected {
-    color: $app-selection-fg;
-    -gtk-icon-effect: none;
+  iconview.view.cell.hidden:selected,
+  iconview.view row.dim-label:selected,
+  iconview.view row.hidden:selected {
+    color: $app-selection-fg !important;
+    -gtk-icon-effect: none !important;
+  }
+
+  .nemo-canvas-item.dim-label,
+  .nemo-canvas-item.hidden,
+  .nemo-desktop.nemo-canvas-item.dim-label,
+  .nemo-desktop.nemo-canvas-item.hidden {
+    color: $_hidden-item-fg !important;
   }
 
   // Force Nemo app selection to follow system app-selection palette.

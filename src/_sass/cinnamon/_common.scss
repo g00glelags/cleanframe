@@ -275,8 +275,8 @@ stscrollbar {
 
 $menu_bg: $popover-floating-bg;
 $submenu_item_radius: $popup-radius - $space-size;
-$cinnamon_menu_spacing_factor: 1.45 * 1.1 * 0.9 * 1.1;
-$cinnamon_menu_font_scale: 1.05 * 0.9 * 1.1;
+$cinnamon_menu_spacing_factor: 1.45;
+$cinnamon_menu_font_scale: 1;
 
 .menu,
 .popup-menu,
@@ -1622,7 +1622,7 @@ $cinnamon_menu_font_scale: 1.05 * 0.9 * 1.1;
 //
 
 $windowlist-focus-indicator-color: $cinnamon-windowlist-focus-indicator;
-$windowlist-focus-indicator-size: 5px; // thicker active-window indicator bar
+$windowlist-focus-indicator-size: 2.6px; // ~30% wider than previous 2px
 
 .window-list {
   &-box {
@@ -1669,17 +1669,8 @@ $windowlist-focus-indicator-size: 5px; // thicker active-window indicator bar
                        (right) {
       .panel-#{$position} & {
         border-#{$position}: $windowlist-focus-indicator-size solid transparent;
-
-        // Keep a small gap from the focus indicator bar when it gets thicker.
-        sticon, stbin, #appMenuIcon { padding: 2px; padding-#{$position}: 1px; }
+        sticon, stbin, #appMenuIcon { padding: 2px; padding-#{$position}: 0; }
       }
-    }
-
-    // Lower window-list contents a bit in horizontal panels for better centering.
-    .panel-bottom &,
-    .panel-top & {
-      padding-top: 2px;
-      padding-bottom: 0;
     }
 
     &:hover {
@@ -1826,17 +1817,15 @@ $windowlist-focus-indicator-size: 5px; // thicker active-window indicator bar
 
     &.top, &.bottom {
       border-bottom: $windowlist-focus-indicator-size solid transparent;
-      padding: 2px 2px 0;
+      padding: 0 2px;
     }
 
     &.left {
       border-left: $windowlist-focus-indicator-size solid transparent;
-      padding-left: 1px;
     }
 
     &.right {
       border-right: $windowlist-focus-indicator-size solid transparent;
-      padding-right: 1px;
     }
 
     &:hover {

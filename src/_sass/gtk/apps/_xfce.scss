@@ -193,6 +193,8 @@ window#whiskermenu-window {
  * Thunar *
  **********/
 .thunar {
+  $_hidden-item-fg: rgba($text, 0.58);
+
   toolbar { border-bottom: 1px solid $divider; }
 
   headerbar.titlebar toolbar {
@@ -243,9 +245,13 @@ window#whiskermenu-window {
       &.hidden,
       &.dim-label,
       .hidden,
+      row.hidden,
+      row.dim-label,
+      cell.hidden,
+      cell.dim-label,
       label.hidden,
       .dim-label {
-        color: #808080;
+        color: $_hidden-item-fg !important;
       }
 
       // Also dim hidden file/folder icons, not only labels.
@@ -255,15 +261,19 @@ window#whiskermenu-window {
       image.dim-label,
       .hidden image,
       .dim-label image {
-        -gtk-icon-effect: dim;
+        -gtk-icon-effect: dim !important;
       }
 
       &.hidden:selected,
       &.dim-label:selected,
       .hidden:selected,
+      row.hidden:selected,
+      row.dim-label:selected,
+      cell.hidden:selected,
+      cell.dim-label:selected,
       label.hidden:selected,
       .dim-label:selected {
-        color: $selection-fg;
+        color: $selection-fg !important;
       }
 
       & image.hidden:selected,
@@ -272,7 +282,7 @@ window#whiskermenu-window {
       image.dim-label:selected,
       .hidden:selected image,
       .dim-label:selected image {
-        -gtk-icon-effect: none;
+        -gtk-icon-effect: none !important;
       }
     }
   }
@@ -280,18 +290,32 @@ window#whiskermenu-window {
   // Thicker selectors for GTK cell renderers used by Thunar list/icon views.
   treeview.view.cell.dim-label,
   treeview.view.cell.hidden,
+  treeview.view row.dim-label,
+  treeview.view row.hidden,
   iconview.view.cell.dim-label,
-  iconview.view.cell.hidden {
-    color: #808080;
-    -gtk-icon-effect: dim;
+  iconview.view.cell.hidden,
+  iconview.view row.dim-label,
+  iconview.view row.hidden {
+    color: $_hidden-item-fg !important;
+    -gtk-icon-effect: dim !important;
   }
 
   treeview.view.cell.dim-label:selected,
   treeview.view.cell.hidden:selected,
+  treeview.view row.dim-label:selected,
+  treeview.view row.hidden:selected,
   iconview.view.cell.dim-label:selected,
-  iconview.view.cell.hidden:selected {
-    color: $selection-fg;
-    -gtk-icon-effect: none;
+  iconview.view.cell.hidden:selected,
+  iconview.view row.dim-label:selected,
+  iconview.view row.hidden:selected {
+    color: $selection-fg !important;
+    -gtk-icon-effect: none !important;
+  }
+
+  // Thunar can mark hidden labels directly on icon/list item nodes.
+  .standard-view .dim-label:not(:selected),
+  .standard-view .hidden:not(:selected) {
+    color: $_hidden-item-fg !important;
   }
 
   paned paned paned > notebook.frame {
