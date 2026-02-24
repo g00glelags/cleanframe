@@ -1669,6 +1669,7 @@ $windowlist-focus-indicator-size: 5px; // thicker active-window indicator bar
                        (right) {
       .panel-#{$position} & {
         border-#{$position}: $windowlist-focus-indicator-size solid transparent;
+
         // Keep a small gap from the focus indicator bar when it gets thicker.
         sticon, stbin, #appMenuIcon { padding: 2px; padding-#{$position}: 1px; }
       }
