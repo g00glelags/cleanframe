@@ -468,11 +468,16 @@ apply_sandbox_theme_preset() {
 
 install_gnome_terminal_profile_from_project() {
   local set_default="${1:-false}"
+  local apply_inplace="${2:-false}"
   local installer_script="$REPO_DIR/scripts/install-gnome-terminal-cleanframe.sh"
   local args=()
 
   if [[ "$set_default" == "true" ]]; then
     args+=(--set-default)
+  fi
+
+  if [[ "$apply_inplace" == "true" ]]; then
+    args+=(--apply-to-default-profile)
   fi
 
   if [[ ! -x "$installer_script" ]]; then
@@ -481,7 +486,11 @@ install_gnome_terminal_profile_from_project() {
     return 1
   fi
 
-  echo -e "\nInstalling GNOME Terminal color preset (selectable profile) 'CleanFrame (Current Sharp Colors)'..."
+  if [[ "$apply_inplace" == "true" ]]; then
+    echo -e "\nApplying GNOME Terminal colors to existing default profile (in-place)..."
+  else
+    echo -e "\nInstalling GNOME Terminal color preset (selectable profile) 'CleanFrame (Current Sharp Colors)'..."
+  fi
 
   if [[ "$UID" -eq "$ROOT_UID" && -n "${SUDO_USER:-}" ]]; then
     local target_uid runtime_dir

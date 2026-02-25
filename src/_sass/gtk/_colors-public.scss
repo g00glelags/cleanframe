@@ -29,6 +29,18 @@ text widgets and the like base background color */
 base background color of selections */
 @define-color theme_selected_bg_color #{"" + $selection-bg};
 
+/* CleanFrame explicit app-selection aliases (for external parsers/fixes, e.g. Electron wrappers) */
+@define-color cleanframe_app_selection_bg_color #{"" + $app-selection-bg};
+@define-color cleanframe_app_selection_fg_color #{"" + $app-selection-fg};
+@define-color cleanframe_calc_selection_bg_color #{"" + $calc-cell-selection-bg};
+@define-color cleanframe_calc_selection_fg_color #{"" + $calc-cell-selection-fg};
+
+/* Legacy aliases commonly read by non-GTK apps/toolkits */
+@define-color selected_bg_color #{"" + $app-selection-bg};
+@define-color selected_fg_color #{"" + $app-selection-fg};
+@define-color text_selected_bg_color #{"" + $app-selection-bg};
+@define-color text_selected_fg_color #{"" + $app-selection-fg};
+
 /*
 text/foreground color of selections */
 @define-color theme_selected_fg_color #{"" + $selection-fg};
@@ -64,6 +76,9 @@ text widgets and the like base background color on backdrop windows */
 /*
 base background color of selections on backdrop windows */
 @define-color theme_unfocused_selected_bg_color #{"" + $selection-bg};
+
+@define-color unfocused_selected_bg_color #{"" + $app-selection-bg};
+@define-color unfocused_selected_fg_color #{"" + $app-selection-fg};
 
 /*
 text/foreground color of selections on backdrop windows */

@@ -81,6 +81,10 @@ $light_5: #9a9996;
   --light-3: #{$light-3};  // light grey
   --light-4: #{$light-4};  // medium grey
   --light-5: #{$light-5};  //  grey
+  --cleanframe-app-selection-bg: #{$app-selection-bg};
+  --cleanframe-app-selection-fg: #{$app-selection-fg};
+  --cleanframe-calc-selection-bg: #{$calc-cell-selection-bg};
+  --cleanframe-calc-selection-fg: #{$calc-cell-selection-fg};
 
 }
 

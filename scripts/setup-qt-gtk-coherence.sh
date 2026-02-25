@@ -12,6 +12,7 @@ DRY_RUN=0
 SKIP_INSTALL=0
 FORCE_PLATFORM_THEME=""
 ENV_FILE="${ENV_FILE_DEFAULT}"
+FORCE_GTK_THEME_NAME=""
 
 log() {
   printf '%s\n' "$*"
@@ -81,6 +82,7 @@ Objetivo:
 Opcoes:
   --skip-install              Nao instala pacotes, apenas configura o ambiente
   --platform-theme VALOR      Forca QT_QPA_PLATFORMTHEME (ex: gnome, gtk3)
+  --gtk-theme-name NOME       Exporta GTK_THEME com este nome (padrao: tema atual via gsettings; fallback CleanFrame-Light)
   --env-file CAMINHO          Arquivo de ambiente (padrao: ${ENV_FILE_DEFAULT})
   --dry-run                   Mostra comandos sem executar
   -h, --help                  Exibe esta ajuda
@@ -89,6 +91,7 @@ Exemplos:
   ${SCRIPT_NAME}
   ${SCRIPT_NAME} --skip-install
   ${SCRIPT_NAME} --platform-theme gnome
+  ${SCRIPT_NAME} --gtk-theme-name CleanFrame-Light
 EOF
 }
 
@@ -101,6 +104,11 @@ while [[ $# -gt 0 ]]; do
     --platform-theme)
       FORCE_PLATFORM_THEME="${2:-}"
       [[ -n "${FORCE_PLATFORM_THEME}" ]] || die "Informe um valor para --platform-theme"
+      shift 2
+      ;;
+    --gtk-theme-name)
+      FORCE_GTK_THEME_NAME="${2:-}"
+      [[ -n "${FORCE_GTK_THEME_NAME}" ]] || die "Informe um valor para --gtk-theme-name"
       shift 2
       ;;
     --env-file)
@@ -336,8 +344,25 @@ read_gtk_setting() {
   gsettings get "${schema}" "${key}" 2>/dev/null | sed "s/^'//; s/'$//" || printf 'N/D\n'
 }
 
+resolve_gtk_theme_name_for_env() {
+  local gtk_theme_name
+
+  if [[ -n "${FORCE_GTK_THEME_NAME}" ]]; then
+    printf '%s\n' "${FORCE_GTK_THEME_NAME}"
+    return 0
+  fi
+
+  gtk_theme_name="$(read_gtk_setting org.gnome.desktop.interface gtk-theme)"
+  if [[ -z "${gtk_theme_name}" || "${gtk_theme_name}" == "N/D" ]]; then
+    gtk_theme_name="CleanFrame-Light"
+  fi
+
+  printf '%s\n' "${gtk_theme_name}"
+}
+
 write_env_file() {
   local platform_theme="$1"
+  local gtk_theme_name="$2"
   local env_dir
 
   env_dir="$(dirname "${ENV_FILE}")"
@@ -348,6 +373,7 @@ write_env_file() {
 [dry-run] Escreveria em ${ENV_FILE}:
 QT_QPA_PLATFORMTHEME=${platform_theme}
 QT_WAYLAND_DECORATION=adwaita
+GTK_THEME=${gtk_theme_name}
 EOF
     return 0
   fi
@@ -357,6 +383,7 @@ EOF
 # Makes Qt apps follow GTK desktop integration when supported.
 QT_QPA_PLATFORMTHEME=${platform_theme}
 QT_WAYLAND_DECORATION=adwaita
+GTK_THEME=${gtk_theme_name}
 EOF
 }
 
@@ -398,6 +425,7 @@ EOF
 
 main() {
   local platform_theme
+  local gtk_theme_name
   local skip_reason
 
   if skip_reason="$(detect_qt_first_desktop_reason)"; then
@@ -417,7 +445,8 @@ main() {
   fi
 
   platform_theme="$(select_platform_theme)"
-  write_env_file "${platform_theme}"
+  gtk_theme_name="$(resolve_gtk_theme_name_for_env)"
+  write_env_file "${platform_theme}" "${gtk_theme_name}"
   show_summary "${platform_theme}"
   show_next_steps
 }
