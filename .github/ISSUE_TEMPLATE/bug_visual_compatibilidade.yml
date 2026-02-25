@@ -1,0 +1,152 @@
+name: Bug visual / compatibilidade
+description: Reporte problemas de legibilidade, popups, dialogs, selecao, ou incompatibilidades em apps/toolkits.
+title: "[bug-visual] "
+labels:
+  - bug
+  - visual
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por reportar.
+
+        O foco do CleanFrame e coerencia visual e legibilidade. Prioridade alta para:
+        - texto ilegivel
+        - popup/dialog/menu quebrado
+        - selecao invisivel
+        - contraste ruim
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severidade
+      description: Qual o impacto visual/funcional?
+      options:
+        - Critica (texto ilegivel / popup quebrado / branco em branco)
+        - Alta (selecao/foco ruim com impacto de uso)
+        - Media (inconsistencia visual sem perda de legibilidade)
+        - Baixa (ajuste estetico)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area afetada
+      options:
+        - GTK3/GTK4 (core)
+        - Qt (coerencia/fallback)
+        - Flatpak (heranca de tema)
+        - Electron / Slack / Teams / wrapper
+        - Terminal
+        - Outro
+    validations:
+      required: true
+
+  - type: input
+    id: distro
+    attributes:
+      label: Distro e versao
+      placeholder: "Fedora 41 / Ubuntu 24.04 / Linux Mint 22..."
+    validations:
+      required: true
+
+  - type: input
+    id: desktop
+    attributes:
+      label: Desktop Environment / Session
+      placeholder: "GNOME 47 (Wayland), Cinnamon 6.x, XFCE 4.18..."
+    validations:
+      required: true
+
+  - type: input
+    id: app_name
+    attributes:
+      label: App afetado
+      placeholder: "Nemo, FileZilla, Slack, teams-for-linux, Telegram, qBittorrent..."
+    validations:
+      required: true
+
+  - type: input
+    id: app_version
+    attributes:
+      label: Versao do app
+      placeholder: "Ex.: 4.42.120"
+
+  - type: dropdown
+    id: app_packaging
+    attributes:
+      label: Forma de instalacao do app
+      options:
+        - Repositorio da distro
+        - Flatpak
+        - Snap
+        - AppImage
+        - Tarball/binario
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce_steps
+    attributes:
+      label: Passos para reproduzir
+      description: Liste passos exatos (1, 2, 3...) e onde o problema aparece (menu, popup, dialog, selecao, tooltip)
+      placeholder: |
+        1. Abrir app X
+        2. Ir em ...
+        3. Abrir dialog ...
+        4. Resultado visual quebrado
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_vs_actual
+    attributes:
+      label: Resultado esperado vs atual
+      placeholder: |
+        Esperado: popup com texto legivel em fundo claro
+        Atual: texto branco em fundo branco
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / evidencias
+      description: Arraste imagens na issue. Se possivel, inclua antes/depois e destaque a area afetada.
+      placeholder: "Cole aqui screenshots e descreva o que cada imagem mostra."
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment_details
+    attributes:
+      label: Detalhes de ambiente (opcional, mas ajuda muito)
+      placeholder: |
+        Tema GTK ativo:
+        gsettings org.gnome.desktop.interface gtk-theme:
+        Flatpak override aplicado?:
+        Qt coherence configurado?:
+        Electron custom CSS/injecao ativa?:
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround (se existir)
+      placeholder: |
+        Ex.: reiniciar app, aplicar script X, usar launcher Y, forcar GTK_THEME=...
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmacoes
+      options:
+        - label: Li o README e as limitacoes de Qt/Flatpak/Electron
+          required: true
+        - label: Testei apos reiniciar o app
+          required: true
+        - label: Se for Qt, testei apos logout/login ou reload da sessao
+          required: false
+        - label: Se for Electron, confirmei suporte a custom CSS/injecao na minha versao
+          required: false

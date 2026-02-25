@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Pergunta de uso / configuracao local
+    url: https://github.com/
+    about: Use as issues apenas para bugs e melhorias rastreaveis. Perguntas de uso podem ser respondidas na discussao/comunidade (ajuste a URL antes da release).

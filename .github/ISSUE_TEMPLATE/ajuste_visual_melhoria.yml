@@ -1,0 +1,46 @@
+name: Ajuste visual / melhoria
+description: Sugestao de melhoria visual sem bug critico de legibilidade.
+title: "[melhoria-visual] "
+labels:
+  - enhancement
+  - visual
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use este template para ajustes visuais e melhorias.
+        Para problemas de legibilidade/contraste/popup quebrado, use o template de bug visual.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto
+      placeholder: "Em qual app/widget/tela voce percebeu a oportunidade de melhoria?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposta de melhoria
+      placeholder: "Descreva a melhoria e por que ela aumenta coerencia/usabilidade."
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impacto e risco
+      placeholder: "Pode afetar contraste? estados focus/hover/selected? GTK3/GTK4/Qt?"
+
+  - type: input
+    id: environment
+    attributes:
+      label: Ambiente testado
+      placeholder: "Distro + DE + app"
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Referencias visuais (opcional)
+      placeholder: "Screenshots, mockups, links, comparacoes."
