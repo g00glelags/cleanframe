@@ -265,7 +265,7 @@ spinner {
     opacity: 1;
     animation: spin 1s linear infinite;
 
-    &:disabled { opacity: 0.5; }
+    &:disabled { opacity: 0.68; }
   }
 }
 
@@ -2588,7 +2588,7 @@ switch {
 
   &:checked { background-color: rgba($primary, 0.5); }
 
-  &:disabled { opacity: 0.5; }
+  &:disabled { opacity: 0.68; }
 
   // hide on/off icons for >=3.24.5
   image {
@@ -3943,7 +3943,7 @@ colorswatch {
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.68;
 
     overlay { box-shadow: none; }
   }

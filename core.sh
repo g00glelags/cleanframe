@@ -72,10 +72,18 @@ normalize_gtk3_css() {
 
   [[ -f "$css_file" ]] || return 0
 
-  # GTK3 parser does not accept selector lists inside :not(...).
+  # GTK3 parser compatibility pass:
+  # - split selector lists inside :not(...)
+  # - drop !important (common GTK3 parser warning in Electron/Chromium apps)
+  # - replace Dart Sass infinity calc artifacts in border-image slices/widths
   # Convert ":not(a, b)" -> ":not(a):not(b)" iteratively.
   if has_command perl; then
-    perl -0pi -e '1 while s/:not\(([^()]*?),\s*([^()]+?)\)/:not($1):not($2)/g' "$css_file"
+    perl -0pi -e '
+      1 while s/:not\(([^()]*?),\s*([^()]+?)\)/:not($1):not($2)/g;
+      s/\h+!important(?=\h*;)/ /g;
+      s/calc\(\s*infinity\s*\*\s*1px\s*\)/9999px/g;
+      s/calc\(\s*-infinity\s*\*\s*1px\s*\)/-9999px/g;
+    ' "$css_file"
   fi
 }
 
@@ -455,6 +463,44 @@ apply_sandbox_theme_preset() {
 
   if [[ "${apply_snap_preset:-false}" == "true" ]]; then
     apply_snap_theme_preset "${theme_name}"
+  fi
+}
+
+install_gnome_terminal_profile_from_project() {
+  local set_default="${1:-false}"
+  local installer_script="$REPO_DIR/scripts/install-gnome-terminal-cleanframe.sh"
+  local args=()
+
+  if [[ "$set_default" == "true" ]]; then
+    args+=(--set-default)
+  fi
+
+  if [[ ! -x "$installer_script" ]]; then
+    echo "WARNING: GNOME Terminal installer script not found or not executable."
+    echo "         Expected: $installer_script"
+    return 1
+  fi
+
+  echo -e "\nInstalling GNOME Terminal color preset (selectable profile) 'CleanFrame (Current Sharp Colors)'..."
+
+  if [[ "$UID" -eq "$ROOT_UID" && -n "${SUDO_USER:-}" ]]; then
+    local target_uid runtime_dir
+    target_uid="$(id -u "$SUDO_USER" 2> /dev/null || true)"
+    runtime_dir="/run/user/${target_uid}"
+
+    if [[ -n "$target_uid" && -S "${runtime_dir}/bus" ]]; then
+      sudo -u "$SUDO_USER" env \
+        XDG_RUNTIME_DIR="$runtime_dir" \
+        DBUS_SESSION_BUS_ADDRESS="unix:path=${runtime_dir}/bus" \
+        bash "$installer_script" "${args[@]}"
+    else
+      echo "WARNING: Could not access DBus user session for '$SUDO_USER'."
+      echo "         Run manually (without sudo) after install:"
+      echo "         bash \"$installer_script\" ${args[*]}"
+      return 1
+    fi
+  else
+    bash "$installer_script" "${args[@]}"
   fi
 }
 

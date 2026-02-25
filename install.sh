@@ -10,7 +10,11 @@ Usage: $0 [OPTION]...
 OPTIONS:
   -d, --dest DIR          Specify destination directory (Default: $DEST_DIR)
   -s, --shell VERSION     Force GNOME Shell style version (38,40,42,44,46,47,48,49)
-  -A, --all               Install with full preset (--shell 49 + --sandbox)
+  -A, --all               Install with full preset (--shell 49 + --sandbox + GNOME Terminal profile)
+      --gnome-terminal-colors          Install CleanFrame GNOME Terminal color preset (as selectable profile)
+      --gnome-terminal-colors-default  Install color preset and set as GNOME Terminal default
+      --gnome-terminal-profile         Alias for --gnome-terminal-colors
+      --gnome-terminal-profile-default Alias for --gnome-terminal-colors-default
       --flatpak           Apply Flatpak override preset (GTK_THEME + filesystem access)
       --snap              Create Snap/session env preset with GTK_THEME
       --sandbox           Apply both --flatpak and --snap presets
@@ -57,6 +61,8 @@ colors=('')
 sizes=('')
 apply_flatpak_preset="false"
 apply_snap_preset="false"
+install_gnome_terminal_profile="false"
+set_default_gnome_terminal_profile="false"
 
 while [[ "$#" -gt 0 ]]; do
   case "${1:-}" in
@@ -82,6 +88,16 @@ while [[ "$#" -gt 0 ]]; do
       shell="49"
       apply_flatpak_preset="true"
       apply_snap_preset="true"
+      install_gnome_terminal_profile="true"
+      shift
+      ;;
+    --gnome-terminal-colors|--gnome-terminal-profile)
+      install_gnome_terminal_profile="true"
+      shift
+      ;;
+    --gnome-terminal-colors-default|--gnome-terminal-profile-default)
+      install_gnome_terminal_profile="true"
+      set_default_gnome_terminal_profile="true"
       shift
       ;;
     -r|--remove|-u|--uninstall)
@@ -118,6 +134,9 @@ if [[ ${remove} == 'true' ]]; then
 else
   clean_theme
   install_theme
+  if [[ "${install_gnome_terminal_profile}" == "true" ]]; then
+    install_gnome_terminal_profile_from_project "${set_default_gnome_terminal_profile}"
+  fi
 fi
 
 print_sandbox_usage

@@ -36,9 +36,9 @@ $xfce-tasklist-focus-indicator-size: 2.8px;
 
   .tasklist button {
     color: on($panel, secondary);
-    border-image: image(transparent) 0 0 $xfce-tasklist-focus-indicator-size / 0 0 $xfce-tasklist-focus-indicator-size;
+    border-image: image(transparent) 0 0 2.8 / 0 0 #{$xfce-tasklist-focus-indicator-size};
 
-    &:checked { border-image: image($primary) 0 0 $xfce-tasklist-focus-indicator-size / 0 0 $xfce-tasklist-focus-indicator-size; }
+    &:checked { border-image: image($primary) 0 0 2.8 / 0 0 #{$xfce-tasklist-focus-indicator-size}; }
 
     image { padding: 4px; }
   }

@@ -46,7 +46,7 @@ arrow:disabled,
 scrollbar:disabled,
 check:disabled,
 radio:disabled,
-treeview.expander:disabled { -gtk-icon-filter: opacity(0.5); }
+treeview.expander:disabled { -gtk-icon-filter: opacity(0.68); }
 
 %view, .view {
   background-color: $base;
@@ -229,7 +229,7 @@ spinner {
     opacity: 1;
     animation: spin 1s linear infinite;
 
-    &:disabled { opacity: 0.5; }
+    &:disabled { opacity: 0.68; }
   }
 }
 
@@ -2574,7 +2574,7 @@ switch {
 
   &:checked { background-color: color-mix(in srgb, $primary 50%, transparent); }
 
-  &:disabled { opacity: 0.5; }
+  &:disabled { opacity: 0.68; }
 
   // hide on/off icons for >=3.24.5
   image {
@@ -3633,7 +3633,7 @@ row.entry {
   }
 
   .edit-icon:disabled {
-    opacity: 0.5;
+    opacity: 0.68;
   }
 
   .indicator {
@@ -4733,7 +4733,7 @@ colorswatch {
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.68;
 
     overlay { box-shadow: none; }
   }

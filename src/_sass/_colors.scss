@@ -102,6 +102,12 @@ $button-min: color-palette-default.$button-min;
 $visual-boost-factor: 1.45;
 $color-saturation-boost: 30%;
 $black-tone-boost: 30%;
+$disabled-alpha-light: 0.68;
+$disabled-secondary-alpha-light: 0.56;
+$disabled-alpha-dark: 0.84;
+$disabled-secondary-alpha-dark: 0.7;
+$divider-alpha-light: 0.24;
+$divider-alpha-dark: 0.26;
 
 @function boost-alpha($alpha) {
   @return math.min($alpha * $visual-boost-factor, 0.99);
@@ -142,7 +148,7 @@ $background: background(c);
 $surface: background(a);
 $base: background(a);
 $base-alt: background(b);
-$tooltip: variables.rgb(background(h), 0.9);
+$tooltip: variables.rgb(background(h), 0.96);
 $osd: background(e);
 $scrim: background(f);
 $scrim-alt: background(g);
@@ -168,15 +174,15 @@ $force-black-menu-text: string.index($theme_id_for_match, "ancient") != null or 
 
     @if $state == 'secondary' { @return #000000; }
 
-    @if $state == 'disabled' { @return rgba(black, boost-alpha(0.38)); }
+    @if $state == 'disabled' { @return rgba(black, $disabled-alpha-light); }
 
-    @if $state == 'secondary-disabled' { @return rgba(black, boost-alpha(0.26)); }
+    @if $state == 'secondary-disabled' { @return rgba(black, $disabled-secondary-alpha-light); }
 
     @if $state == 'track' { @return rgba(black, boost-alpha(0.26)); }
 
     @if $state == 'track-disabled' { @return rgba(black, boost-alpha(0.15)); }
 
-    @if $state == 'divider' { @return rgba(black, boost-alpha(0.12)); }
+    @if $state == 'divider' { @return rgba(black, $divider-alpha-light); }
 
     @if $state == 'secondary-fill' { @return rgba(black, boost-alpha(0.104)); }
 
@@ -186,15 +192,15 @@ $force-black-menu-text: string.index($theme_id_for_match, "ancient") != null or 
 
     @if $state == 'secondary' { @return #FFFFFF; }
 
-    @if $state == 'disabled' { @return rgba(white, boost-alpha(0.5)); }
+    @if $state == 'disabled' { @return rgba(white, $disabled-alpha-dark); }
 
-    @if $state == 'secondary-disabled' { @return rgba(white, boost-alpha(0.3)); }
+    @if $state == 'secondary-disabled' { @return rgba(white, $disabled-secondary-alpha-dark); }
 
     @if $state == 'track' { @return rgba(white, boost-alpha(0.3)); }
 
     @if $state == 'track-disabled' { @return rgba(white, boost-alpha(0.15)); }
 
-    @if $state == 'divider' { @return rgba(white, boost-alpha(0.12)); }
+    @if $state == 'divider' { @return rgba(white, $divider-alpha-dark); }
 
     @if $state == 'secondary-fill' { @return rgba(white, boost-alpha(0.104)); }
 
@@ -226,9 +232,9 @@ $keyboard: apply-black-tone(color-palette-default.$grey-050);
 $keyboard-alt: apply-black-tone(color-palette-default.$grey-300);
 $system: color-palette-default.$grey-750;
 $popover: background(a);
-$popover-floating-bg: if(sass(tweaks.$opacity == 'solid'): $popover; else: rgba($popover, 0.97));
+$popover-floating-bg: if(sass(tweaks.$opacity == 'solid'): $popover; else: rgba($popover, 0.992));
 $panel-solid: background(c);
-$panel: rgba($panel-solid, 0.65);
+$panel: rgba($panel-solid, 0.88);
 $shell: background(c);
 $button: gtkalpha(currentcolor, 0.05);
 $entry: gtkalpha(currentcolor, 0.05);
@@ -246,23 +252,23 @@ $suggested: $button-accent;
 $suggested-fg: $button-accent-fg;
 $destructive: $error;
 $check_radio_primary: if(sass(tweaks.$check_radio == 'default'): $success; else: $primary);
-$frame: variables.rgb(black, boost-alpha(0.1));
-$border: variables.rgb(black, boost-alpha(0.12));
-$solid-border: rgba($background, 8%);
-$border-alt: variables.rgb(black, boost-alpha(0.16));
+$frame: variables.rgb(black, 0.22);
+$border: variables.rgb(black, 0.28);
+$solid-border: rgba($background, 14%);
+$border-alt: variables.rgb(black, 0.36);
 $titlebar-indicator: $primary;
 
 //
 // Overlay state colors
 //
 
-$overlay-normal: gtkalpha(currentcolor, boost-alpha(0.05));
-$overlay-hover: gtkalpha(currentcolor, boost-alpha(0.104));
-$overlay-focus: gtkalpha(currentcolor, boost-alpha(0.104));
-$overlay-focus-hover: gtkalpha(currentcolor, boost-alpha(0.208));
-$overlay-active: gtkalpha(currentcolor, boost-alpha(0.12));
-$overlay-checked: gtkalpha(currentcolor, boost-alpha(0.10));
-$overlay-selected: gtkalpha(currentcolor, boost-alpha(0.06));
+$overlay-normal: gtkalpha(currentcolor, boost-alpha(0.07));
+$overlay-hover: gtkalpha(currentcolor, boost-alpha(0.14));
+$overlay-focus: gtkalpha(currentcolor, boost-alpha(0.16));
+$overlay-focus-hover: gtkalpha(currentcolor, boost-alpha(0.26));
+$overlay-active: gtkalpha(currentcolor, boost-alpha(0.18));
+$overlay-checked: gtkalpha(currentcolor, boost-alpha(0.14));
+$overlay-selected: gtkalpha(currentcolor, boost-alpha(0.1));
 
 //
 // Text and derivative colors
