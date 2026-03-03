@@ -1674,7 +1674,7 @@ $windowlist-focus-indicator-content-compensation: $windowlist-focus-indicator-si
         sticon, stbin, stlabel, #appMenuIcon {
           padding: 2px;
           padding-#{$position}: 0;
-          margin-#{$position}: -$windowlist-focus-indicator-content-compensation;
+          margin-#{$position}: 0;
         }
       }
     }
@@ -1821,12 +1821,21 @@ $windowlist-focus-indicator-content-compensation: $windowlist-focus-indicator-si
     border-radius: 0;
     spacing: $space-size;
 
-    &.top, &.bottom {
+    &.top {
+      border-top: $windowlist-focus-indicator-size solid transparent;
+      padding: 0 2px;
+
+      sticon, stbin, stlabel {
+        margin-top: 0;
+      }
+    }
+
+    &.bottom {
       border-bottom: $windowlist-focus-indicator-size solid transparent;
       padding: 0 2px;
 
       sticon, stbin, stlabel {
-        margin-bottom: -$windowlist-focus-indicator-content-compensation;
+        margin-bottom: 0;
       }
     }
 
@@ -1834,7 +1843,7 @@ $windowlist-focus-indicator-content-compensation: $windowlist-focus-indicator-si
       border-left: $windowlist-focus-indicator-size solid transparent;
 
       sticon, stbin, stlabel {
-        margin-left: -$windowlist-focus-indicator-content-compensation;
+        margin-left: 0;
       }
     }
 
@@ -1842,7 +1851,7 @@ $windowlist-focus-indicator-content-compensation: $windowlist-focus-indicator-si
       border-right: $windowlist-focus-indicator-size solid transparent;
 
       sticon, stbin, stlabel {
-        margin-right: -$windowlist-focus-indicator-content-compensation;
+        margin-right: 0;
       }
     }
 
