@@ -76,7 +76,6 @@ text widgets and the like base background color on backdrop windows */
 /*
 base background color of selections on backdrop windows */
 @define-color theme_unfocused_selected_bg_color #{"" + $selection-bg};
-
 @define-color unfocused_selected_bg_color #{"" + $app-selection-bg};
 @define-color unfocused_selected_fg_color #{"" + $app-selection-fg};
 

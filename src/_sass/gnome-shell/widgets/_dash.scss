@@ -65,7 +65,7 @@ $dash_border_radius: if(sass($corner_style == 'circular'): $circular-radius; els
 
 // OSD Tooltip
 .dash-label {
-  border-radius: if(sass($corner_style == 'circular'): $circular-radius; else: $material-radius);
+  border-radius: if(sass($corner_style == 'circular'): $circular-radius; else: $material-radius * 0.7);
   padding: $space-size $space-size * 2;
   color: on();
   background-color: rgb(black, 0.75);

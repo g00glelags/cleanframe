@@ -211,7 +211,7 @@ $screenshot_ui_button_red: colors.$error;
 .screenshot-ui-tooltip {
   color: colors.on(colors.$system);
   background-color: colors.$system;
-  border-radius: variables.$circular-radius;
+  border-radius: variables.$material-radius * 0.7;
   padding: variables.$space-size variables.$space-size * 2;
   text-align: center;
   -y-offset: 24px;

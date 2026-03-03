@@ -221,7 +221,7 @@ stwidget.focused .app-well-app-running-dot {
     background-gradient-start: rgb(255, 255, 255, 0.05);
     background-gradient-end: transparent;
     background-gradient-direction: horizontal;
-    border-radius: 15px 0 0 15px;
+    border-radius: 10.5px 0 0 10.5px;
   }
 
   &.previous:ltr,
@@ -229,7 +229,7 @@ stwidget.focused .app-well-app-running-dot {
     background-gradient-start: transparent;
     background-gradient-end: rgb(255, 255, 255, 0.05);
     background-gradient-direction: horizontal;
-    border-radius: 0 15px 15px 0;
+    border-radius: 0 10.5px 10.5px 0;
   }
 }
 
