@@ -139,7 +139,7 @@ done
 if [[ ${remove} == 'true' ]]; then
   uninstall_theme
 else
-  clean_theme
+  uninstall_theme
   install_theme
   if [[ "${install_gnome_terminal_profile}" == "true" ]]; then
     install_gnome_terminal_profile_from_project "${set_default_gnome_terminal_profile}" "${apply_gnome_terminal_colors_inplace}"

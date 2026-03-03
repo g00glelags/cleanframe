@@ -31,6 +31,51 @@ has_command() {
   command -v "$1" >/dev/null 2>&1
 }
 
+detect_qt_platformtheme_overrides() {
+  local desired="$1"
+  local files=(
+    "/etc/environment"
+    "${HOME}/.profile"
+    "${HOME}/.bash_profile"
+    "${HOME}/.pam_environment"
+    "${HOME}/.xprofile"
+    "${HOME}/.xsessionrc"
+  )
+  local found_conflict=0
+  local file
+
+  if [[ -n "${QT_QPA_PLATFORMTHEME:-}" && "${QT_QPA_PLATFORMTHEME}" != "${desired}" ]]; then
+    warn "Sessao atual com QT_QPA_PLATFORMTHEME=${QT_QPA_PLATFORMTHEME}, diferente do valor gerado (${desired})."
+    found_conflict=1
+  fi
+
+  for file in "${files[@]}"; do
+    [[ -f "${file}" ]] || continue
+
+    while IFS= read -r hit; do
+      local line_no
+      local expr
+      local value
+
+      line_no="${hit%%:*}"
+      expr="${hit#*:}"
+      value="$(printf '%s\n' "${expr}" \
+        | sed -E 's/^[[:space:]]*export[[:space:]]+QT_QPA_PLATFORMTHEME=//; s/^[[:space:]]*QT_QPA_PLATFORMTHEME=//; s/[[:space:]]*(#.*)?$//' \
+        | sed -E 's/^"//; s/"$//; s/^'\''//; s/'\''$//')"
+
+      [[ -n "${value}" ]] || continue
+      if [[ "${value}" != "${desired}" ]]; then
+        warn "Override conflitante detectada em ${file}:${line_no} -> QT_QPA_PLATFORMTHEME=${value}"
+        found_conflict=1
+      fi
+    done < <(grep -nE '^[[:space:]]*(export[[:space:]]+)?QT_QPA_PLATFORMTHEME=' "${file}" || true)
+  done
+
+  if [[ "${found_conflict}" -eq 1 ]]; then
+    warn "Corrija/remova os overrides acima e reinicie a sessao para aplicar ${desired}."
+  fi
+}
+
 desktop_env_value() {
   local parts=(
     "${XDG_CURRENT_DESKTOP:-}"
@@ -312,10 +357,34 @@ has_platform_theme_plugin() {
   [[ "${#matches[@]}" -gt 0 ]]
 }
 
+has_platform_theme_plugin_for_qt_major() {
+  local major="$1"
+  local needle="$2"
+  local matches=()
+
+  shopt -s nullglob
+  matches+=(
+    /usr/lib*/qt"${major}"/plugins/platformthemes/*"${needle}"*
+    /usr/lib/*/qt"${major}"/plugins/platformthemes/*"${needle}"*
+  )
+  shopt -u nullglob
+
+  [[ "${#matches[@]}" -gt 0 ]]
+}
+
 select_platform_theme() {
   if [[ -n "${FORCE_PLATFORM_THEME}" ]]; then
     printf '%s\n' "${FORCE_PLATFORM_THEME}"
     return 0
+  fi
+
+  # Prefer gtk3 when qgnomeplatform is not available for Qt6.
+  # This avoids mixed behavior where Qt5 uses "gnome" but Qt6 falls back differently.
+  if has_platform_theme_plugin "qgtk3"; then
+    if has_platform_theme_plugin_for_qt_major 6 "qgtk3" && ! has_platform_theme_plugin_for_qt_major 6 "qgnomeplatform"; then
+      printf 'gtk3\n'
+      return 0
+    fi
   fi
 
   if has_platform_theme_plugin "qgnomeplatform"; then
@@ -447,6 +516,7 @@ main() {
   platform_theme="$(select_platform_theme)"
   gtk_theme_name="$(resolve_gtk_theme_name_for_env)"
   write_env_file "${platform_theme}" "${gtk_theme_name}"
+  detect_qt_platformtheme_overrides "${platform_theme}"
   show_summary "${platform_theme}"
   show_next_steps
 }
