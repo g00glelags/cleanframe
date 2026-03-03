@@ -3853,12 +3853,12 @@ infobar {
  ************/
 tooltip {
   &.background, &.background.csd {
-    border-radius: $corner-radius * 0.49;
+    border-radius: $corner-radius * 0.343;
     background-color: $tooltip;
     color: white;
   }
 
-  border-radius: $corner-radius * 0.245;
+  border-radius: $corner-radius * 0.1715;
   box-shadow: none; // otherwise it gets inherited by windowframe.csd
 
   // FIXME: we need a border or tooltips vanish on black background.

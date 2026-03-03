@@ -258,7 +258,7 @@ stscrollbar {
 // Tooltip
 //
 #Tooltip {
-  border-radius: $circular-radius;
+  border-radius: $circular-radius * 0.7;
   padding: $space-size $space-size * 2;
   background-color: $tooltip;
   color: on($tooltip);
@@ -554,7 +554,7 @@ $cinnamon_menu_font_scale: 1;
   border: 1px solid $tooltip;
   color: on($tooltip);
   spacing: 25px;
-  border-radius: $corner-radius;
+  border-radius: $corner-radius * 0.7;
   font-size: 9pt;
   padding: 5px 8px;
   -cinnamon-caption-spacing: 4px;
@@ -1625,6 +1625,7 @@ $windowlist-focus-indicator-color: $cinnamon-windowlist-focus-indicator;
 $windowlist-focus-indicator-size: 6px;
 $windowlist-focus-indicator-baseline-size: 2px;
 $windowlist-focus-indicator-content-compensation: $windowlist-focus-indicator-size - $windowlist-focus-indicator-baseline-size;
+$windowlist-icon-horizontal-width-scale: 1.2;
 
 .window-list {
   &-box {
@@ -1677,6 +1678,15 @@ $windowlist-focus-indicator-content-compensation: $windowlist-focus-indicator-si
           padding-#{$position}: 0;
           margin-#{$position}: 0;
         }
+      }
+    }
+
+    // Increase icon box horizontal allocation by 20% on horizontal panels.
+    .panel-top &,
+    .panel-bottom & {
+      sticon,
+      #appMenuIcon {
+        min-width: 1em * $windowlist-icon-horizontal-width-scale;
       }
     }
 
@@ -1829,6 +1839,10 @@ $windowlist-focus-indicator-content-compensation: $windowlist-focus-indicator-si
       sticon, stbin, stlabel {
         margin-top: 0;
       }
+
+      sticon {
+        min-width: 1em * $windowlist-icon-horizontal-width-scale;
+      }
     }
 
     &.bottom {
@@ -1837,6 +1851,10 @@ $windowlist-focus-indicator-content-compensation: $windowlist-focus-indicator-si
 
       sticon, stbin, stlabel {
         margin-bottom: 0;
+      }
+
+      sticon {
+        min-width: 1em * $windowlist-icon-horizontal-width-scale;
       }
     }
 
