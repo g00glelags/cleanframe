@@ -193,7 +193,9 @@ window#whiskermenu-window {
  * Thunar *
  **********/
 .thunar {
-  $_hidden-item-fg: rgba($text, 0.58);
+  $_hidden-item-fg: rgba($text, 0.16);
+  $_hidden-item-icon-opacity: 0.28;
+  $_hidden-item-bg: rgba($text, 0.05);
 
   toolbar { border-bottom: 1px solid $divider; }
 
@@ -245,13 +247,19 @@ window#whiskermenu-window {
       &.hidden,
       &.dim-label,
       .hidden,
+      text.hidden,
+      text.dim-label,
       row.hidden,
       row.dim-label,
       cell.hidden,
       cell.dim-label,
       label.hidden,
+      label.dim-label,
       .dim-label {
         color: $_hidden-item-fg !important;
+        text-shadow: none !important;
+        font-style: italic !important;
+        background-color: $_hidden-item-bg !important;
       }
 
       // Also dim hidden file/folder icons, not only labels.
@@ -259,30 +267,42 @@ window#whiskermenu-window {
       & image.dim-label,
       image.hidden,
       image.dim-label,
+      .hidden .image,
+      .dim-label .image,
       .hidden image,
       .dim-label image {
         -gtk-icon-effect: dim !important;
+        opacity: $_hidden-item-icon-opacity !important;
       }
 
       &.hidden:selected,
       &.dim-label:selected,
       .hidden:selected,
+      text.hidden:selected,
+      text.dim-label:selected,
       row.hidden:selected,
       row.dim-label:selected,
       cell.hidden:selected,
       cell.dim-label:selected,
       label.hidden:selected,
+      label.dim-label:selected,
       .dim-label:selected {
         color: $selection-fg !important;
+        text-shadow: none !important;
+        font-style: normal !important;
+        background-color: transparent !important;
       }
 
       & image.hidden:selected,
       & image.dim-label:selected,
       image.hidden:selected,
       image.dim-label:selected,
+      .hidden:selected .image,
+      .dim-label:selected .image,
       .hidden:selected image,
       .dim-label:selected image {
         -gtk-icon-effect: none !important;
+        opacity: 1 !important;
       }
     }
   }
@@ -298,6 +318,10 @@ window#whiskermenu-window {
   iconview.view row.hidden {
     color: $_hidden-item-fg !important;
     -gtk-icon-effect: dim !important;
+    text-shadow: none !important;
+    opacity: $_hidden-item-icon-opacity;
+    font-style: italic !important;
+    background-color: $_hidden-item-bg !important;
   }
 
   treeview.view.cell.dim-label:selected,
@@ -310,12 +334,29 @@ window#whiskermenu-window {
   iconview.view row.hidden:selected {
     color: $selection-fg !important;
     -gtk-icon-effect: none !important;
+    opacity: 1;
+    text-shadow: none !important;
+    font-style: normal !important;
+    background-color: transparent !important;
   }
 
   // Thunar can mark hidden labels directly on icon/list item nodes.
   .standard-view .dim-label:not(:selected),
-  .standard-view .hidden:not(:selected) {
+  .standard-view .hidden:not(:selected),
+  .standard-view label.dim-label:not(:selected),
+  .standard-view label.hidden:not(:selected),
+  .standard-view text.dim-label:not(:selected),
+  .standard-view text.hidden:not(:selected) {
     color: $_hidden-item-fg !important;
+    text-shadow: none !important;
+    font-style: italic !important;
+    background-color: $_hidden-item-bg !important;
+  }
+
+  .standard-view image.dim-label:not(:selected),
+  .standard-view image.hidden:not(:selected) {
+    -gtk-icon-effect: dim !important;
+    opacity: $_hidden-item-icon-opacity !important;
   }
 
   paned paned paned > notebook.frame {
