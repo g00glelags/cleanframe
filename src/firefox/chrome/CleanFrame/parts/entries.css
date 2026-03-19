@@ -16,7 +16,7 @@
 	max-height: 32px !important;
 	padding: 6px 12px !important;
 	box-sizing: border-box;
-	transition: all 100ms;
+	transition: background-color 100ms, color 100ms, outline-color 100ms;
 }
 
 /* Entries focused */
@@ -29,7 +29,7 @@
 	outline: 2px solid var(--gnome-focused-urlbar-border-color) !important;
 	outline-offset: -2px;
 	-moz-outline-radius: 16px;
-	transition: all 100ms;
+	transition: background-color 100ms, color 100ms, outline-color 100ms;
 }
 
 #urlbar:hover,

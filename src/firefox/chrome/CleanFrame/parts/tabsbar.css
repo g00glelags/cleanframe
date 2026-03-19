@@ -201,7 +201,7 @@ tab[selected]:-moz-window-inactive {
 .tab-background {
 	background-color: var(--gnome-tabbar-tab-background) !important;
 	box-shadow: none !important;
-	transition: all .2s ease;
+	transition: background-color .2s ease, border-radius .2s ease;
 }
 
 /* Active tab */
@@ -211,7 +211,7 @@ tab[selected]:-moz-window-inactive {
 	border-radius: 12px 12px 0 0 !important;
 	border: none !important;
 	border-image: none !important;
-	transition: all .2s ease;
+	transition: background-color .2s ease, border-radius .2s ease;
 }
 .tab-background[selected=true]:-moz-window-inactive {
 	background-color: var(--gnome-inactive-tabbar-tab-active-background) !important;
@@ -228,7 +228,7 @@ tab[selected]:-moz-window-inactive {
 	border: none !important;
 	border-image: none !important;
 	border-top: none !important;
-	transition: all .2s ease;
+	transition: background-color .2s ease, border-radius .2s ease;
 }
 .tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected=true]),
 #TabsToolbar[brighttext] > #tabbrowser-tabs > .tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected=true]),
@@ -237,7 +237,7 @@ tab[selected]:-moz-window-inactive {
 	border-radius: 12px 12px 0 0 !important;
 	border: none !important;
 	border-image: none !important;
-	transition: all .2s ease;
+	transition: background-color .2s ease, border-radius .2s ease;
 }
 
 /* Tabs scroll buttons hover */

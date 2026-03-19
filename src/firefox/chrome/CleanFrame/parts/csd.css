@@ -122,12 +122,12 @@
 	border: none !important;
 	border-radius: 100% !important;
 	padding: 0 0 !important;
-	transition: all .2s ease;
+	transition: background-color .2s ease, color .2s ease, opacity .2s ease;
 }
 
 :root[tabsintitlebar] #titlebar .titlebar-button:hover,
 :root[tabsintitlebar][inFullscreen] #window-controls toolbarbutton:hover {
-	transition: all .1s ease;
+	transition: background-color .1s ease, color .1s ease, opacity .1s ease;
 }
 
 :root[tabsintitlebar] #titlebar .titlebar-button {

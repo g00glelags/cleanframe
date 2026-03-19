@@ -51,7 +51,7 @@ button.close,
 	min-height: 32px !important;
 	min-width: 32px !important;
 	color: var(--gnome-button-color) !important;
-	transition: all .2s ease;
+	transition: background-color .2s ease, color .2s ease, opacity .2s ease, fill .2s ease, fill-opacity .2s ease;
 }
 
 #PanelUI-menu-button {
@@ -96,7 +96,7 @@ menulist,
 #appMenu-fxa-status2:not([fxastatus="signedin"]) #appMenu-fxa-label2 {
 	padding: 2px 16px !important;
 	text-align: center !important;
-	transition: all .2s ease;
+	transition: background-color .2s ease, color .2s ease, opacity .2s ease;
 }
 
 .subviewbutton.panel-subview-footer label {
@@ -160,7 +160,7 @@ menulist:hover .menulist-label-box,
 .permission-popup-permission-remove-button:hover {
 	outline: 0 !important;
 	background: var(--gnome-button-hover-background) !important;
-	transition: all .1s ease;
+	transition: background-color .1s ease, color .1s ease, opacity .1s ease, fill .1s ease, fill-opacity .1s ease;
 }
 
 /* Active buttons */
