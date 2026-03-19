@@ -2577,7 +2577,7 @@ scrollbar {
  * Switch *
  **********/
 switch {
-  transition: all $duration $ease-out;
+  transition: background-color $duration $ease-out, border-color $duration $ease-out, opacity $duration $ease-out;
   margin: $space-size 0;
   padding: 0 2px;
   border: 5px solid transparent;
@@ -2597,7 +2597,7 @@ switch {
   }
 
   slider {
-    transition: all $duration $ease-out;
+    transition: background-color $duration $ease-out, box-shadow $duration $ease-out;
     min-width: 20px;
     min-height: 20px;
     margin: -3px -2px;
@@ -3375,7 +3375,7 @@ row {
  *************/
 expander {
   title > arrow {
-    transition: all $duration $ease-out;
+    transition: color $duration $ease-out, -gtk-icon-transform $duration $ease-out, opacity $duration $ease-out;
     min-width: 16px;
     min-height: 16px;
     -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
