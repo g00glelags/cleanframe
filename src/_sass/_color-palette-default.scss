@@ -63,27 +63,27 @@ $black: #000;
 
 // Semantic theme tokens
 // Used by GTK secondary window surfaces and sidebars (e.g. Thunar side pane).
-$surface-soft: #FAFAFA;
+$surface-soft: #F6F6F6;
 
 // Used by GTK notebook inactive tabs (e.g. Thunar and GNOME Terminal tab strip).
-$notebook-tab-inactive-bg: #E6E6E6;
+$notebook-tab-inactive-bg: #DFDFDF;
 
 // Used by focused/active tabs in GTK notebooks and tabbars (e.g. Thunar, Nemo, XFCE Terminal, GNOME Terminal).
-$notebook-tab-active-bg: #E6F7FF;
+$notebook-tab-active-bg: #D9F2FF;
 
 // Used by Cinnamon panel/menu bar background.
-$cinnamon-panel-bg: #E2E2E2;
+$cinnamon-panel-bg: #DCDCDC;
 $cinnamon-panel-fg: #000;
 
 // Used by Cinnamon window list active/focused indicator detail.
 $cinnamon-windowlist-focus-indicator: #2DFF3D;
 
 // Used by GTK app selections (e.g. Nemo/Thunar list and icon selection).
-$app-selection-bg: #A6E4FF;
+$app-selection-bg: #8FD9FF;
 $app-selection-fg: #000;
 
 // Used by focused/editable field borders (entries, spinbuttons, text inputs).
-$edit-focus-border: #00B8FF;
+$edit-focus-border: #00AEEF;
 
 // Used by progress bars across GTK/Cinnamon surfaces.
 $progress-bar-fill: #34A653;
@@ -98,14 +98,14 @@ $calc-cell-selection-fg: #000;
 
 // Used by desktop selection (mouse drag rubberband + desktop icon selection).
 // Keep aligned with app selection to avoid blue Adwaita-like leaks across file managers.
-$desktop-selection-bg: #A6E4FF;
+$desktop-selection-bg: #8FD9FF;
 $desktop-selection-fg: #000;
 
 // Used only for GTK drag-and-drop drop target highlight (folder/file destination).
 // Keep independent from normal selection to allow fine-tuning readability.
 $drag-drop-target-bg: #E3DCD5;
 $drag-drop-target-fg: #000;
-$drag-drop-target-outline: #B8ACA1;
+$drag-drop-target-outline: #A99889;
 $drag-drop-target-fill-alpha: 0.58;
 
 // Used by Cinnamon calendar selected day state.

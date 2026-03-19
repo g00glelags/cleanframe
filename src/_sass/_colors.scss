@@ -99,14 +99,14 @@ $button-min: color-palette-default.$button-min;
 }
 
 // Global visual boost controls
-$visual-boost-factor: 1.45;
-$color-saturation-boost: 30%;
+$visual-boost-factor: 1.58;
+$color-saturation-boost: 36%;
 $black-tone-boost: 30%;
 $disabled-alpha-light: 0.68;
 $disabled-secondary-alpha-light: 0.56;
 $disabled-alpha-dark: 0.84;
 $disabled-secondary-alpha-dark: 0.7;
-$divider-alpha-light: 0.24;
+$divider-alpha-light: 0.29;
 $divider-alpha-dark: 0.26;
 
 @function boost-alpha($alpha) {
@@ -153,8 +153,8 @@ $osd: background(e);
 $scrim: background(f);
 $scrim-alt: background(g);
 $scrim-inverse: variables.rgb(white, 0.1);
-$titlebar: #fafafa;
-$titlebar-backdrop: #fafafa;
+$titlebar: #f6f6f6;
+$titlebar-backdrop: #f4f4f4;
 
 // Variant-specific readability override for light-toned menu palettes.
 $theme_id_for_match: string.to-lower-case("#{tweaks.$colorscheme} #{tweaks.$theme}");
