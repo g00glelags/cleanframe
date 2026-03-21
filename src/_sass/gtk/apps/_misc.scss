@@ -182,7 +182,9 @@ window.background.chromium {
     &:disabled { color: $text-secondary-disabled; }
   }
 
-  menubar, headerbar { color: $titlebar-text-secondary; }
+  menubar { color: $text-secondary; }
+
+  headerbar { color: $titlebar-text-secondary; }
 
   menu {
     padding: 0;

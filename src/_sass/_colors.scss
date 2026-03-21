@@ -154,7 +154,7 @@ $scrim: background(f);
 $scrim-alt: background(g);
 $scrim-inverse: variables.rgb(white, 0.1);
 $titlebar: #f6f6f6;
-$titlebar-backdrop: #f4f4f4;
+$titlebar-backdrop: #f6f6f6;
 
 // Variant-specific readability override for light-toned menu palettes.
 $theme_id_for_match: string.to-lower-case("#{tweaks.$colorscheme} #{tweaks.$theme}");

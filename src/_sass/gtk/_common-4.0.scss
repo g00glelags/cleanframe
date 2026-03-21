@@ -1887,12 +1887,12 @@ menubar {
 
   // box-shadow: inset 0 -1px $divider;
   background-color: $titlebar;
-  color: $titlebar-text;
+  color: $text;
   font-size: $menu-font-scale * 1em;
 
   &:backdrop {
     background-color: $titlebar-backdrop;
-    color: $titlebar-text-secondary;
+    color: $text-secondary;
   }
 
   .csd & { transition: $transition; }
@@ -1901,17 +1901,17 @@ menubar {
     transition: $transition;
     min-height: 20px;
     padding: 4px 8px;
-    color: $titlebar-text-secondary;
+    color: $text-secondary;
     font-size: $menu-font-scale * 1em;
     font-weight: 500;
 
     &:selected { // Seems like it :hover even with keyboard focus
       transition: none;
       background-color: $overlay-checked;
-      color: $titlebar-text;
+      color: $text;
     }
 
-    &:disabled { color: $titlebar-text-secondary-disabled; }
+    &:disabled { color: $text-secondary-disabled; }
 
     label:disabled { color: inherit; } // to inherit the above color
   }

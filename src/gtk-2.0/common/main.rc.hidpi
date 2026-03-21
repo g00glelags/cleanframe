@@ -1608,22 +1608,22 @@ style "default" {
 
 style "menubar" {
   bg[NORMAL]      = @titlebar_bg_color
-  fg[NORMAL]      = mix(0.7, @titlebar_fg_color, @titlebar_bg_color)
-  fg[PRELIGHT]    = @titlebar_fg_color
-  fg[INSENSITIVE] = mix(0.3, @titlebar_fg_color, @titlebar_bg_color)
+  fg[NORMAL]      = mix(0.7, @theme_fg_color, @titlebar_bg_color)
+  fg[PRELIGHT]    = @theme_fg_color
+  fg[INSENSITIVE] = mix(0.3, @theme_fg_color, @titlebar_bg_color)
   # Needed to fix Firefox's menubar text
-  bg[SELECTED]    = mix(0.12, @titlebar_fg_color, @titlebar_bg_color)
-  fg[SELECTED]    = @titlebar_fg_color
+  bg[SELECTED]    = mix(0.12, @theme_fg_color, @titlebar_bg_color)
+  fg[SELECTED]    = @theme_fg_color
 }
 
 style "menubar_item" {
   xthickness = 6
   ythickness = 8
 
-  fg[NORMAL]      = mix(0.7, @titlebar_fg_color, @titlebar_bg_color)
-  bg[PRELIGHT]    = mix(0.12, @titlebar_fg_color, @titlebar_bg_color)
-  fg[PRELIGHT]    = @titlebar_fg_color
-  fg[INSENSITIVE] = mix(0.3, @titlebar_fg_color, @titlebar_bg_color)
+  fg[NORMAL]      = mix(0.7, @theme_fg_color, @titlebar_bg_color)
+  bg[PRELIGHT]    = mix(0.12, @theme_fg_color, @titlebar_bg_color)
+  fg[PRELIGHT]    = @theme_fg_color
+  fg[INSENSITIVE] = mix(0.3, @theme_fg_color, @titlebar_bg_color)
 }
 
 style "menu" {
