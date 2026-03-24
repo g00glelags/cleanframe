@@ -224,21 +224,21 @@ patch_teams_custom_css() {
   fi
 
   if [[ "${DRY_RUN}" -eq 1 ]]; then
-    log "[dry-run] Atualizaria ${file} para usar selecao #A6E4FF"
+    log "[dry-run] Atualizaria ${file} para usar selecao #8FD9FF"
     return 0
   fi
 
   cp -f "${file}" "${backup}"
 
   if grep -qi -- '--cleanframe-selection-bg:' "${file}"; then
-    sed -i 's/--cleanframe-selection-bg:[[:space:]]*#00[Bb]8[Ff][Ff];/--cleanframe-selection-bg: #A6E4FF;/g' "${file}"
-    sed -i 's/--cleanframe-selection-bg:[[:space:]]*#A6E4FF;/--cleanframe-selection-bg: #A6E4FF;/g' "${file}"
+    sed -i 's/--cleanframe-selection-bg:[[:space:]]*#00[Bb]8[Ff][Ff];/--cleanframe-selection-bg: #8FD9FF;/g' "${file}"
+    sed -i 's/--cleanframe-selection-bg:[[:space:]]*#A6E4FF;/--cleanframe-selection-bg: #8FD9FF;/g' "${file}"
   else
     cat >> "${file}" <<'EOF'
 
 /* CleanFrame selection override */
 :root {
-  --cleanframe-selection-bg: #A6E4FF;
+  --cleanframe-selection-bg: #8FD9FF;
   --cleanframe-selection-fg: #000000;
 }
 
