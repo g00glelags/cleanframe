@@ -2,6 +2,11 @@
 
 # Build helpers for SCSS compilation and asset preparation.
 
+# Source common helpers if available
+if [[ -f "${BASH_SOURCE[0]%/*}/common.sh" ]]; then
+  source "${BASH_SOURCE[0]%/*}/common.sh"
+fi
+
 compile_scss() {
   local input="$1"
   local output="$2"
@@ -32,13 +37,21 @@ normalize_gtk3_css() {
   # - split selector lists inside :not(...)
   # - drop !important (common GTK3 parser warning in Electron/Chromium apps)
   # - replace Dart Sass infinity calc artifacts in border-image slices/widths
-  if has_command perl; then
+  if can_use_perl_normalization; then
+    echo "[NORMALIZE] Applying GTK3 CSS normalization (full Perl)"
     perl -0pi -e '
       1 while s/:not\(([^()]*?),\s*([^()]+?)\)/:not($1):not($2)/g;
       s/\h+!important(?=\h*;)/ /g;
       s/calc\(\s*infinity\s*\*\s*1px\s*\)/9999px/g;
       s/calc\(\s*-infinity\s*\*\s*1px\s*\)/-9999px/g;
     ' "$css_file"
+  else
+    # Use fallback implementation
+    if [[ $(type -t normalize_css_fallback) == "function" ]]; then
+      normalize_css_fallback "$css_file" "gtk3"
+    else
+      echo "[WARNING] No CSS normalization available for GTK3"
+    fi
   fi
 }
 
@@ -48,7 +61,8 @@ normalize_gtk4_css() {
   [[ -f "$css_file" ]] || return 0
 
   # GTK4 parser compatibility pass for older/libadwaita runtimes.
-  if has_command perl; then
+  if can_use_perl_normalization; then
+    echo "[NORMALIZE] Applying GTK4 CSS normalization (full Perl)"
     perl -0pi -e '
       s/^:root\s*\{.*?\}\s*//s;
       1 while s/:not\(([^()]*?),\s*([^()]+?)\)/:not($1):not($2)/g;
@@ -59,6 +73,13 @@ normalize_gtk4_css() {
       s/^\h*[a-zA-Z_-][a-zA-Z0-9_-]*\h*:\h*(?:(?![{}]).)*?\bvar\(--(?:(?![{}]).)*?;\h*\n//msg;
       s/^\h*[a-zA-Z_-][a-zA-Z0-9_-]*\h*:\h*(?:(?![{}]).)*?\bcolor-mix\((?:(?![{}]).)*?;\h*\n//msg;
     ' "$css_file"
+  else
+    # Use fallback implementation
+    if [[ $(type -t normalize_css_fallback) == "function" ]]; then
+      normalize_css_fallback "$css_file" "gtk4"
+    else
+      echo "[WARNING] No CSS normalization available for GTK4"
+    fi
   fi
 }
 
@@ -161,5 +182,145 @@ create_gtk2_asset_fallbacks() {
 
   if [[ "${created}" -gt 0 ]]; then
     echo "GTK2 asset fallbacks created: ${created}"
+  fi
+}
+
+# CSS optimization functions
+optimize_css() {
+  local css_file="$1"
+  
+  [ -f "$css_file" ] || return 0
+  
+  echo "[OPTIMIZE] Applying CSS optimizations to $(basename "$css_file")"
+  
+  # Backup original
+  cp "$css_file" "${css_file}.backup"
+  
+  # Remove duplicate rules (exact duplicates)
+  remove_duplicate_css_rules "$css_file"
+  
+  # Remove empty rules (rules with only braces)
+  remove_empty_css_rules "$css_file"
+  
+  # Basic minification (preserve CSS custom properties)
+  minify_css_basic "$css_file"
+  
+  echo "[OPTIMIZE] CSS optimizations applied"
+}
+
+remove_duplicate_css_rules() {
+  local css_file="$1"
+  local temp_file="${css_file}.tmp"
+  
+  # This is a simple approach - for exact duplicate blocks
+  # More advanced deduplication would require a CSS parser
+  awk '/^[^{]+{$/ {
+    rule = $0
+    getline
+    while ($0 != "}") {
+      rule = rule "\n" $0
+      getline
+    }
+    rule = rule "\n}"
+    
+    if (!seen[rule]++) {
+      print rule
+    }
+    next
+  }
+  { print }' "$css_file" > "$temp_file" && mv "$temp_file" "$css_file"
+  
+  local duplicates_removed=$(( $(wc -l < "${css_file}.backup") - $(wc -l < "$css_file") ))
+  if [ "$duplicates_removed" -gt 0 ]; then
+    echo "[OPTIMIZE] Removed approximately $duplicates_removed lines of duplicate rules"
+  fi
+}
+
+remove_empty_css_rules() {
+  local css_file="$1"
+  local temp_file="${css_file}.tmp"
+  
+  # Remove rules that only contain {}
+  awk '
+  /^[^{]+{$/ {
+    selector = $0
+    getline
+    if ($0 == "}") {
+      # Empty rule, skip it
+      next
+    } else {
+      # Not empty, print selector and continue
+      print selector
+      print $0
+    }
+    next
+  }
+  { print }
+  ' "$css_file" > "$temp_file" && mv "$temp_file" "$css_file"
+}
+
+minify_css_basic() {
+  local css_file="$1"
+  
+  # Only minify if file is reasonably small (< 5MB)
+  local file_size=$(stat -c%s "$css_file" 2>/dev/null || echo 0)
+  if [ "$file_size" -gt 5000000 ]; then
+    echo "[OPTIMIZE] Skipping minification for large file ($(numfmt --to=si --suffix=B "$file_size"))"
+    return 0
+  fi
+  
+  # Basic minification steps
+  # 1. Remove comments (but keep CSS custom property definitions)
+  # 2. Remove extra whitespace
+  # 3. Preserve @define-color and custom properties
+  
+  # Create a temporary file for processing
+  local temp_file="${css_file}.min"
+  
+  # Simple minification using sed (more reliable than complex awk)
+  # Keep @define-color lines intact
+  # Remove single-line CSS comments
+  # Collapse multiple spaces to one
+  sed '
+    # Keep @define-color lines as-is
+    /^@define-color/ b
+    # Remove CSS comments (single line only for safety)
+    s|/\*.*\*/||g
+    # Remove leading/trailing whitespace
+    s/^[[:space:]]*//
+    s/[[:space:]]*$//
+    # Collapse multiple spaces/tabs to single space
+    s/[[:space:]]\+/ /g
+    # Remove spaces before and after braces/semicolons
+    s/[[:space:]]*{[[:space:]]*/{/g
+    s/[[:space:]]*}[[:space:]]*/}/g
+    s/[[:space:]]*;[[:space:]]*/;/g
+    s/[[:space:]]*:[[:space:]]*/:/g
+    # Remove empty lines
+    /^$/d
+  ' "$css_file" > "$temp_file"
+  
+  # Only replace if minification actually reduced size
+  local original_size=$(stat -c%s "$css_file")
+  local minified_size=$(stat -c%s "$temp_file")
+  
+  if [ "$minified_size" -lt "$original_size" ]; then
+    local reduction=$(echo "scale=1; 100 * ($original_size - $minified_size) / $original_size" | bc)
+    echo "[OPTIMIZE] Basic minification: $(numfmt --to=si --suffix=B "$original_size") → $(numfmt --to=si --suffix=B "$minified_size") (${reduction}%)"
+    mv "$temp_file" "$css_file"
+  else
+    rm -f "$temp_file"
+  fi
+}
+
+# Function to optionally run CSS optimizations
+maybe_optimize_css() {
+  local css_file="$1"
+  
+  [ -f "$css_file" ] || return 0
+  
+  # Check if optimization is enabled
+  if [ "${ENABLE_CSS_OPTIMIZATION:-false}" = "true" ]; then
+    optimize_css "$css_file"
   fi
 }

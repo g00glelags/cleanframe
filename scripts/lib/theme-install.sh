@@ -86,6 +86,8 @@ assemble_theme() {
   mkdir -p "$THEME_DIR/gnome-shell"
   cp -r "$SRC_DIR/gnome-shell/pad-osd.css" "$THEME_DIR/gnome-shell"
   compile_scss "$SRC_DIR/gnome-shell/shell-$GS_VERSION/gnome-shell$size.scss" "$THEME_DIR/gnome-shell/gnome-shell.css"
+  # Apply CSS optimizations if enabled
+  maybe_optimize_css "$THEME_DIR/gnome-shell/gnome-shell.css"
   cp -r "$SRC_DIR/gnome-shell/common-assets" "$THEME_DIR/gnome-shell/assets"
   cp -r "$SRC_DIR/gnome-shell/assets/"*.svg "$THEME_DIR/gnome-shell/assets"
   cp -r "$SRC_DIR/gnome-shell/theme$theme$ctype/more-results.svg" "$THEME_DIR/gnome-shell/assets/more-results.svg"
@@ -111,6 +113,8 @@ assemble_theme() {
   cp -r "$SRC_DIR/gtk/thumbnails/thumbnail$theme$ctype.png" "$THEME_DIR/gtk-3.0/thumbnail.png"
   compile_scss "$SRC_DIR/gtk/3.0/gtk$color$size.scss" "$THEME_DIR/gtk-3.0/gtk.css"
   normalize_gtk3_css "$THEME_DIR/gtk-3.0/gtk.css"
+  # Apply CSS optimizations if enabled
+  maybe_optimize_css "$THEME_DIR/gtk-3.0/gtk.css"
 
   mkdir -p "$THEME_DIR/gtk-4.0"
   cp -r "$SRC_DIR/gtk/assets$theme$ctype" "$THEME_DIR/gtk-4.0/assets"
@@ -118,6 +122,8 @@ assemble_theme() {
   compile_scss "$SRC_DIR/gtk/4.0/gtk$color$size.scss" "$THEME_DIR/gtk-4.0/gtk.css"
   echo "Normalizing GTK4 CSS for parser compatibility..."
   normalize_gtk4_css "$THEME_DIR/gtk-4.0/gtk.css"
+  # Apply CSS optimizations if enabled
+  maybe_optimize_css "$THEME_DIR/gtk-4.0/gtk.css"
 
   assemble_xfwm_variants "$THEME_DIR"
 
@@ -128,6 +134,8 @@ assemble_theme() {
   cp -r "$SRC_DIR/cinnamon/theme$theme$ctype/corner-ripple.svg" "$THEME_DIR/cinnamon/assets/corner-ripple.svg"
   cp -r "$SRC_DIR/cinnamon/theme$theme$ctype/toggle-on.svg" "$THEME_DIR/cinnamon/assets/toggle-on.svg"
   compile_scss "$SRC_DIR/cinnamon/cinnamon$size.scss" "$THEME_DIR/cinnamon/cinnamon.css"
+  # Apply CSS optimizations if enabled
+  maybe_optimize_css "$THEME_DIR/cinnamon/cinnamon.css"
   cp -r "$SRC_DIR/cinnamon/thumbnails/thumbnail$theme$ctype.png" "$THEME_DIR/cinnamon/thumbnail.png"
 
   mkdir -p "$THEME_DIR/metacity-1"

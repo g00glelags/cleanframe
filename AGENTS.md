@@ -119,6 +119,19 @@ Se uma nova versao do GNOME Shell entrar no projeto, o primeiro ponto de ajuste 
 - `bash -n scripts/*.sh`
 - `bash -n scripts/lib/*.sh`
 
+### Novas Funcionalidades (Fase 1 - Estabilização)
+
+- **Validação de pré-requisitos**: `make validate` ou `./install.sh` valida automaticamente
+- **Fallback sem Perl**: Sistema funciona mesmo sem Perl (com normalização limitada)
+- **Documentação de normalização CSS**: `docs/CSS_NORMALIZATION.md`
+- **Script de atualização de versão**: `scripts/update-shell-version.sh [VERSÃO]`
+- **Requisitos do sistema**: `REQUIREMENTS.md` com dependências e workarounds
+
+Comandos novos:
+- `make validate` - Valida pré-requisitos do sistema
+- `bash scripts/update-shell-version.sh` - Mostra versões suportadas
+- `bash scripts/update-shell-version.sh 50` - Cria estrutura para GNOME Shell 50
+
 ## 6. Convencoes de Engenharia
 
 - Documentacao e notas operacionais em PT-BR.

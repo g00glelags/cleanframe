@@ -19,6 +19,8 @@ OPTIONS:
       --flatpak           Apply Flatpak override preset (GTK_THEME + filesystem access)
       --snap              Create Snap/session env preset with GTK_THEME
       --sandbox           Apply both --flatpak and --snap presets
+      --optimize          Apply CSS optimizations (minification, duplicate removal)
+      --no-optimize       Skip CSS optimizations (for compatibility testing)
   -r, --remove,
   -u, --uninstall         Uninstall/Remove installed themes
 
@@ -65,6 +67,7 @@ apply_snap_preset="false"
 install_gnome_terminal_profile="false"
 set_default_gnome_terminal_profile="false"
 apply_gnome_terminal_colors_inplace="false"
+ENABLE_CSS_OPTIMIZATION="false"
 
 while [[ "$#" -gt 0 ]]; do
   case "${1:-}" in
@@ -91,6 +94,7 @@ while [[ "$#" -gt 0 ]]; do
       apply_flatpak_preset="true"
       apply_snap_preset="true"
       install_gnome_terminal_profile="true"
+      ENABLE_CSS_OPTIMIZATION="true"
       shift
       ;;
     --gnome-terminal-colors|--gnome-terminal-profile)
@@ -124,6 +128,14 @@ while [[ "$#" -gt 0 ]]; do
       apply_snap_preset="true"
       shift
       ;;
+    --optimize)
+      ENABLE_CSS_OPTIMIZATION="true"
+      shift
+      ;;
+    --no-optimize)
+      ENABLE_CSS_OPTIMIZATION="false"
+      shift
+      ;;
     -h|--help)
       usage
       exit 0
@@ -135,6 +147,18 @@ while [[ "$#" -gt 0 ]]; do
       ;;
   esac
 done
+
+# Validate prerequisites before proceeding
+if ! validate_prerequisites; then
+  echo "❌ Prerequisites validation failed. Please install required tools."
+  exit 1
+fi
+
+# Show system information for debugging
+show_system_info
+
+# Export optimization flag for child scripts
+export ENABLE_CSS_OPTIMIZATION
 
 if [[ ${remove} == 'true' ]]; then
   uninstall_theme

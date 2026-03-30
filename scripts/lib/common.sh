@@ -38,7 +38,7 @@ install_package() {
 }
 
 backup_file() {
-  if [[ -f "${1}.bak" || -d "${1}.bak" ]]; then
+  if [ -f "${1}.bak" ] || [ -d "${1}.bak" ]; then
     case "${2}" in
       sudo)
         sudo rm -rf "${1}" ;;
@@ -47,12 +47,169 @@ backup_file() {
     esac
   fi
 
-  if [[ -f "${1}" || -d "${1}" ]]; then
+  if [ -f "${1}" ] || [ -d "${1}" ]; then
     case "${2}" in
       sudo)
-        sudo mv -n "${1}"{"",".bak"} ;;
+        sudo mv -n "${1}" "${1}.bak" ;;
       *)
-        mv -n "${1}"{"",".bak"} ;;
+        mv -n "${1}" "${1}.bak" ;;
     esac
   fi
+}
+
+# Validation and dependency checking functions
+validate_prerequisites() {
+  echo "[VALIDATION] Checking system prerequisites..."
+  
+  local missing_tools=""
+  local warnings=""
+  
+  # Critical tools (build will fail without these)
+  if ! has_command sass && ! has_command sassc && ! (has_command npx && npx sass --version > /dev/null 2>&1); then
+    missing_tools="${missing_tools}sass/sassc (Dart Sass or libsass)"$'\n'
+  fi
+  
+  # Important tools (features will be limited)
+  if ! has_command perl; then
+    warnings="${warnings}perl (CSS normalization will be limited)"$'\n'
+  fi
+  
+  # Check bash version if BASH_VERSION is set
+  if [ -n "${BASH_VERSION}" ] && [ "${BASH_VERSION%%.*}" -lt 4 ]; then
+    warnings="${warnings}bash 4+ (some features may not work optimally)"$'\n'
+  fi
+  
+  # Display results
+  if [ -n "$missing_tools" ]; then
+    echo "❌ MISSING CRITICAL TOOLS:"
+    echo "$missing_tools" | while IFS= read -r tool; do
+      [ -n "$tool" ] && echo "   - $tool"
+    done
+    echo ""
+    echo "Install missing tools before proceeding:"
+    
+    if has_command apt-get; then
+      echo "  sudo apt-get install sassc perl"
+    elif has_command dnf; then
+      echo "  sudo dnf install sassc perl"
+    elif has_command pacman; then
+      echo "  sudo pacman -S sassc perl"
+    elif has_command zypper; then
+      echo "  sudo zypper in sassc perl"
+    elif has_command brew; then
+      echo "  brew install sass/sass/sass perl"
+    else
+      echo "  Install Dart Sass (sass) or sassc and perl manually"
+    fi
+    
+    return 1
+  fi
+  
+  if [ -n "$warnings" ]; then
+    echo "⚠️  WARNINGS (will proceed with limited functionality):"
+    echo "$warnings" | while IFS= read -r warning; do
+      [ -n "$warning" ] && echo "   - $warning"
+    done
+    echo ""
+  fi
+  
+  # Check SCSS compiler availability
+  detect_sass_compiler
+  if [ -z "${SASS_COMPILER:-}" ]; then
+    echo "❌ No SCSS compiler detected after validation"
+    return 1
+  fi
+  
+  echo "✅ Using SCSS compiler: $SASS_COMPILER"
+  
+  # Create minimal Perl fallback if perl is missing
+  if ! has_command perl; then
+    setup_perl_fallback
+  fi
+  
+  return 0
+}
+
+setup_perl_fallback() {
+  echo "[SETUP] Creating minimal Perl fallback for CSS normalization..."
+  
+  # Create a simple sed-based fallback for critical normalizations
+  cat > "${REPO_DIR:-.}/scripts/lib/perl-fallback.sh" << 'PERL_FALLBACK'
+#!/usr/bin/env bash
+
+# Minimal CSS normalization fallback when perl is not available
+# Limited functionality compared to full Perl implementation
+
+normalize_css_fallback() {
+  local css_file="$1"
+  local mode="${2:-gtk3}"  # gtk3 or gtk4
+  
+  [ -f "$css_file" ] || return 0
+  
+  echo "[FALLBACK] Applying limited CSS normalization (perl not available)"
+  
+  # Basic transformations that work with sed
+  case "$mode" in
+    gtk3)
+      # Remove !important (simple cases)
+      sed -i 's/!important//g' "$css_file"
+      
+      # Replace infinity calc artifacts (simple pattern)
+      sed -i 's/calc( *infinity *\* *1px *)/9999px/g' "$css_file"
+      sed -i 's/calc( *-infinity *\* *1px *)/-9999px/g' "$css_file"
+      ;;
+    gtk4)
+      # Remove :root block (simple implementation)
+      sed -i '/^:root\s*{/,/^}/d' "$css_file"
+      
+      # Replace modern pseudo-classes with basic :focus
+      sed -i 's/:focus-within/:focus/g' "$css_file"
+      sed -i 's/:focus-visible/:focus/g' "$css_file"
+      ;;
+  esac
+  
+  echo "[FALLBACK] Limited normalization applied (some features disabled)"
+}
+PERL_FALLBACK
+  
+  chmod +x "${REPO_DIR:-.}/scripts/lib/perl-fallback.sh"
+  echo "[SETUP] Perl fallback script created"
+}
+
+# Function to check if we can use Perl-based normalization
+can_use_perl_normalization() {
+  if has_command perl; then
+    return 0
+  else
+    echo "[INFO] Perl not available, using limited CSS normalization"
+    # Try to source the fallback if it exists
+    if [ -f "${REPO_DIR:-.}/scripts/lib/perl-fallback.sh" ]; then
+      source "${REPO_DIR:-.}/scripts/lib/perl-fallback.sh" 2>/dev/null || true
+    fi
+    return 1
+  fi
+}
+
+# Display system information for debugging
+show_system_info() {
+  echo "[SYSTEM INFO]"
+  echo "  OS: $(uname -s) $(uname -r)"
+  echo "  Bash: ${BASH_VERSION}"
+  
+  if has_command lsb_release; then
+    echo "  Distro: $(lsb_release -ds 2>/dev/null || echo "Unknown")"
+  fi
+  
+  # Tool versions
+  if has_command sass; then
+    echo "  Sass: $(sass --version 2>/dev/null || echo "Present")"
+  elif has_command sassc; then
+    echo "  Sassc: $(sassc --version 2>/dev/null || echo "Present")"
+  fi
+  
+  if has_command perl; then
+    echo "  Perl: $(perl -v 2>/dev/null | head -2 | tail -1 | cut -d' ' -f2,3,4,5)"
+  fi
+  
+  echo ""
 }
