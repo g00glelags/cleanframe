@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TMP_DIR="$(mktemp -d /tmp/cleanframe-scss-smoke.XXXXXX)"
 trap 'rm -rf "$TMP_DIR"' EXIT
+source "${ROOT_DIR}/scripts/lib/metadata.sh"
 
 if ! command -v sassc >/dev/null 2>&1; then
   echo "ERROR: sassc not found in PATH." >&2
@@ -72,17 +73,11 @@ else
   if command -v gnome-shell >/dev/null 2>&1; then
     shell_major="$(gnome-shell --version | awk '{print $3}' | cut -d. -f1)"
   else
-    shell_major="49"
+    shell_major="$(latest_supported_gnome_shell_major)"
   fi
 
-  case "$shell_major" in
-    49|48|47|46|44|42|40)
-      shell_dir="shell-${shell_major}-0"
-      ;;
-    *)
-      shell_dir="shell-3-28"
-      ;;
-  esac
+  shell_major="$(resolve_gnome_shell_major "$shell_major")"
+  shell_dir="shell-$(gnome_shell_dir_from_major "$shell_major")"
 
   compile "src/gnome-shell/${shell_dir}/gnome-shell.scss" "${shell_dir}.css"
 fi

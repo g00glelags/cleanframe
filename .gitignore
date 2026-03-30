@@ -2,6 +2,7 @@
 .sass-cache
 *-temp.scss
 .vscode
+build/
 src/cinnamon/*.css
 src/gnome-shell/*/*.css
 src/gtk/*/*.css

@@ -4,6 +4,7 @@
   "description": "To install the theme, run the following command:",
   "main": "index.js",
   "scripts": {
+    "build": "bash scripts/build-theme.sh",
     "lint:scss": "stylelint \"src/**/*.scss\"",
     "lint:scss:fix": "stylelint \"src/**/*.scss\" --fix",
     "build:scss:smoke": "bash scripts/scss-smoke.sh",
