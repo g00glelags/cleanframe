@@ -148,21 +148,21 @@ while [[ "$#" -gt 0 ]]; do
   esac
 done
 
-# Validate prerequisites before proceeding
-if ! validate_prerequisites; then
-  echo "❌ Prerequisites validation failed. Please install required tools."
-  exit 1
-fi
-
-# Show system information for debugging
-show_system_info
-
-# Export optimization flag for child scripts
-export ENABLE_CSS_OPTIMIZATION
-
 if [[ ${remove} == 'true' ]]; then
   uninstall_theme
 else
+  # Validate prerequisites before proceeding with build/install flows
+  if ! validate_prerequisites; then
+    echo "❌ Prerequisites validation failed. Please install required tools."
+    exit 1
+  fi
+
+  # Show system information for debugging
+  show_system_info
+
+  # Export optimization flag for child scripts
+  export ENABLE_CSS_OPTIMIZATION
+
   uninstall_theme
   install_theme
   if [[ "${install_gnome_terminal_profile}" == "true" ]]; then

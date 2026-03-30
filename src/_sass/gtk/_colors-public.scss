@@ -38,7 +38,7 @@ base background color of selections */
 /* Legacy aliases commonly read by non-GTK apps/toolkits */
 @define-color selected_bg_color #{"" + $app-selection-bg};
 @define-color selected_fg_color #{"" + $app-selection-fg};
-@define-color text_selected_bg_color #{"" + $app-selection-fg};
+@define-color text_selected_bg_color #{"" + $app-selection-bg};
 @define-color text_selected_fg_color #{"" + $app-selection-fg};
 
 /*
@@ -116,6 +116,24 @@ these are pretty self explicative */
 @define-color success_color #{"" + $success};
 @define-color link_color #{"" + $link};
 @define-color content_view_bg #{"" + $base};
+
+/*
+window manager exported colors kept for Metacity compatibility */
+$windows-border: color.mix(black, $base, 35%);
+
+@define-color wm_title #{"" + $titlebar-text};
+@define-color wm_unfocused_title #{"" + $titlebar-text-secondary};
+@define-color wm_highlight #{"" + highlight($titlebar)};
+@define-color wm_border #{"" + $windows-border};
+@define-color wm_bg #{"" + $titlebar};
+@define-color wm_unfocused_bg #{"" + $titlebar-backdrop};
+@define-color wm_button_icon #{"" + white};
+@define-color wm_button_close_hover_bg #{"" + $button-close};
+@define-color wm_button_close_active_bg #{"" + en($button-close, 12%)};
+@define-color wm_button_max_hover_bg #{"" + $button-max};
+@define-color wm_button_max_active_bg #{"" + en($button-max, 12%)};
+@define-color wm_button_min_hover_bg #{"" + $button-min};
+@define-color wm_button_min_active_bg #{"" + en($button-min, 12%)};
 
 /* 
 Material Design color palette for external consumption 

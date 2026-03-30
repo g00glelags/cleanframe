@@ -188,13 +188,14 @@ create_gtk2_asset_fallbacks() {
 # CSS optimization functions
 optimize_css() {
   local css_file="$1"
+  local backup_file="${css_file}.backup"
   
   [ -f "$css_file" ] || return 0
   
   echo "[OPTIMIZE] Applying CSS optimizations to $(basename "$css_file")"
   
   # Backup original
-  cp "$css_file" "${css_file}.backup"
+  cp "$css_file" "$backup_file"
   
   # Remove duplicate rules (exact duplicates)
   remove_duplicate_css_rules "$css_file"
@@ -205,12 +206,14 @@ optimize_css() {
   # Basic minification (preserve CSS custom properties)
   minify_css_basic "$css_file"
   
+  rm -f "$backup_file"
   echo "[OPTIMIZE] CSS optimizations applied"
 }
 
 remove_duplicate_css_rules() {
   local css_file="$1"
   local temp_file="${css_file}.tmp"
+  local backup_file="${css_file}.backup"
   
   # This is a simple approach - for exact duplicate blocks
   # More advanced deduplication would require a CSS parser
@@ -230,7 +233,7 @@ remove_duplicate_css_rules() {
   }
   { print }' "$css_file" > "$temp_file" && mv "$temp_file" "$css_file"
   
-  local duplicates_removed=$(( $(wc -l < "${css_file}.backup") - $(wc -l < "$css_file") ))
+  local duplicates_removed=$(( $(wc -l < "$backup_file") - $(wc -l < "$css_file") ))
   if [ "$duplicates_removed" -gt 0 ]; then
     echo "[OPTIMIZE] Removed approximately $duplicates_removed lines of duplicate rules"
   fi
