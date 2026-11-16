@@ -289,6 +289,13 @@ $cinnamon_menu_font_scale: 1;
 
   &-arrow { icon-size: 16px; }
 
+  .user-widget-label,
+  .user-label,
+  .menu-user-label {
+    color: $black;
+    text-shadow: none;
+  }
+
   .popup-sub-menu {
     border-radius: $submenu_item_radius;
     background-gradient-direction: none;
@@ -1624,6 +1631,16 @@ $cinnamon_menu_font_scale: 1;
   border-right-width: 1px;
   border-color: $border;
 
+  .appmenu-sidebar-user-box {
+    padding: $space-size 0;
+
+    .user-widget-label,
+    .user-label {
+      color: $black;
+      text-shadow: none;
+    }
+  }
+
   .appmenu-system-button {
     background-color: rgba($text, 0.08);
 
@@ -1639,6 +1656,35 @@ $cinnamon_menu_font_scale: 1;
       &:hover {
         background-color: darken($error, 8%);
       }
+    }
+  }
+}
+
+.appmenu-sidebar-user-box {
+  padding: $space-size 0;
+
+  .user-widget,
+  .user-widget.vertical,
+  .user-widget.horizontal {
+    .user-widget-label,
+    .user-label {
+      color: $black;
+      text-shadow: none;
+    }
+  }
+
+  .user-widget-label,
+  .user-label {
+    color: $black;
+    text-shadow: none;
+  }
+
+  &:hover,
+  &:focus {
+    .user-widget-label,
+    .user-label {
+      color: $black;
+      text-shadow: none;
     }
   }
 }
@@ -2428,7 +2474,7 @@ $windowlist-icon-horizontal-width-scale: 1.2;
 }
 
 //
-// User Applet
+// User Applet & User Widgets
 //
 .user-icon {
   width: 32px;
@@ -2436,13 +2482,66 @@ $windowlist-icon-horizontal-width-scale: 1.2;
   background-color: transparent;
   border: none;
   border-radius: 0;
+
+  &.user-avatar {
+    border: transparent;
+    border-radius: 99px;
+  }
+
+  StIcon.highlighted {
+    border: 1px solid rgba($black, 0.2);
+    border-radius: 99px;
+  }
 }
 
 .user-label {
-  color: $text;
+  color: $black;
   font-size: 1em;
   font-weight: bold;
   margin: 0;
+  text-shadow: none;
+}
+
+.user-widget {
+  &.vertical {
+    spacing: 6px;
+
+    .user-widget-label {
+      font-weight: bold;
+      color: $black;
+      text-shadow: none;
+      text-align: center;
+    }
+  }
+
+  &.horizontal {
+    spacing: 6px;
+
+    .user-widget-label {
+      font-weight: bold;
+      color: $black;
+      text-shadow: none;
+      text-align: left;
+    }
+  }
+
+  &-label {
+    color: $black;
+    text-shadow: none;
+  }
+
+  &:hover,
+  &:focus {
+    .user-widget-label {
+      color: $black;
+      text-shadow: none;
+    }
+  }
+}
+
+.menu-user-label {
+  color: $black;
+  text-shadow: none;
 }
 
 //

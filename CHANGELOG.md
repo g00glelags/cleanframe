@@ -15,6 +15,7 @@ quando aplicavel.
 
 ### Fixed
 
+- Correção da cor e contorno do nome do usuário no menu do Cinnamon (`.user-widget-label` e `.appmenu-sidebar-user-box`), definindo preto puro (`$black`) e `text-shadow: none` para eliminar texto branco ilegível e aberrações cromáticas em fundo claro.
 - Suporte e estilização completa para o menu moderno do Cinnamon 6+ (`menu@cinnamon.org`) cobrindo as classes `.appmenu-*` (sidebar, categorias, botões de aplicativos, favoritos, busca e botões do sistema), restaurando a legibilidade e o alinhamento visual.
 - Recarregamento automático e contínuo do tema no Cinnamon Shell via D-Bus (`RestartCinnamon`) e gsettings em `scripts/lib/desktop.sh`.
 - Correção de truncamento e corrupção de regras CSS com seletores multilinha na etapa de otimização de build, eliminando erro de parsing no GTK3.

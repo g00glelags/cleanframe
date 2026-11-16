@@ -140,6 +140,10 @@ assert_regex "Cinnamon windowlist ativo em #2DFF3D" \
   '(window-list-item-box:focus[^}]*\{[^}]*#2DFF3D|border-color:\s*#2DFF3D;)' \
   "$CINNAMON_CSS" || status=1
 
+assert_regex "Cinnamon menu user-widget-label em preto puro (#000/#000000)" \
+  '(\.appmenu-sidebar-user-box|\.user-widget\.vertical)[^{]*\.user-widget-label[^{]*\{[^}]*color:\s*(#000|#000000|black);' \
+  "$CINNAMON_CSS" || status=1
+
 report_suspicious_blue_white_blocks "$GTK3_CSS"
 
 if [[ $status -ne 0 ]]; then
