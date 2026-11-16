@@ -10,7 +10,8 @@ Usage: $0 [OPTION]...
 OPTIONS:
   -d, --dest DIR          Specify destination directory (Default: $DEST_DIR)
   -s, --shell VERSION     Force GNOME Shell style version (38,40,42,44,46,47,48,49)
-  -A, --all               Install with full preset (--shell 49 + --sandbox + GNOME Terminal profile)
+  -A, --all               Install with full preset (--shell 49 + --sandbox + GNOME Terminal profile + --libadwaita)
+  -l, --libadwaita, --link Link theme to ~/.config/gtk-4.0 for Libadwaita apps
       --gnome-terminal-colors          Install/update CleanFrame GNOME Terminal color preset (selectable profile, no duplicates on reinstall)
       --gnome-terminal-colors-default  Install/update color preset and set as GNOME Terminal default
       --gnome-terminal-colors-inplace  Apply CleanFrame GNOME Terminal colors to existing default profile (no new profile)
@@ -64,6 +65,7 @@ colors=('')
 sizes=('')
 apply_flatpak_preset="false"
 apply_snap_preset="false"
+link_libadwaita_enabled="false"
 install_gnome_terminal_profile="false"
 set_default_gnome_terminal_profile="false"
 apply_gnome_terminal_colors_inplace="false"
@@ -93,8 +95,12 @@ while [[ "$#" -gt 0 ]]; do
       shell="49"
       apply_flatpak_preset="true"
       apply_snap_preset="true"
+      link_libadwaita_enabled="true"
       install_gnome_terminal_profile="true"
-      ENABLE_CSS_OPTIMIZATION="true"
+      shift
+      ;;
+    -l|--libadwaita|--link)
+      link_libadwaita_enabled="true"
       shift
       ;;
     --gnome-terminal-colors|--gnome-terminal-profile)
@@ -150,6 +156,7 @@ done
 
 if [[ ${remove} == 'true' ]]; then
   uninstall_theme
+  uninstall_link
 else
   # Validate prerequisites before proceeding with build/install flows
   if ! validate_prerequisites; then
@@ -165,6 +172,9 @@ else
 
   uninstall_theme
   install_theme
+  if [[ "${link_libadwaita_enabled}" == "true" ]]; then
+    link_theme
+  fi
   if [[ "${install_gnome_terminal_profile}" == "true" ]]; then
     install_gnome_terminal_profile_from_project "${set_default_gnome_terminal_profile}" "${apply_gnome_terminal_colors_inplace}"
   fi

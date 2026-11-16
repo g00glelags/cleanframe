@@ -17,17 +17,17 @@ $theme_list_radius: $window-radius - $space-size;
   }
 
   &.background.csd {
-    background-color: if(sass($topbar == '' and $variant == 'light'): $titlebar; else: $base);
+    background-color: if($topbar == '' and $variant == 'light', $titlebar, $base);
     border-radius: 0 0 $window-radius $window-radius;
 
     headerbar {
       padding-left: $space-size * 2;
-      background-color: if(sass($topbar == '' and $variant == 'light'): $titlebar; else: $base);
+      background-color: if($topbar == '' and $variant == 'light', $titlebar, $base);
       box-shadow: inset 0 1px highlight($titlebar);
     }
 
     > grid.horizontal > paned.horizontal > separator,
-    > deck > box.vertical > paned.horizontal > separator { margin-left: if(sass($topbar == '' and $variant == 'light'): -1px; else: 0); }
+    > deck > box.vertical > paned.horizontal > separator { margin-left: if($topbar == '' and $variant == 'light', -1px, 0); }
 
     placessidebar {
       background-color: transparent;
@@ -37,7 +37,7 @@ $theme_list_radius: $window-radius - $space-size;
 
       > viewport.frame {
         border-radius: $theme_list_radius;
-        background-color: if(sass($topbar == '' and $variant == 'light'): transparent; else: rgba($primary, 0.08));
+        background-color: if($topbar == '' and $variant == 'light', transparent, rgba($primary, 0.08));
 
         > list {
           padding: 12px 0;
@@ -185,12 +185,12 @@ $theme_list_radius: $window-radius - $space-size;
 
     notebook {
       background: none;
-      margin: if(sass($topbar == '' and $variant == 'light'): (0 6px 6px 0); else: 0);
+      margin: if($topbar == '' and $variant == 'light', (0 6px 6px 0), 0);
 
       > header {
         padding: 0 16px;
         background: none;
-        border-color: if(sass($topbar == '' and $variant == 'light'): transparent; else: $solid-border);
+        border-color: if($topbar == '' and $variant == 'light', transparent, $solid-border);
 
         tab {
           color: $titlebar-text-secondary;
@@ -204,7 +204,7 @@ $theme_list_radius: $window-radius - $space-size;
 
           &:checked, &:active {
             color: $text;
-            border-color: if(sass($topbar == '' and $variant == 'light'): transparent; else: $solid-border);
+            border-color: if($topbar == '' and $variant == 'light', transparent, $solid-border);
 
             &:disabled { color: $text-disabled; }
 
@@ -2033,7 +2033,7 @@ preferencesgroup, .geary-accounts-editor-pane {
   > deck > overlay > .geary-main-layout {
     background-color: $base-alt;
 
-    $titlebar-size: if(sass($variant == 'light' and $topbar == ''): $large-size; else: $large-size - 1px);
+    $titlebar-size: if($variant == 'light' and $topbar == '', $large-size, $large-size - 1px);
 
     > leaflet > separator.sidebar, // centry
     > leaflet > separator.geary-sidebar-pane-separator, // centry > = 44.0

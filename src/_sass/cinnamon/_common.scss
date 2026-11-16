@@ -1560,18 +1560,191 @@ $cinnamon_menu_font_scale: 1;
   &-search-box-rtl { padding-right: 30px; }
 }
 
-#menu-search-entry {
-  width: 250px;
-  height: 15px;
+#menu-search-entry,
+#appmenu-search-entry {
+  min-height: 22px;
+  padding: 6px 9px;
   font-weight: normal;
   caret-color: $text;
 
   @extend %entry;
 }
 
-.menu-search-entry-icon {
-  icon-size: 1em;
+.menu-search-entry-icon,
+.appmenu-search-entry-icon {
+  icon-size: 1.091em;
   color: $text;
+}
+
+//
+// Modern Cinnamon 6+ AppMenu (menu@cinnamon.org)
+//
+.appmenu-background {
+  .popup-menu-content {
+    padding: 0;
+    border: 1px solid $border;
+  }
+}
+
+.appmenu-main-box {
+  spacing: 10px;
+}
+
+.appmenu-right-box {
+  spacing: 5px;
+  padding: 10px;
+}
+
+.appmenu-categories-applications-box {
+  spacing: 15px;
+
+  &:top {
+    padding-top: 5px;
+  }
+}
+
+.appmenu-categories-box {
+  spacing: 2px;
+}
+
+.appmenu-applications-box {
+  spacing: 2px;
+  padding-right: 5px;
+}
+
+.appmenu-search-box {
+  spacing: 10px;
+  padding: 0 0 6px 9px;
+}
+
+.appmenu-sidebar {
+  padding: 10px 0;
+  background-color: $surface-soft;
+  border-radius: $popup-radius 0 0 $popup-radius;
+  border-right-width: 1px;
+  border-color: $border;
+
+  .appmenu-system-button {
+    background-color: rgba($text, 0.08);
+
+    &-lock:hover,
+    &-logout:hover {
+      background-color: rgba($text, 0.16);
+    }
+
+    &-shutdown {
+      background-color: $error;
+      color: $white;
+
+      &:hover {
+        background-color: darken($error, 8%);
+      }
+    }
+  }
+}
+
+.appmenu-system-box {
+  spacing: 10px;
+}
+
+.appmenu-sidebar-button {
+  padding: 3px 6px;
+  margin: 0 10px;
+  border-radius: $corner-radius;
+  color: $text;
+
+  &:hover {
+    background-color: rgba($text, 0.08);
+    border-color: $border;
+  }
+}
+
+.appmenu-system-button {
+  padding: 8.4px;
+  border: 1px solid $border;
+  border-radius: 9999px;
+  background-color: rgba($text, 0.08);
+  color: $text;
+
+  &-lock:hover,
+  &-logout:hover {
+    background-color: rgba($text, 0.16);
+  }
+
+  &-shutdown {
+    background-color: $error;
+    color: $white;
+
+    &:hover {
+      background-color: darken($error, 8%);
+    }
+  }
+}
+
+.appmenu-category-button-greyed,
+.appmenu-category-button-selected,
+.appmenu-category-button,
+.appmenu-application-button-selected,
+.appmenu-application-button,
+.appmenu-sidebar-button {
+  padding: 6px;
+  spacing: 4px;
+  border-radius: $corner-radius;
+  color: $text;
+}
+
+.appmenu-category-button {
+  &:hover {
+    background-color: rgba($text, 0.08);
+  }
+
+  &-selected {
+    color: $selection-fg;
+    background-color: $app-selection-bg;
+  }
+
+  &-greyed {
+    color: $text-disabled;
+    font-style: italic;
+
+    StIcon,
+    sticon {
+      opacity: 0.5;
+    }
+  }
+
+  &-label {
+    padding: 0;
+  }
+}
+
+.appmenu-application-button {
+  &:highlighted {
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: rgba($text, 0.08);
+  }
+
+  &-selected {
+    color: $selection-fg;
+    background-color: $app-selection-bg;
+
+    &:highlighted {
+      font-weight: bold;
+    }
+  }
+
+  &-label {
+    padding: 0;
+  }
+
+  &-description {
+    color: $text-secondary;
+    font-size: 0.818em;
+    font-weight: 400;
+  }
 }
 
 // Context menu (at the moment only for favorites)

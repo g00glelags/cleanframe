@@ -8,7 +8,7 @@
 stentry {
   min-height: variables.$medium-size;
   padding: 0 8px;
-  border-radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius);
+  border-radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, variables.$material-radius);
   border-width: 0;
   selection-background-color: colors.$selection-bg !important;
   selected-color: colors.$selection-fg !important;

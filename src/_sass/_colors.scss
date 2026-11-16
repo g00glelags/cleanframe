@@ -153,8 +153,8 @@ $osd: background(e);
 $scrim: background(f);
 $scrim-alt: background(g);
 $scrim-inverse: variables.rgb(white, 0.1);
-$titlebar: #f6f6f6;
-$titlebar-backdrop: #f6f6f6;
+$titlebar: $surface-soft;
+$titlebar-backdrop: $surface-soft;
 
 // Variant-specific readability override for light-toned menu palettes.
 $theme_id_for_match: string.to-lower-case("#{tweaks.$colorscheme} #{tweaks.$theme}");
@@ -232,7 +232,7 @@ $keyboard: apply-black-tone(color-palette-default.$grey-050);
 $keyboard-alt: apply-black-tone(color-palette-default.$grey-300);
 $system: color-palette-default.$grey-750;
 $popover: background(a);
-$popover-floating-bg: if(sass(tweaks.$opacity == 'solid'): $popover; else: rgba($popover, 0.992));
+$popover-floating-bg: if(tweaks.$opacity == 'solid', $popover, rgba($popover, 0.992));
 $panel-solid: background(c);
 $panel: rgba($panel-solid, 0.88);
 $shell: background(c);
@@ -251,7 +251,7 @@ $success: boost-color(color-palette-default.$sea-);
 $suggested: $button-accent;
 $suggested-fg: $button-accent-fg;
 $destructive: $error;
-$check_radio_primary: if(sass(tweaks.$check_radio == 'default'): $success; else: $primary);
+$check_radio_primary: if(tweaks.$check_radio == 'default', $success, $primary);
 $frame: variables.rgb(black, 0.22);
 $border: variables.rgb(black, 0.28);
 $solid-border: rgba($background, 14%);

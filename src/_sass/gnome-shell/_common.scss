@@ -22,7 +22,7 @@ stage {
   color: colors.on($state: disabled);
 }
 
-$bubble_button_radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius);
+$bubble_button_radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, variables.$material-radius);
 
 %bubble_button {
   border: none;

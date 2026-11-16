@@ -20,7 +20,7 @@ $window_close_button_padding: 3px;
 .window-caption {
   color: colors.on();
   background-color: colors.$tooltip;
-  border-radius: if(sass(tweaks.$corner-style == 'circular'): variables.$circular-radius; else: variables.$material-radius);
+  border-radius: if(tweaks.$corner-style == 'circular', variables.$circular-radius, variables.$material-radius);
   padding: variables.$space-size variables.$space-size * 2;
   box-shadow: none;
   border: none;

@@ -28,6 +28,30 @@ compile_scss() {
   esac
 }
 
+normalize_css_fallback() {
+  local css_file="$1"
+  local mode="${2:-gtk3}"
+
+  [[ -f "$css_file" ]] || return 0
+
+  echo "[FALLBACK] Applying limited CSS normalization (perl not available)"
+
+  case "$mode" in
+    gtk3)
+      sed -i 's/\h*!important\h*;/;/g' "$css_file"
+      sed -i 's/calc(\s*infinity\s*\*\s*1px\s*)/9999px/g' "$css_file"
+      sed -i 's/calc(\s*-infinity\s*\*\s*1px\s*)/-9999px/g' "$css_file"
+      ;;
+    gtk4)
+      sed -i '/^:root\s*{/,/^}/d' "$css_file"
+      sed -i 's/:focus-within/:focus/g' "$css_file"
+      sed -i 's/:focus-visible/:focus/g' "$css_file"
+      ;;
+  esac
+
+  echo "[FALLBACK] Limited normalization applied (some features disabled)"
+}
+
 normalize_gtk3_css() {
   local css_file="$1"
 
@@ -197,11 +221,9 @@ optimize_css() {
   # Backup original
   cp "$css_file" "$backup_file"
   
-  # Remove duplicate rules (exact duplicates)
-  remove_duplicate_css_rules "$css_file"
-  
-  # Remove empty rules (rules with only braces)
-  remove_empty_css_rules "$css_file"
+  # Note: Naive line-based deduplication/empty removal with awk/regex corrupts
+  # multi-line selectors in CSS output (leaving trailing commas and syntax errors).
+  # SCSS is already properly structured by the compiler.
   
   # Basic minification (preserve CSS custom properties)
   minify_css_basic "$css_file"
@@ -233,9 +255,11 @@ remove_duplicate_css_rules() {
   }
   { print }' "$css_file" > "$temp_file" && mv "$temp_file" "$css_file"
   
-  local duplicates_removed=$(( $(wc -l < "$backup_file") - $(wc -l < "$css_file") ))
-  if [ "$duplicates_removed" -gt 0 ]; then
-    echo "[OPTIMIZE] Removed approximately $duplicates_removed lines of duplicate rules"
+  if [[ -f "$backup_file" ]]; then
+    local duplicates_removed=$(( $(wc -l < "$backup_file") - $(wc -l < "$css_file") ))
+    if [ "$duplicates_removed" -gt 0 ]; then
+      echo "[OPTIMIZE] Removed approximately $duplicates_removed lines of duplicate rules"
+    fi
   fi
 }
 
@@ -308,7 +332,12 @@ minify_css_basic() {
   local minified_size=$(stat -c%s "$temp_file")
   
   if [ "$minified_size" -lt "$original_size" ]; then
-    local reduction=$(echo "scale=1; 100 * ($original_size - $minified_size) / $original_size" | bc)
+    local reduction
+    if has_command awk; then
+      reduction=$(awk -v o="$original_size" -v m="$minified_size" 'BEGIN { printf "%.1f", 100 * (o - m) / o }')
+    else
+      reduction=$(( 100 * (original_size - minified_size) / original_size ))
+    fi
     echo "[OPTIMIZE] Basic minification: $(numfmt --to=si --suffix=B "$original_size") → $(numfmt --to=si --suffix=B "$minified_size") (${reduction}%)"
     mv "$temp_file" "$css_file"
   else

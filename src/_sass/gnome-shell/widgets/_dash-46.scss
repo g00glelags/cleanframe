@@ -9,7 +9,7 @@ $dash_placeholder_size: 32px;
 $dash_padding: 12px;
 $dash_spacing: 2px;
 $dash_edge_offset: 12px;
-$dash_border_radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius + $dash_padding + $dash_spacing);
+$dash_border_radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, variables.$material-radius + $dash_padding + $dash_spacing);
 
 #dash {
   // a bit of spacing so that dash doesn't touch the screen edges
@@ -50,7 +50,7 @@ $dash_border_radius: if(sass(tweaks.$corner_style == 'circular'): variables.$cir
       padding-bottom: $dash_edge_offset; // align with other items
 
       .overview-icon {
-        border-radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius);
+        border-radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, variables.$material-radius);
         padding: variables.$space-size;
         spacing: variables.$space-size;
         text-align: center;
@@ -89,7 +89,7 @@ $dash_border_radius: if(sass(tweaks.$corner_style == 'circular'): variables.$cir
 
 // OSD Tooltip
 .dash-label {
-  border-radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius * 0.7);
+  border-radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, variables.$material-radius * 0.7);
   padding: variables.$space-size variables.$space-size * 2;
   margin: variables.$space-size * 1.5;
   color: colors.on();

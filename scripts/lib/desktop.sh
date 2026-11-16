@@ -61,6 +61,13 @@ refresh_theme() {
       gsettings set org.gnome.desktop.interface gtk-theme "$current_gtk_theme" 2> /dev/null || true
       gsettings set org.cinnamon.desktop.interface gtk-theme "$current_gtk_theme" 2> /dev/null || true
       gsettings set org.cinnamon.desktop.wm.preferences theme "$current_gtk_theme" 2> /dev/null || true
+
+      local current_cinnamon_shell_theme=""
+      current_cinnamon_shell_theme="$(gsettings get org.cinnamon.theme name 2> /dev/null | tr -d "'" || true)"
+      if [[ "$current_cinnamon_shell_theme" == "$current_gtk_theme" ]]; then
+        gsettings set org.cinnamon.theme name 'cinnamon' 2> /dev/null || true
+        gsettings set org.cinnamon.theme name "$current_gtk_theme" 2> /dev/null || true
+      fi
     fi
   fi
 

@@ -11,7 +11,7 @@ Uso:
 
 Valida no tema instalado:
   - botoes accent/suggested com fundo #35A854 e texto preto
-  - foco/borda de entradas com #00B8FF
+  - foco/borda de entradas com #00AEEF
   - indicador ativo do windowlist do Cinnamon com #2DFF3D
   - relatorio de blocos interativos com fundo #00B8FF + texto branco (suspeitos)
 EOF
@@ -132,8 +132,8 @@ assert_regex "Stackswitcher checked verde com texto branco (GTK3)" \
   'stackswitcher:not\(\.vertical\)\s*>\s*button:not\(\.suggested-action\):not\(\.destructive-action\):checked\s*\{[^}]*background-color:\s*#35A854;[^}]*color:\s*(#FFF|#FFFFFF);' \
   "$GTK3_CSS" || status=1
 
-assert_regex "Foco/borda de entrada em #00B8FF (GTK3)" \
-  '(box-shadow:\s*inset 0 0 0 2px #00B8FF;|outline:\s*2px solid #00B8FF;|border:\s*1px solid #00B8FF;)' \
+assert_regex "Foco/borda de entrada em #00AEEF (GTK3)" \
+  '(box-shadow:\s*inset 0 0 0 2px #00AEEF;|outline:\s*2px solid #00AEEF;|border:\s*1px solid #00AEEF;)' \
   "$GTK3_CSS" || status=1
 
 assert_regex "Cinnamon windowlist ativo em #2DFF3D" \

@@ -35,28 +35,36 @@ validate:
 	fi
 
 build:
-	$(NPM) run build
+	bash scripts/build-theme.sh
 
 build-optimized:
-	ENABLE_CSS_OPTIMIZATION=true $(NPM) run build
+	ENABLE_CSS_OPTIMIZATION=true bash scripts/build-theme.sh
 
-check:
-	$(NPM) run test
+check: audit-colors scss-smoke
+	@if command -v $(NPM) >/dev/null 2>&1; then \
+		$(NPM) run lint:scss; \
+	else \
+		echo "ℹ️  npm not found, skipping stylelint check (SCSS & color audits passed)"; \
+	fi
 
-check-strict:
-	$(NPM) run test:ci
+check-strict: audit-colors-strict scss-smoke
+	@if command -v $(NPM) >/dev/null 2>&1; then \
+		$(NPM) run lint:scss; \
+	else \
+		echo "ℹ️  npm not found, skipping stylelint check (SCSS & strict color audits passed)"; \
+	fi
 
 lint:
 	$(NPM) run lint:scss
 
 scss-smoke:
-	$(NPM) run build:scss:smoke
+	bash scripts/scss-smoke.sh
 
 audit-colors:
-	$(NPM) run audit:colors
+	bash scripts/audit-color-leaks.sh
 
 audit-colors-strict:
-	$(NPM) run audit:colors:strict
+	bash scripts/audit-color-leaks.sh --strict
 
 install:
 	bash ./install.sh $(INSTALL_ARGS)

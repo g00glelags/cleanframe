@@ -25,7 +25,7 @@ $panel_button_hpadding: ($panel_height - variables.$base-icon-size) * 0.5;
   }
 
   margin: variables.$space-size * 0.5;
-  border-radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius + variables.$space-size * 0.5);
+  border-radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, variables.$material-radius + variables.$space-size * 0.5);
 
   // transparent panel on lock & login screens
   &.unlock-screen,
@@ -96,7 +96,7 @@ $panel_button_hpadding: ($panel_height - variables.$base-icon-size) * 0.5;
     -minimum-hpadding: $panel_button_hpadding;
     transition-duration: 150ms;
     border: variables.$space-size * 0.5 solid transparent;
-    border-radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius + variables.$space-size * 0.5);
+    border-radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, variables.$material-radius + variables.$space-size * 0.5);
     margin: 0;
 
     &.clock-display {
@@ -110,7 +110,7 @@ $panel_button_hpadding: ($panel_height - variables.$base-icon-size) * 0.5;
       }
 
       .clock {
-        border-radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius + variables.$space-size * 0.5);
+        border-radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, variables.$material-radius + variables.$space-size * 0.5);
         padding: 0 variables.$space-size * 2 !important;
       }
     }
@@ -228,7 +228,7 @@ $panel_button_hpadding: ($panel_height - variables.$base-icon-size) * 0.5;
   gjs_arcmenu_arcmenu_com_menubutton_arc_menu_menubutton.panel-button,
   gjs_arcmenu_arcmenu_com_menubutton_arcmenu_menubutton.panel-button {
     .arc-menu-icon {
-      border-radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius);
+      border-radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, variables.$material-radius);
       width: $panel_height - variables.$space-size + 1px;
       margin: variables.$space-size * 0.5 0;
 
@@ -246,7 +246,7 @@ $panel_button_hpadding: ($panel_height - variables.$base-icon-size) * 0.5;
 
   gjs_arcmenu_arcmenu_com_menubutton_arcmenumenubutton.panel-button {
     .arcmenu-menu-button {
-      border-radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: variables.$material-radius);
+      border-radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, variables.$material-radius);
 
       // width: $panel_height - $space-size + 1px;
       margin: variables.$space-size * 0.5 0;

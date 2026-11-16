@@ -34,7 +34,7 @@ write_index_theme_file() {
 [Desktop Entry]
 Type=X-GNOME-Metatheme
 Name=${theme_name}
-Comment=An flat Materia Gtk+ theme based on Elegant Design
+Comment=CleanFrame Light - Clear, readable and predictable light desktop theme
 Encoding=UTF-8
 
 [X-GNOME-Metatheme]
@@ -115,6 +115,10 @@ assemble_theme() {
   normalize_gtk3_css "$THEME_DIR/gtk-3.0/gtk.css"
   # Apply CSS optimizations if enabled
   maybe_optimize_css "$THEME_DIR/gtk-3.0/gtk.css"
+  (
+    cd "$THEME_DIR/gtk-3.0" || exit 1
+    ln -sf gtk.css gtk-dark.css
+  )
 
   mkdir -p "$THEME_DIR/gtk-4.0"
   cp -r "$SRC_DIR/gtk/assets$theme$ctype" "$THEME_DIR/gtk-4.0/assets"
@@ -124,6 +128,10 @@ assemble_theme() {
   normalize_gtk4_css "$THEME_DIR/gtk-4.0/gtk.css"
   # Apply CSS optimizations if enabled
   maybe_optimize_css "$THEME_DIR/gtk-4.0/gtk.css"
+  (
+    cd "$THEME_DIR/gtk-4.0" || exit 1
+    ln -sf gtk.css gtk-dark.css
+  )
 
   assemble_xfwm_variants "$THEME_DIR"
 
@@ -166,6 +174,7 @@ copy_theme_payload() {
   theme_name="$(theme_dir_name "$name" "$theme" "$color" "$size" "$ctype")"
   remove_theme_payload "$dest_root" "$name" "$theme" "$color" "$size" "$ctype"
 
+  mkdir -p "${dest_root}"
   echo "Installing '${dest_root}/${theme_name}' from staged artifacts..."
   cp -a "${source_root}/${theme_name}" "${dest_root}/${theme_name}"
   [[ -d "${source_root}/${theme_name}-hdpi" ]] && cp -a "${source_root}/${theme_name}-hdpi" "${dest_root}/${theme_name}-hdpi"
@@ -198,7 +207,7 @@ uninstall() {
 }
 
 uninstall_link() {
-  rm -rf "${HOME}/.config/gtk-4.0/"{assets,gtk.css}
+  rm -rf "${HOME}/.config/gtk-4.0/"{assets,gtk.css,gtk-dark.css}
   echo -e "\nRemoving ${HOME}/.config/gtk-4.0 links..."
 }
 
@@ -211,12 +220,13 @@ link_libadwaita() {
   local ctype="$6"
   local THEME_DIR="${1}/${2}${3}${4}${5}${6}"
 
-  echo -e "\nLink '$THEME_DIR/gtk-4.0' to '${HOME}/.config/gtk-4.0' for libadwaita..."
+  echo -e "\nLinking '$THEME_DIR/gtk-4.0' to '${HOME}/.config/gtk-4.0' for libadwaita..."
 
   [[ ! -d "${HOME}/.config/gtk-4.0" ]] && mkdir -p "${HOME}/.config/gtk-4.0"
-  rm -rf "${HOME}/.config/gtk-4.0/"{assets,gtk.css}
+  rm -rf "${HOME}/.config/gtk-4.0/"{assets,gtk.css,gtk-dark.css}
   ln -sf "${THEME_DIR}/gtk-4.0/assets" "${HOME}/.config/gtk-4.0/assets"
   ln -sf "${THEME_DIR}/gtk-4.0/gtk.css" "${HOME}/.config/gtk-4.0/gtk.css"
+  ln -sf "${THEME_DIR}/gtk-4.0/gtk.css" "${HOME}/.config/gtk-4.0/gtk-dark.css"
 }
 
 install_theme() {
@@ -238,9 +248,11 @@ install_theme() {
       notify-send "You need set your whiskermenu background opacity to 0 !" -i dialog-warning-symbolic
     fi
 
-    if $(sed -i "s|.*menu-opacity=.*|menu-opacity=0|" "$HOME/.config/xfce4/panel/whiskermenu"*".rc" &> /dev/null); then
-      sed -i "s|.*menu-opacity=.*|menu-opacity=0|" "$HOME/.config/xfce4/panel/whiskermenu"*".rc"
-    fi
+    for rc in "$HOME/.config/xfce4/panel/whiskermenu"*.rc; do
+      if [[ -f "$rc" ]]; then
+        sed -i "s|.*menu-opacity=.*|menu-opacity=0|" "$rc"
+      fi
+    done
 
     if (pgrep xfce4-session &> /dev/null); then
       xfce4-panel -r
@@ -274,7 +286,7 @@ clean_theme() {
 
 link_theme() {
   for theme in "${themes[@]}"; do
-    for color in "${lcolors[@]}"; do
+    for color in "${colors[@]}"; do
       for size in "${sizes[0]}"; do
         link_libadwaita "${dest:-$DEST_DIR}" "${_name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
       done

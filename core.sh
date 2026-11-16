@@ -22,7 +22,7 @@ else
 fi
 
 SASSC_OPT="-M -t expanded"
-SASS_OPT="--no-source-map --style=expanded --silence-deprecation=import,global-builtin,color-functions,slash-div,if-function,strict-unary"
+SASS_OPT="--no-source-map --style=expanded --silence-deprecation=import,global-builtin,color-functions,slash-div,strict-unary"
 
 THEME_NAME=CleanFrame-Light
 

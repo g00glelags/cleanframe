@@ -30,7 +30,7 @@ Qt-first (KDE/LXQt) pode ser validado, mas nao e alvo principal de coercao visua
 - [ ] Dialogs (abrir/salvar) legiveis
 - [ ] Tooltips legiveis
 - [ ] Inputs focados legiveis
-- [ ] Selecao de texto (`#A6E4FF`) legivel
+- [ ] Selecao de texto (`#8FD9FF`) legivel
 - [ ] Lista/linha selecionada legivel
 - [ ] Disabled/read-only distinguiveis
 - [ ] Backdrop window (janela sem foco) ainda legivel

@@ -4,7 +4,7 @@ $dash_background_color: rgb(white, 0.2);
 $dash_placeholder_size: 32px;
 $dash_padding: 12px;
 $dash_spacing: 2px;
-$dash_border_radius: if(sass($corner_style == 'circular'): $circular-radius; else: $material-radius + $dash_padding + $dash_spacing);
+$dash_border_radius: if($corner_style == 'circular', $circular-radius, $material-radius + $dash_padding + $dash_spacing);
 
 #dash {
   @include font(caption);
@@ -52,7 +52,7 @@ $dash_border_radius: if(sass($corner_style == 'circular'): $circular-radius; els
 
     & .overview-icon {
       padding: 8px !important;
-      border-radius: if(sass($corner_style == 'circular'): $circular-radius; else: $material-radius);
+      border-radius: if($corner_style == 'circular', $circular-radius, $material-radius);
     }
   }
 }
@@ -65,7 +65,7 @@ $dash_border_radius: if(sass($corner_style == 'circular'): $circular-radius; els
 
 // OSD Tooltip
 .dash-label {
-  border-radius: if(sass($corner_style == 'circular'): $circular-radius; else: $material-radius * 0.7);
+  border-radius: if($corner_style == 'circular', $circular-radius, $material-radius * 0.7);
   padding: $space-size $space-size * 2;
   color: on();
   background-color: rgb(black, 0.75);

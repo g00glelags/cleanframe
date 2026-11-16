@@ -6,13 +6,8 @@ TMP_DIR="$(mktemp -d /tmp/cleanframe-scss-smoke.XXXXXX)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 source "${ROOT_DIR}/scripts/lib/metadata.sh"
 
-if ! command -v sassc >/dev/null 2>&1; then
-  echo "ERROR: sassc not found in PATH." >&2
-  exit 1
-fi
-
 SASSC_OPT='-M -t expanded'
-SASS_OPT='--no-source-map --style=expanded --silence-deprecation=import,global-builtin,color-functions,slash-div,if-function,strict-unary'
+SASS_OPT='--no-source-map --style=expanded --silence-deprecation=import,global-builtin,color-functions,slash-div,strict-unary'
 MODE="${1:-default}"
 
 detect_sass_compiler() {

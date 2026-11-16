@@ -1605,7 +1605,7 @@ window.devel {
   }
 }
 
-$window-space: if(sass($mac_style == 'true'): $space-size * 1.5; else: $space-size);
+$window-space: if($mac_style == 'true', $space-size * 1.5, $space-size);
 
 headerbar windowcontrols {
   border-spacing: $space-size;

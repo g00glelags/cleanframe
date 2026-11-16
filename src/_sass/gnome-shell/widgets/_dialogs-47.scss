@@ -11,7 +11,7 @@ $mdborder_color: variables.rgb(black, 0.15);
 .headline { @include drawing.font(title); }
 
 .modal-dialog {
-  border-radius: if(sass(tweaks.$corner_style == 'circular'): 20px + variables.$space-size; else: variables.$material-radius + variables.$space-size);
+  border-radius: if(tweaks.$corner_style == 'circular', 20px + variables.$space-size, variables.$material-radius + variables.$space-size);
   color: colors.$text;
   background-color: colors.$base;
   border: 0 none $mdborder_color;

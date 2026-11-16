@@ -207,7 +207,7 @@
     > scrolledwindow {
       margin: 0 0 $space-size * 2 $space-size * 2;
       border-radius: $window-radius - $space-size;
-      background-color: if(sass($topbar =='' and $variant =='light'): transparent; else: rgba(theme($theme), 0.08));
+      background-color: if($topbar =='' and $variant =='light', transparent, rgba(theme($theme), 0.08));
 
       > overshoot, > undershoot {
         &.top {
@@ -366,7 +366,7 @@
     .box {
       padding: 0 $window-radius - $space-size;
       background-color: transparent;
-      box-shadow: inset 0 -1px if(sass($topbar =='' and $variant =='light'): transparent; else: $solid-border);
+      box-shadow: inset 0 -1px if($topbar =='' and $variant =='light', transparent, $solid-border);
     }
 
     tab {

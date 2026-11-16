@@ -52,7 +52,7 @@ $submenu_item_radius: variables.$popup-radius - variables.$space-size;
   background-color: transparent;
   background-image: none;
   transition-duration: variables.$shorter-duration;
-  border-radius: if(sass(tweaks.$corner_style == 'circular'): variables.$circular-radius; else: $submenu_item_radius);
+  border-radius: if(tweaks.$corner_style == 'circular', variables.$circular-radius, $submenu_item_radius);
 
   &:ltr { padding-right:1.75em; padding-left: 0; }
   &:rtl { padding-right: 0; padding-left:1.75em; }

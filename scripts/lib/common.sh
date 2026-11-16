@@ -122,58 +122,7 @@ validate_prerequisites() {
   
   echo "✅ Using SCSS compiler: $SASS_COMPILER"
   
-  # Create minimal Perl fallback if perl is missing
-  if ! has_command perl; then
-    setup_perl_fallback
-  fi
-  
   return 0
-}
-
-setup_perl_fallback() {
-  echo "[SETUP] Creating minimal Perl fallback for CSS normalization..."
-  
-  # Create a simple sed-based fallback for critical normalizations
-  cat > "${REPO_DIR:-.}/scripts/lib/perl-fallback.sh" << 'PERL_FALLBACK'
-#!/usr/bin/env bash
-
-# Minimal CSS normalization fallback when perl is not available
-# Limited functionality compared to full Perl implementation
-
-normalize_css_fallback() {
-  local css_file="$1"
-  local mode="${2:-gtk3}"  # gtk3 or gtk4
-  
-  [ -f "$css_file" ] || return 0
-  
-  echo "[FALLBACK] Applying limited CSS normalization (perl not available)"
-  
-  # Basic transformations that work with sed
-  case "$mode" in
-    gtk3)
-      # Remove !important (simple cases)
-      sed -i 's/!important//g' "$css_file"
-      
-      # Replace infinity calc artifacts (simple pattern)
-      sed -i 's/calc( *infinity *\* *1px *)/9999px/g' "$css_file"
-      sed -i 's/calc( *-infinity *\* *1px *)/-9999px/g' "$css_file"
-      ;;
-    gtk4)
-      # Remove :root block (simple implementation)
-      sed -i '/^:root\s*{/,/^}/d' "$css_file"
-      
-      # Replace modern pseudo-classes with basic :focus
-      sed -i 's/:focus-within/:focus/g' "$css_file"
-      sed -i 's/:focus-visible/:focus/g' "$css_file"
-      ;;
-  esac
-  
-  echo "[FALLBACK] Limited normalization applied (some features disabled)"
-}
-PERL_FALLBACK
-  
-  chmod +x "${REPO_DIR:-.}/scripts/lib/perl-fallback.sh"
-  echo "[SETUP] Perl fallback script created"
 }
 
 # Function to check if we can use Perl-based normalization
@@ -182,10 +131,6 @@ can_use_perl_normalization() {
     return 0
   else
     echo "[INFO] Perl not available, using limited CSS normalization"
-    # Try to source the fallback if it exists
-    if [ -f "${REPO_DIR:-.}/scripts/lib/perl-fallback.sh" ]; then
-      source "${REPO_DIR:-.}/scripts/lib/perl-fallback.sh" 2>/dev/null || true
-    fi
     return 1
   fi
 }
