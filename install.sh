@@ -13,10 +13,12 @@ OPTIONS:
   -A, --all               Install with full preset (--shell 49 + --sandbox + GNOME Terminal profile + --libadwaita)
   -l, --libadwaita, --link Link theme to ~/.config/gtk-4.0 for Libadwaita apps
       --gnome-terminal-colors          Install/update CleanFrame GNOME Terminal color preset (selectable profile, no duplicates on reinstall)
-      --gnome-terminal-colors-default  Install/update color preset and set as GNOME Terminal default
+      --gnome-terminal-colors-default  Install/update color preset and set as GNOME Terminal default (enabled by default)
       --gnome-terminal-colors-inplace  Apply CleanFrame GNOME Terminal colors to existing default profile (no new profile)
       --gnome-terminal-profile         Alias for --gnome-terminal-colors
       --gnome-terminal-profile-default Alias for --gnome-terminal-colors-default
+      --no-terminal,
+      --no-gnome-terminal              Skip GNOME Terminal light profile configuration
       --flatpak           Apply Flatpak override preset (GTK_THEME + filesystem access)
       --snap              Create Snap/session env preset with GTK_THEME
       --sandbox           Apply both --flatpak and --snap presets
@@ -66,8 +68,8 @@ sizes=('')
 apply_flatpak_preset="false"
 apply_snap_preset="false"
 link_libadwaita_enabled="false"
-install_gnome_terminal_profile="false"
-set_default_gnome_terminal_profile="false"
+install_gnome_terminal_profile="true"
+set_default_gnome_terminal_profile="true"
 apply_gnome_terminal_colors_inplace="false"
 ENABLE_CSS_OPTIMIZATION="false"
 
@@ -115,6 +117,11 @@ while [[ "$#" -gt 0 ]]; do
     --gnome-terminal-colors-inplace)
       install_gnome_terminal_profile="true"
       apply_gnome_terminal_colors_inplace="true"
+      shift
+      ;;
+    --no-terminal|--no-gnome-terminal)
+      install_gnome_terminal_profile="false"
+      set_default_gnome_terminal_profile="false"
       shift
       ;;
     -r|--remove|-u|--uninstall)

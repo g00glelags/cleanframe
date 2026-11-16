@@ -1831,6 +1831,12 @@ terminal-window {
   }
 
   &.background.csd.maximized { border-radius: 0; } // Fixed gnome 3.32 issue: Unable to restore window size after maximization
+
+  vte-terminal,
+  VteTerminal {
+    background-color: $base;
+    color: $text;
+  }
 }
 
 window.background { // gnome-terminal 3.32 setting

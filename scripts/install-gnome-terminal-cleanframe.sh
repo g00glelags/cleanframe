@@ -158,6 +158,9 @@ if [[ "${APPLY_TO_DEFAULT_PROFILE}" == "true" ]]; then
   [[ -n "${current_name}" ]] && echo "  Name: ${current_name}"
 else
   existing_uuid="$(find_profile_uuid_by_visible_name "${VISIBLE_NAME}" || true)"
+  if [[ -z "${existing_uuid}" ]]; then
+    existing_uuid="$(find_profile_uuid_by_visible_name "CleanFrame (Light Palette Only - Vivid)" || true)"
+  fi
   if [[ -n "${existing_uuid}" ]]; then
     target_uuid="${existing_uuid}"
     profile_path="/org/gnome/terminal/legacy/profiles:/:${target_uuid}/"
@@ -237,6 +240,15 @@ if [[ "${APPLY_PALETTE_ONLY}" != "true" ]]; then
 fi
 
 if [[ "${SET_DEFAULT}" == "true" ]]; then
+  default_uuid_raw="$(gsettings_get_quiet "${profiles_schema}" default)"
+  prev_default_uuid="${default_uuid_raw//\'}"
+  if [[ -n "${prev_default_uuid}" && "${prev_default_uuid}" != "${target_uuid}" ]]; then
+    prev_schema="${profile_schema_base}:/org/gnome/terminal/legacy/profiles:/:${prev_default_uuid}/"
+    gsettings_set "${prev_schema}" use-theme-colors "false" 2>/dev/null || true
+    gsettings_set "${prev_schema}" background-color "'#ffffff'" 2>/dev/null || true
+    gsettings_set "${prev_schema}" foreground-color "'#000000'" 2>/dev/null || true
+  fi
+
   gsettings_set "${profiles_schema}" default "'${target_uuid}'"
   echo "Profile set as default."
 fi

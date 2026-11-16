@@ -56,10 +56,27 @@ apply_sandbox_theme_preset() {
 }
 
 install_gnome_terminal_profile_from_project() {
-  local set_default="${1:-false}"
+  local set_default="${1:-true}"
   local apply_inplace="${2:-false}"
   local installer_script="$REPO_DIR/scripts/install-gnome-terminal-cleanframe.sh"
   local args=()
+
+  # Configure XFCE Terminal if installed and running
+  if has_command xfconf-query; then
+    if xfconf-query -c xfce4-terminal -p /color-use-theme >/dev/null 2>&1; then
+      xfconf-query -c xfce4-terminal -p /color-use-theme -s false 2>/dev/null || true
+      xfconf-query -c xfce4-terminal -p /color-background -s '#ffffffffffff' 2>/dev/null || true
+      xfconf-query -c xfce4-terminal -p /color-foreground -s '#000000000000' 2>/dev/null || true
+    fi
+  fi
+
+  if ! has_command gsettings; then
+    return 0
+  fi
+
+  if ! gsettings list-schemas 2>/dev/null | grep -q "^org\.gnome\.Terminal\.ProfilesList$"; then
+    return 0
+  fi
 
   if [[ "$set_default" == "true" ]]; then
     args+=(--set-default)
@@ -78,7 +95,7 @@ install_gnome_terminal_profile_from_project() {
   if [[ "$apply_inplace" == "true" ]]; then
     echo -e "\nApplying GNOME Terminal colors to existing default profile (in-place)..."
   else
-    echo -e "\nInstalling GNOME Terminal color preset (selectable profile) 'CleanFrame (Current Sharp Colors)'..."
+    echo -e "\nConfiguring GNOME Terminal light profile 'CleanFrame Light'..."
   fi
 
   if [[ "$UID" -eq "$ROOT_UID" && -n "${SUDO_USER:-}" ]]; then

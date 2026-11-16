@@ -9,12 +9,14 @@ quando aplicavel.
 
 ### Added
 
+- Configuração de perfil e cores do terminal em modo light ativado por padrão no instalador (`install.sh`), com suporte à flag `--no-terminal` para desativar.
 - Geracao automatica de `gtk-dark.css` apontando para `gtk.css` em GTK 3.0 e GTK 4.0 para evitar regressao para Adwaita Dark em apps com preferencia dark.
 - Flag `-l, --libadwaita, --link` no `install.sh` (e inclusao no preset `-A / --all`) para vincular o tema em `~/.config/gtk-4.0`.
 - Suporte a `gtk-dark.css` em `uninstall_link` e `link_libadwaita`.
 
 ### Fixed
 
+- Correção de emuladores de terminal baseados em VTE (GNOME Terminal, XFCE Terminal, Tilix) que ficavam pretos/escuros por falta de estilo de fallback no GTK; adicionadas regras explícitas de fundo claro (`$base`) e texto preto (`$text`) em `vte-terminal` e perfil padrão light no GNOME Terminal (`CleanFrame Light`).
 - Correção da cor e contorno do nome do usuário no menu do Cinnamon (`.user-widget-label` e `.appmenu-sidebar-user-box`), definindo preto puro (`$black`) e `text-shadow: none` para eliminar texto branco ilegível e aberrações cromáticas em fundo claro.
 - Suporte e estilização completa para o menu moderno do Cinnamon 6+ (`menu@cinnamon.org`) cobrindo as classes `.appmenu-*` (sidebar, categorias, botões de aplicativos, favoritos, busca e botões do sistema), restaurando a legibilidade e o alinhamento visual.
 - Recarregamento automático e contínuo do tema no Cinnamon Shell via D-Bus (`RestartCinnamon`) e gsettings em `scripts/lib/desktop.sh`.

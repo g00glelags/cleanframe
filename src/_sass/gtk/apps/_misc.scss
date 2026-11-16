@@ -1,3 +1,20 @@
+/************************************
+ * Terminal Emulators (VTE widgets) *
+ ************************************/
+vte-terminal,
+VteTerminal,
+terminal-window vte-terminal,
+.terminal-window vte-terminal,
+.terminal-screen {
+  background-color: $base;
+  color: $text;
+
+  &:backdrop {
+    background-color: $base;
+    color: $text;
+  }
+}
+
 /*********
  * Tilix *
  *********/
