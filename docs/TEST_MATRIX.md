@@ -12,13 +12,13 @@ Falha critica se ocorrer qualquer caso abaixo:
 - input focado sem indicacao visual minima
 - tooltip ilegivel
 
-## Ambientes Prioritarios
+## Ambientes e Cobertura de Testes
 
-- GNOME (GTK-first)
-- Cinnamon
-- XFCE
+- **Cinnamon:** Ambiente prioritário e **exaustivamente testado** no uso diário.
+- **XFCE & KDE Plasma:** Testados e validados na camada de integração e aplicações **GTK+**.
+- **GNOME Shell:** **Nunca testado pelo autor** no shell puro (alvos SCSS mantidos como best-effort herdados do upstream).
 
-Qt-first (KDE/LXQt) pode ser validado, mas nao e alvo principal de coercao visual.
+Qt-first (KDE/LXQt) pode ser validado, mas nao e alvo principal de coercao visual alheia ao GTK.
 
 ## Matriz Minima por Release
 

@@ -1,13 +1,13 @@
 # CleanFrame Theme
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL_v3-blue.svg)](COPYING)
-[![Theme: Light-Only](https://img.shields.io/badge/Theme-Light--Only-success.svg)](#principios)
-[![GNOME Shell](https://img.shields.io/badge/GNOME_Shell-40_to_49-orange.svg)](#escopo)
-[![GTK Support](https://img.shields.io/badge/GTK-2%20%7C%203%20%7C%204-purple.svg)](#escopo)
+[![Theme: Predominantemente Light](https://img.shields.io/badge/Theme-Predominantemente_Light-success.svg)](#principios)
+[![Target: Cinnamon & GTK+](https://img.shields.io/badge/Target-Cinnamon_%26_GTK%2B-blueviolet.svg)](#escopo)
+[![Status: Cinnamon Exhaustively Tested](https://img.shields.io/badge/Cinnamon-Exaustivamente_Testado-brightgreen.svg)](#status-de-testes-e-ambientes)
 
-Tema claro para Linux com foco em coerência visual, legibilidade e previsibilidade no uso diário.
+CleanFrame é um tema **predominantemente light**, refinado com foco específico no **Cinnamon** e em todo o ecossistema **GTK+** (GTK 2, GTK 3 e GTK 4).
 
-O objetivo do CleanFrame não é ser o tema "mais bonito" ou repleto de efeitos translúcidos que cansam a visão. O objetivo é ser **confiável**: menus, popups, caixas de diálogo, seleções, entradas de texto, terminais e widgets devem permanecer nítidos, legíveis e com contraste impecável no maior número de interfaces possível (GTK 2/3/4, Qt, Flatpak, Snap e apps Electron).
+O objetivo do CleanFrame não é ser o tema "mais bonito" ou repleto de efeitos translúcidos e gradientes que cansam a visão no dia a dia. O foco absoluto é ser **confiável, ergonômico e nítido**: menus, popups, caixas de diálogo, seleções, entradas de texto, terminais e widgets devem permanecer legíveis, com contraste impecável e sem aberrações cromáticas (color leaks) no maior número de interfaces possível (GTK+, Cinnamon, Qt, Flatpak, Snap e apps Electron).
 
 ---
 
@@ -20,21 +20,34 @@ O objetivo do CleanFrame não é ser o tema "mais bonito" ou repleto de efeitos 
 
 ---
 
+## Status de Testes e Ambientes (Transparência Comunitária)
+
+Para garantir total clareza e transparência para a comunidade sobre o que foi validado na prática:
+
+| Ambiente / Desktop | Nível de Teste | Situação & Observações |
+| :--- | :--- | :--- |
+| **Cinnamon** | 🟢 **Exaustivamente Testado** | **Ambiente principal do projeto.** Testado exaustivamente no uso diário. Painel, applets, menus clássicos e Cinnamon 6+ (`.appmenu-*`), barra lateral, calendário, alternador de janelas e CSD foram polidos em detalhes. |
+| **XFCE** | 🟡 **Testado na parte GTK+** | Testado na camada de aplicações GTK+ e decorações de janela XFWM4. Comportamento estável e consistente. |
+| **KDE Plasma** | 🟡 **Testado na parte GTK+** | Testado para garantir consistência em aplicativos GTK+ rodando sob a sessão Plasma (cores, fontes e seleção). |
+| **GNOME (Shell)** | ⚪ **Nunca Testado** | **Atenção:** O tema **nunca foi testado no GNOME Shell pelo autor**. Embora a estrutura contenha código SCSS compilável herdado do upstream para GNOME Shell (40 a 49), seu comportamento visual no shell puro não é garantido. Contribuições e testes da comunidade são muito bem-vindos! |
+
+---
+
 ## Princípios
 
-- Tema claro apenas (light-only)
-- Coerencia visual acima de efeitos visuais
-- Legibilidade e contraste como prioridade
-- Fallback seguro quando um app nao herda tema automaticamente
-- Integracoes extras documentadas (Qt, Flatpak, Electron)
+- **Predominantemente light:** Foco absoluto no modo claro, sem inconsistências de texto claro em fundo claro.
+- **Coerência visual acima de efeitos visuais:** Confiabilidade de interface em primeiro lugar.
+- **Legibilidade e contraste como prioridade:** Menus e seleções sempre nítidos e fáceis de ler.
+- **Fallback seguro:** Quando um app não herda o tema automaticamente, prover comportamento legível.
+- **Integrações práticas documentadas:** Scripts dedicados para Qt, Flatpak, Snap, Terminais e Electron.
 
 ## Escopo
 
-O repositorio contem:
+O repositório contém:
 
-- tema base (GTK/Cinnamon/XFWM/GNOME Shell e variantes relacionadas)
-- scripts de integracao e compatibilidade (Qt/GTK, Flatpak, Electron, terminal)
-- scripts de troubleshooting para apps especificos
+- Tema base (Cinnamon, GTK 2 / 3 / 4, XFWM4, Metacity)
+- Scripts de integração e compatibilidade (Qt/GTK, Flatpak, Snap, Electron, terminais)
+- Scripts de troubleshooting e ajustes finos (FileZilla wxWidgets, LibreOffice Calc dedicado)
 
 ## Instalacao Rapida
 
