@@ -14,9 +14,15 @@ Falha critica se ocorrer qualquer caso abaixo:
 
 ## Ambientes e Cobertura de Testes
 
+### Desktops
 - **Cinnamon:** Ambiente prioritário e **exaustivamente testado** no uso diário.
 - **XFCE & KDE Plasma:** Testados e validados na camada de integração e aplicações **GTK+**.
 - **GNOME Shell:** **Nunca testado pelo autor** no shell puro (alvos SCSS mantidos como best-effort herdados do upstream).
+
+### Distribuições
+- **CachyOS / Arch Linux:** 🟢 100% testado e funcional.
+- **Linux Mint:** 🟢 100% testado e funcional.
+- **Outras distros:** Provável funcionamento, porém não testadas oficialmente pelo autor.
 
 Qt-first (KDE/LXQt) pode ser validado, mas nao e alvo principal de coercao visual alheia ao GTK.
 

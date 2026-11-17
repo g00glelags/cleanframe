@@ -4,6 +4,7 @@
 [![Theme: Predominantemente Light](https://img.shields.io/badge/Theme-Predominantemente_Light-success.svg)](#principios)
 [![Target: Cinnamon & GTK+](https://img.shields.io/badge/Target-Cinnamon_%26_GTK%2B-blueviolet.svg)](#escopo)
 [![Status: Cinnamon Exhaustively Tested](https://img.shields.io/badge/Cinnamon-Exaustivamente_Testado-brightgreen.svg)](#status-de-testes-e-ambientes)
+[![Distros: CachyOS / Arch & Mint](https://img.shields.io/badge/Distros-CachyOS%20%7C%20Mint%20(100%25)-blue.svg)](#distribuições-validadas)
 
 CleanFrame é um tema **predominantemente light**, refinado com foco específico no **Cinnamon** e em todo o ecossistema **GTK+** (GTK 2, GTK 3 e GTK 4).
 
@@ -30,6 +31,14 @@ Para garantir total clareza e transparência para a comunidade sobre o que foi v
 | **XFCE** | 🟡 **Testado na parte GTK+** | Testado na camada de aplicações GTK+ e decorações de janela XFWM4. Comportamento estável e consistente. |
 | **KDE Plasma** | 🟡 **Testado na parte GTK+** | Testado para garantir consistência em aplicativos GTK+ rodando sob a sessão Plasma (cores, fontes e seleção). |
 | **GNOME (Shell)** | ⚪ **Nunca Testado** | **Atenção:** O tema **nunca foi testado no GNOME Shell pelo autor**. Embora a estrutura contenha código SCSS compilável herdado do upstream para GNOME Shell (40 a 49), seu comportamento visual no shell puro não é garantido. Contribuições e testes da comunidade são muito bem-vindos! |
+
+### Distribuições Validadas
+
+| Distribuição | Status | Observações |
+| :--- | :--- | :--- |
+| **CachyOS / Arch Linux** | 🟢 **100% Funcional** | Ambiente de desenvolvimento e testes diários (rolling release com versões recentes de pacotes). |
+| **Linux Mint** | 🟢 **100% Funcional** | Ambiente de referência oficial para Cinnamon e todo o ecossistema GTK. |
+| **Demais Distribuições** *(Fedora, Debian, Ubuntu, openSUSE, etc.)* | 🟡 **Provável que funcione** | Como o tema segue padrões universais de GTK 2/3/4 e Cinnamon, é muito provável que funcione perfeitamente, porém **ainda não foi homologado/testado** pelo autor. Relatos de testes e compatibilidade da comunidade são bem-vindos! |
 
 ---
 
