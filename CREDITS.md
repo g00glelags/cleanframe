@@ -73,7 +73,16 @@ O CleanFrame é uma obra derivada e utiliza como alicerce o trabalho de excelent
 
 ---
 
-## 4. Declaração de Licença / License Notice
+## 4. Assistência de Ferramentas de Inteligência Artificial / AI Assistance
+
+O processo de pesquisa, adaptação e engenharia do CleanFrame contou com suporte de ferramentas de Inteligência Artificial:
+
+- **Codex (OpenAI) em 2025:** Auxílio no mapeamento inicial do tema upstream, isolamento das primeiras regras de modo escuro e início das adaptações das folhas de estilo SCSS para o design *light-only*.
+- **Gemini (Google DeepMind) em 2026:** Engenharia de estabilização do pipeline de build, desenvolvimento da normalização GTK4 CSS para parsers do GNOME Shell 40 ao 49, automação de testes e auditorias visuais, scripts de integração sistêmica (Flatpak, Snap, Terminal, Electron) e conformidade de licenciamento para publicação comunitária.
+
+---
+
+## 5. Declaração de Licença / License Notice
 
 CleanFrame é software livre: você pode redistribuí-lo e/ou modificá-lo sob os termos da **GNU General Public License (GPL)** conforme publicada pela Free Software Foundation, versão 3 da licença, ou (a seu critério) qualquer versão posterior.
 

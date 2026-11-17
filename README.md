@@ -169,4 +169,10 @@ O projeto é mantido por **sfairmm** ([g00gle.lags@gmail.com](mailto:g00gle.lags
 - **Firefox GNOME Theme** por Rafael Mardojai e Sai Kurogetsu
 - **Adwaita / GNOME Shell** por GNOME Design Team / Red Hat, Inc.
 
+### Assistência de Ferramentas de IA / AI Assistance
+
+O desenvolvimento e refinamento do CleanFrame contaram com o auxílio de modelos de Inteligência Artificial:
+- **Codex (OpenAI)** em **2025**: Apoio na estruturação inicial do fork, limpeza das primeiras regras dark e adaptações do SCSS para o modo claro unificado.
+- **Gemini (Google DeepMind)** em **2026**: Apoio na estabilização do pipeline de build, engenharia de normalização GTK4 CSS (GNOME Shell 40–49), automação de auditorias visuais, scripts de integração (Flatpak/Snap/Terminal/Electron) e empacotamento para lançamento comunitário.
+
 Veja a lista completa de contribuições e notas legais em [CREDITS.md](CREDITS.md) e [COPYING](COPYING).
