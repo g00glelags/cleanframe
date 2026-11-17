@@ -2,205 +2,203 @@
   <img src="images/logo/cleanframe-banner.png" alt="CleanFrame Theme Banner" width="800">
 </p>
 
+<p align="center">
+  <b>🇺🇸 English</b> | <b><a href="README.pt-BR.md">🇧🇷 Português</a></b>
+</p>
+
 # CleanFrame Theme
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL_v3-blue.svg)](COPYING)
 [![OpenDesktop / Pling](https://img.shields.io/badge/OpenDesktop-Download%20Theme-00b4d8.svg)](https://www.opendesktop.org/p/2382045)
-[![Theme: Predominantemente Light](https://img.shields.io/badge/Theme-Predominantemente_Light-success.svg)](#principios)
-[![Target: Cinnamon & GTK+](https://img.shields.io/badge/Target-Cinnamon_%26_GTK%2B-blueviolet.svg)](#escopo)
-[![Status: Cinnamon Exhaustively Tested](https://img.shields.io/badge/Cinnamon-Exaustivamente_Testado-brightgreen.svg)](#status-de-testes-e-ambientes)
-[![Distros: CachyOS / Arch & Mint](https://img.shields.io/badge/Distros-CachyOS%20%7C%20Mint%20(100%25)-blue.svg)](#distribuições-validadas)
+[![Theme: Predominantly Light](https://img.shields.io/badge/Theme-Predominantly_Light-success.svg)](#principles)
+[![Target: Cinnamon & GTK+](https://img.shields.io/badge/Target-Cinnamon_%26_GTK%2B-blueviolet.svg)](#scope)
+[![Status: Cinnamon Exhaustively Tested](https://img.shields.io/badge/Cinnamon-Exhaustively_Tested-brightgreen.svg)](#test-status-and-environments)
+[![Distros: CachyOS / Arch & Mint](https://img.shields.io/badge/Distros-CachyOS%20%7C%20Mint%20(100%25)-blue.svg)](#verified-distributions)
 
-CleanFrame é um tema **predominantemente light**, refinado com foco específico no **Cinnamon** e em todo o ecossistema **GTK+** (GTK 2, GTK 3 e GTK 4).
+CleanFrame is a **predominantly light** theme, carefully engineered with a primary focus on **Cinnamon** and the entire **GTK+ ecosystem** (GTK 2, GTK 3, and GTK 4).
 
-O objetivo do CleanFrame não é ser o tema "mais bonito" ou repleto de efeitos translúcidos e gradientes que cansam a visão no dia a dia. O foco absoluto é ser **confiável, ergonômico e nítido**: menus, popups, caixas de diálogo, seleções, entradas de texto, terminais e widgets devem permanecer legíveis, com contraste impecável e sem aberrações cromáticas (color leaks) no maior número de interfaces possível (GTK+, Cinnamon, Qt, Flatpak, Snap e apps Electron).
+The primary goal of CleanFrame is not to be flashy with heavy transparencies or harsh gradients that cause eye strain during daily work. The focus is to be **reliable, ergonomic, and crisp**: menus, popups, dialog boxes, text selections, input fields, terminal windows, and widgets remain clear, readable, and free of chromatic aberrations (*color leaks*) across as many interfaces as possible (GTK+, Cinnamon, Qt, Flatpak, Snap, and Electron wrappers).
 
 ---
 
-### Mantenedor / Links Oficiais:
-- **Autor:** Marcos Sfair Mariani (`sfairmm`)
-- **E-mail:** [g00gle.lags@gmail.com](mailto:g00gle.lags@gmail.com)
+### Maintainer / Official Links:
+- **Author / Maintainer:** Marcos Sfair Mariani (`sfairmm`)
+- **Email:** [g00gle.lags@gmail.com](mailto:g00gle.lags@gmail.com)
 - **Telegram:** [@sfairmm](https://t.me/sfairmm)
 - **OpenDesktop / Pling:** [https://www.opendesktop.org/p/2382045](https://www.opendesktop.org/p/2382045)
-- **Repositório GitHub:** [https://github.com/g00glelags/cleanframe](https://github.com/g00glelags/cleanframe)
-- **Espelho Codeberg:** [https://codeberg.org/g00gle_lags/cleanframe](https://codeberg.org/g00gle_lags/cleanframe)
+- **GitHub Repository:** [https://github.com/g00glelags/cleanframe](https://github.com/g00glelags/cleanframe)
+- **Codeberg Mirror:** [https://codeberg.org/g00gle_lags/cleanframe](https://codeberg.org/g00gle_lags/cleanframe)
 
 ---
 
-## Status de Testes e Ambientes (Transparência Comunitária)
+## Test Status and Environments (Community Transparency)
 
-Para garantir total clareza e transparência para a comunidade sobre o que foi validado na prática:
+To maintain full transparency with the community regarding our actual test coverage:
 
-| Ambiente / Desktop | Nível de Teste | Situação & Observações |
+| Desktop Environment | Testing Level | Status & Notes |
 | :--- | :--- | :--- |
-| **Cinnamon** | 🟢 **Exaustivamente Testado** | **Ambiente principal do projeto.** Testado exaustivamente no uso diário. Painel, applets, menus clássicos e Cinnamon 6+ (`.appmenu-*`), barra lateral, calendário, alternador de janelas e CSD foram polidos em detalhes. |
-| **XFCE** | 🟡 **Testado na parte GTK+** | Testado na camada de aplicações GTK+ e decorações de janela XFWM4. Comportamento estável e consistente. |
-| **KDE Plasma** | 🟡 **Testado na parte GTK+** | Testado para garantir consistência em aplicativos GTK+ rodando sob a sessão Plasma (cores, fontes e seleção). |
-| **GNOME (Shell)** | ⚪ **Nunca Testado** | **Atenção:** O tema **nunca foi testado no GNOME Shell pelo autor**. Embora a estrutura contenha código SCSS compilável herdado do upstream para GNOME Shell (40 a 49), seu comportamento visual no shell puro não é garantido. Contribuições e testes da comunidade são muito bem-vindos! |
+| **Cinnamon** | 🟢 **Exhaustively Tested** | **Primary target environment.** Tested extensively in daily production use. Panel, applets, classic menus, modern Cinnamon 6+ (`.appmenu-*`), sidebar, calendar, window switcher, and CSD controls are fully polished. |
+| **XFCE** | 🟡 **Tested on GTK+ Layer** | Verified on GTK+ applications and XFWM4 window decorations. Stable and consistent behavior. |
+| **KDE Plasma** | 🟡 **Tested on GTK+ Layer** | Verified for consistent appearance across GTK+ applications running in Plasma sessions (colors, fonts, and selections). |
+| **GNOME (Shell)** | ⚪ **Untested** | **Notice:** This theme has **never been tested on GNOME Shell by the author**. Although the codebase retains compilable SCSS targets inherited from upstream for GNOME Shell (40 to 49), visual behavior on pure GNOME Shell is not guaranteed. Community testing and feedback are welcome! |
 
-### Distribuições Validadas
+### Verified Distributions
 
-| Distribuição | Status | Observações |
+| Distribution | Status | Notes |
 | :--- | :--- | :--- |
-| **CachyOS / Arch Linux** | 🟢 **100% Funcional** | Ambiente de desenvolvimento e testes diários (rolling release com versões recentes de pacotes). |
-| **Linux Mint** | 🟢 **100% Funcional** | Ambiente de referência oficial para Cinnamon e todo o ecossistema GTK. |
-| **Demais Distribuições** *(Fedora, Debian, Ubuntu, openSUSE, etc.)* | 🟡 **Provável que funcione** | Como o tema segue padrões universais de GTK 2/3/4 e Cinnamon, é muito provável que funcione perfeitamente, porém **ainda não foi homologado/testado** pelo autor. Relatos de testes e compatibilidade da comunidade são bem-vindos! |
+| **CachyOS / Arch Linux** | 🟢 **100% Functional** | Daily development and testing workstation (rolling release with cutting-edge packages). |
+| **Linux Mint** | 🟢 **100% Functional** | Official reference environment for Cinnamon and the GTK ecosystem. |
+| **Other Distributions** *(Fedora, Debian, Ubuntu, openSUSE, etc.)* | 🟡 **Likely Functional** | Since CleanFrame adheres to universal GTK 2/3/4 and Cinnamon standards, it is very likely to work smoothly. However, it has **not yet been officially tested** by the author. User reports and compatibility feedback are welcome! |
 
 ---
 
-## Princípios
+## Principles
 
-- **Predominantemente light:** Foco absoluto no modo claro, sem inconsistências de texto claro em fundo claro.
-- **Coerência visual acima de efeitos visuais:** Confiabilidade de interface em primeiro lugar.
-- **Legibilidade e contraste como prioridade:** Menus e seleções sempre nítidos e fáceis de ler.
-- **Fallback seguro:** Quando um app não herda o tema automaticamente, prover comportamento legível.
-- **Integrações práticas documentadas:** Scripts dedicados para Qt, Flatpak, Snap, Terminais e Electron.
+- **Predominantly Light:** Focused strictly on light mode clarity, eliminating common dark/light hybrid glitches (such as light text on light backgrounds).
+- **Visual Coherence over Eye Candy:** Prioritizing interface dependability over fragile aesthetic effects.
+- **Legibility and Contrast First:** Menus, popups, and selection highlights are always sharp and easy to read.
+- **Safe Fallback:** Providing clean, readable fallbacks when an application fails to inherit system themes automatically.
+- **Documented Integrations:** Dedicated automation scripts for Qt, Flatpak, Snap, Terminals, and Electron.
 
-## Escopo
+## Scope
 
-O repositório contém:
+The repository provides:
 
-- Tema base (Cinnamon, GTK 2 / 3 / 4, XFWM4, Metacity)
-- Scripts de integração e compatibilidade (Qt/GTK, Flatpak, Snap, Electron, terminais)
-- Scripts de troubleshooting e ajustes finos (FileZilla wxWidgets, LibreOffice Calc dedicado)
+- Base theme targets (Cinnamon, GTK 2 / 3 / 4, XFWM4, Metacity)
+- Compatibility and integration scripts (Qt/GTK, Flatpak, Snap, Electron, terminal profiles)
+- Troubleshooting tools and application-specific overrides (FileZilla wxWidgets safe-mode, LibreOffice Calc dedicated selection)
 
-## Instalacao Rapida
+## Quick Installation
 
 ```bash
 ./install.sh
 ```
 
-## Presets para Flatpak e Snap
+## Flatpak and Snap Presets
 
-O instalador pode aplicar presets de ambiente para melhorar a consistencia do
-tema em apps sandbox.
+The installer can configure environment presets to ensure visual consistency across sandboxed applications.
 
 ```bash
-# Flatpak (GTK_THEME + permissoes de leitura de tema/config)
+# Flatpak (sets GTK_THEME and theme/config read permissions)
 ./install.sh --flatpak
 
-# Snap (gera preset em ~/.config/environment.d)
+# Snap (generates preset in ~/.config/environment.d)
 ./install.sh --snap
 
-# Ambos
+# Both
 ./install.sh --sandbox
 ```
 
-Observacoes:
+Notes:
+- `--flatpak` applies `flatpak override --user`.
+- `--snap` creates `~/.config/environment.d/90-cleanframe-theme.conf` with `GTK_THEME=CleanFrame-Light`.
+- For Snap, logging out and back into your session may be required to propagate environment variables.
 
-- `--flatpak` usa `flatpak override --user`.
-- `--snap` cria `~/.config/environment.d/90-cleanframe-theme.conf` com `GTK_THEME=CleanFrame-Light`.
-- No Snap, pode ser necessario encerrar sessao e entrar novamente para o ambiente propagar.
+## Community Integrations (Qt / Flatpak / Electron)
 
-## Integracoes Comunitarias (Qt / Flatpak / Electron)
-
-Para aproximar a coerencia visual em apps que nao seguem GTK automaticamente:
+To achieve visual harmony in applications that do not inherit GTK themes automatically:
 
 ```bash
 bash scripts/apply-community-integrations.sh
 ```
 
-Exemplos:
+Examples:
 
 ```bash
-# Apenas Qt/GTK (sem instalar pacotes)
+# Qt/GTK integration only (without installing packages)
 bash scripts/apply-community-integrations.sh --qt
 
-# Apenas CSS de selecao para wrappers Electron
+# Generate selection CSS for Electron wrappers
 bash scripts/apply-community-integrations.sh --electron
 
-# Gerar CSS para todos os presets conhecidos do script Electron
+# Generate CSS for all known Electron app presets
 bash scripts/apply-community-integrations.sh --electron --electron-all-known
 
-# Habilitar injecao de CSS no Slack (normal + Flatpak), quando suportado
+# Enable CSS injection in Slack (standard + Flatpak), when supported
 bash scripts/apply-community-integrations.sh --slack-interop
 ```
 
-Importante:
+Important Considerations:
+- Electron apps (Slack, Teams, web wrappers) do not automatically inherit GTK webview selection colors.
+- CleanFrame generates CSS selection snippets, but the target app must support custom CSS or script injection.
+- `teams-for-linux` natively supports `custom.css`; Slack may require `ssb-interop.js`.
 
-- Apps Electron (Slack/Teams/wrappers) normalmente nao herdam a selecao GTK do conteudo web.
-- O CleanFrame gera CSS de selecao, mas o app precisa suportar custom CSS / injecao.
-- `teams-for-linux` costuma suportar `custom.css`; Slack pode exigir `ssb-interop.js`.
+## Known Limitations (Support Guidelines)
 
-## Limites Conhecidos (Importante para suporte)
+- **Qt:** Requires environment variables loaded in the user session (`~/.config/environment.d`), typically active after relogin.
+- **Flatpak:** May require user overrides and file read permissions for custom theme paths.
+- **Electron:** Custom styling depends on build-specific support for preload injection or custom stylesheets.
+- Proprietary software may render internal widgets using custom canvas routines that bypass GTK styling.
 
-- Qt precisa de sessao com variaveis de ambiente carregadas (`~/.config/environment.d`), geralmente apos logout/login.
-- Flatpak pode exigir override e permissao de leitura do tema/config.
-- Electron depende de suporte da versao/build para custom CSS ou preload interop.
-- Nem todo widget interno de app proprietario respeita o tema do sistema.
+## Dedicated LibreOffice Calc Variant
 
-## Variante Dedicada para LibreOffice Calc
-
-Para manter a selecao geral do sistema e usar outra cor apenas no Calc:
+To preserve the system's global selection color while using a distinct highlight in Calc spreadsheets:
 
 ```bash
-# 1) instale/atualize o tema base
+# 1) Install or update the base theme
 ./install.sh
 
-# 2) gere a variante CleanFrame-Light-Calc (selecao #00b8ff)
+# 2) Generate the dedicated CleanFrame-Light-Calc variant (selection #00b8ff)
 ./scripts/install-calc-theme-variant.sh
 
-# 3) abra o Calc forcando a variante
+# 3) Launch Calc forcing the dedicated variant
 ./scripts/run-calc-with-theme.sh
 ```
 
-Opcional:
-
+Optional (custom color override):
 ```bash
 CALC_SELECTION_BG='#00b8ff' ./scripts/install-calc-theme-variant.sh
 ```
 
-## FileZilla (Modo Seguro)
+## FileZilla (Safe Mode)
 
-Se o FileZilla apresentar bug visual (drop target preto / renomear deformado),
-rode com launcher isolado:
+If FileZilla encounters visual rendering bugs (such as black drag-and-drop targets or distorted inline renaming):
 
 ```bash
 ./scripts/run-filezilla-safe.sh
 ```
 
-Opcional (testar com seu tema atual):
-
+Optional (test with your current active theme):
 ```bash
 FILEZILLA_GTK_THEME='CleanFrame-Light' ./scripts/run-filezilla-safe.sh
 ```
 
-## Empacotamento e Build para Distribuição Comunitária
+## Packaging and Build for Community Distribution
 
-Para gerar o build do tema e criar os arquivos compactados prontos para distribuição comunitária (GitHub Releases, Gnome-Look / Pling):
+To compile theme artifacts and generate release packages (`.tar.xz`, `.zip`) ready for community distribution (GitHub Releases, Gnome-Look / Pling):
 
 ```bash
-# Compilar tema montado em build/
+# Compile theme artifacts into build/
 make build
 
-# Gerar pacotes de distribuição (.tar.xz e .zip) em dist/
+# Package release archives (.tar.xz and .zip) into dist/
 make package
 ```
 
-## Release Comunitária
+## Community Release Documents
 
-Documentos de referência para testes, validação e licenciamento:
+Reference documents for testing, validation, and licensing compliance:
 
-- `CREDITS.md` - Atribuições e créditos completos
-- `COPYING` - Licença GNU General Public License v3.0
-- `docs/TEST_MATRIX.md` - Matriz de testes em GTK, Cinnamon e Shell
-- `docs/RELEASE_CHECKLIST.md` - Checklist pré-release
-- `docs/LICENSE_AND_CREDITS.md` - Conformidade de licenciamento e upstream
+- `CREDITS.md` - Complete author attribution and upstream credits
+- `COPYING` - Full GNU General Public License v3.0 text
+- `docs/TEST_MATRIX.md` - Test matrix across GTK, Cinnamon, and Shell
+- `docs/RELEASE_CHECKLIST.md` - Pre-release checklist
+- `docs/LICENSE_AND_CREDITS.md` - Upstream licensing compliance notes
 
-## Licença e Créditos
+## License and Credits
 
-CleanFrame é um software livre distribuído sob a licença **GNU General Public License v3.0 (GPL-3.0)**.
+CleanFrame is free software licensed under the **GNU General Public License v3.0 (GPL-3.0)**.
 
-O projeto é mantido por **sfairmm** ([g00gle.lags@gmail.com](mailto:g00gle.lags@gmail.com)) e deriva respeitosamente de grandes trabalhos da comunidade:
-- **Orchis Theme** por Vince Liuice ([@vinceliuice](https://github.com/vinceliuice))
-- **Materia Theme** por nana-4 ([@nana-4](https://github.com/nana-4))
-- **Firefox GNOME Theme** por Rafael Mardojai e Sai Kurogetsu
-- **Adwaita / GNOME Shell** por GNOME Design Team / Red Hat, Inc.
+Maintained by **sfairmm** ([g00gle.lags@gmail.com](mailto:g00gle.lags@gmail.com)), respectfully derived from outstanding community projects:
+- **Orchis Theme** by Vince Liuice ([@vinceliuice](https://github.com/vinceliuice))
+- **Materia Theme** by nana-4 ([@nana-4](https://github.com/nana-4))
+- **Firefox GNOME Theme** by Rafael Mardojai and Sai Kurogetsu
+- **Adwaita / GNOME Shell** by GNOME Design Team / Red Hat, Inc.
 
-### Assistência de Ferramentas de IA / AI Assistance
+### AI Assistance Credits
 
-O desenvolvimento e refinamento do CleanFrame contaram com o auxílio de modelos de Inteligência Artificial:
-- **Codex (OpenAI)** em **2025**: Apoio na estruturação inicial do fork, limpeza das primeiras regras dark e adaptações do SCSS para o modo claro unificado.
-- **Gemini (Google DeepMind)** em **2026**: Apoio na estabilização do pipeline de build, engenharia de normalização GTK4 CSS (GNOME Shell 40–49), automação de auditorias visuais, scripts de integração (Flatpak/Snap/Terminal/Electron) e empacotamento para lançamento comunitário.
+The development and refinement of CleanFrame were assisted by Artificial Intelligence models:
+- **Codex (OpenAI) in 2025:** Assisted in the initial fork restructuring, isolation of dark mode rules, and SCSS stylesheet adaptations for unified light mode.
+- **Gemini (Google DeepMind) in 2026:** Assisted in build pipeline stabilization, GTK4 CSS normalization engineering (GNOME Shell 40–49), automated visual audits, ecosystem integration scripts (Flatpak/Snap/Terminal/Electron), and community release packaging.
 
-Veja a lista completa de contribuições e notas legais em [CREDITS.md](CREDITS.md) e [COPYING](COPYING).
+See [CREDITS.md](CREDITS.md) and [COPYING](COPYING) for complete licensing and legal notices.
