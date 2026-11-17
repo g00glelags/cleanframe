@@ -1,4 +1,4 @@
-.PHONY: help validate build build-optimized check check-strict lint scss-smoke audit-colors audit-colors-strict install uninstall css-audit
+.PHONY: help validate build build-optimized check check-strict lint scss-smoke audit-colors audit-colors-strict install uninstall css-audit package
 
 NPM ?= npm
 INSTALL_ARGS ?=
@@ -10,6 +10,7 @@ help:
 	@echo "  make check-strict  - lint + color audit (strict) + SCSS smoke compile"
 	@echo "  make build         - assemble staged theme artifacts under build/"
 	@echo "  make build-optimized - build with CSS optimization (smaller files)"
+	@echo "  make package       - assemble and create distribution archives in dist/"
 	@echo "  make lint          - SCSS lint"
 	@echo "  make scss-smoke    - SCSS smoke compilation"
 	@echo "  make audit-colors  - Color leak audit (default)"
@@ -39,6 +40,9 @@ build:
 
 build-optimized:
 	ENABLE_CSS_OPTIMIZATION=true bash scripts/build-theme.sh
+
+package:
+	bash scripts/package-release.sh
 
 check: audit-colors scss-smoke
 	@if command -v $(NPM) >/dev/null 2>&1; then \

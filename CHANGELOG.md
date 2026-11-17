@@ -9,6 +9,8 @@ quando aplicavel.
 
 ### Added
 
+- Arquivo raiz `CREDITS.md` com atribuições completas do mantenedor (`sfairmm`), histórico de projetos upstream (Orchis, Materia, Firefox GNOME Theme, Adwaita) e licenças de assets.
+- Script de empacotamento `scripts/package-release.sh` e comando `make package` para gerar arquivos prontos para release comunitária (`.tar.xz`, `.zip` e `SHA256SUMS.txt` em `dist/`).
 - Configuração de perfil e cores do terminal em modo light ativado por padrão no instalador (`install.sh`), com suporte à flag `--no-terminal` para desativar.
 - Geracao automatica de `gtk-dark.css` apontando para `gtk.css` em GTK 3.0 e GTK 4.0 para evitar regressao para Adwaita Dark em apps com preferencia dark.
 - Flag `-l, --libadwaita, --link` no `install.sh` (e inclusao no preset `-A / --all`) para vincular o tema em `~/.config/gtk-4.0`.

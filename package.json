@@ -1,7 +1,7 @@
 {
-  "name": "cleanframe-theme-master-sem-dark-compc-tweak",
+  "name": "cleanframe-theme",
   "version": "1.0.0",
-  "description": "To install the theme, run the following command:",
+  "description": "A clean, light-only Linux desktop theme focusing on visual consistency and readability",
   "main": "index.js",
   "scripts": {
     "build": "bash scripts/build-theme.sh",
@@ -15,9 +15,17 @@
     "test:ci": "npm run lint:scss && npm run audit:colors:strict && npm run build:scss:smoke",
     "test": "npm run lint:scss && npm run audit:colors && npm run build:scss:smoke"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "gtk-theme",
+    "gtk3",
+    "gtk4",
+    "gnome-shell",
+    "cinnamon",
+    "xfwm4",
+    "light-theme"
+  ],
+  "author": "sfairmm <g00gle.lags@gmail.com>",
+  "license": "GPL-3.0-or-later",
   "type": "commonjs",
   "devDependencies": {
     "stylelint": "^17.3.0",

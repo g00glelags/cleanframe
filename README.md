@@ -1,13 +1,25 @@
 # CleanFrame Theme
 
-Tema claro com foco em coerencia visual e legibilidade no uso diario.
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL_v3-blue.svg)](COPYING)
+[![Theme: Light-Only](https://img.shields.io/badge/Theme-Light--Only-success.svg)](#principios)
+[![GNOME Shell](https://img.shields.io/badge/GNOME_Shell-40_to_49-orange.svg)](#escopo)
+[![GTK Support](https://img.shields.io/badge/GTK-2%20%7C%203%20%7C%204-purple.svg)](#escopo)
 
-O objetivo do CleanFrame nao e ser o tema "mais bonito". O objetivo e ser
-confiavel: menus, popups, dialogs, selecao, inputs, terminal e widgets devem
-continuar legiveis e previsiveis no maior numero de interfaces possivel
-(GTK/Qt/apps sandbox/Electron com integracao documentada).
+Tema claro para Linux com foco em coerência visual, legibilidade e previsibilidade no uso diário.
 
-## Principios
+O objetivo do CleanFrame não é ser o tema "mais bonito" ou repleto de efeitos translúcidos que cansam a visão. O objetivo é ser **confiável**: menus, popups, caixas de diálogo, seleções, entradas de texto, terminais e widgets devem permanecer nítidos, legíveis e com contraste impecável no maior número de interfaces possível (GTK 2/3/4, Qt, Flatpak, Snap e apps Electron).
+
+---
+
+### Mantenedor / Autor da Adaptação:
+- **Autor:** Marcos Sfair Mariani (`sfairmm`)
+- **E-mail:** [g00gle.lags@gmail.com](mailto:g00gle.lags@gmail.com)
+- **Telegram:** [@sfairmm](https://t.me/sfairmm)
+- **Repositório:** [https://codeberg.org/g00gle_lags/cleanframe](https://codeberg.org/g00gle_lags/cleanframe)
+
+---
+
+## Princípios
 
 - Tema claro apenas (light-only)
 - Coerencia visual acima de efeitos visuais
@@ -124,19 +136,36 @@ Opcional (testar com seu tema atual):
 FILEZILLA_GTK_THEME='CleanFrame-Light' ./scripts/run-filezilla-safe.sh
 ```
 
-## Release Comunitaria (WIP)
+## Empacotamento e Build para Distribuição Comunitária
 
-Documentos para manter a release consistente com o proposito do projeto:
+Para gerar o build do tema e criar os arquivos compactados prontos para distribuição comunitária (GitHub Releases, Gnome-Look / Pling):
 
-- `docs/TEST_MATRIX.md`
-- `docs/RELEASE_CHECKLIST.md`
-- `docs/LICENSE_AND_CREDITS.md`
+```bash
+# Compilar tema montado em build/
+make build
 
-## Licenca e Creditos
+# Gerar pacotes de distribuição (.tar.xz e .zip) em dist/
+make package
+```
 
-Este projeto deriva/adapta a base do tema Orchis (e historico relacionado).
-Veja detalhes, creditos e notas de adaptacao em:
+## Release Comunitária
 
-- `docs/LICENSE_AND_CREDITS.md`
-- `COPYING`
-- `original/Orchis-theme-master/README.md`
+Documentos de referência para testes, validação e licenciamento:
+
+- `CREDITS.md` - Atribuições e créditos completos
+- `COPYING` - Licença GNU General Public License v3.0
+- `docs/TEST_MATRIX.md` - Matriz de testes em GTK, Cinnamon e Shell
+- `docs/RELEASE_CHECKLIST.md` - Checklist pré-release
+- `docs/LICENSE_AND_CREDITS.md` - Conformidade de licenciamento e upstream
+
+## Licença e Créditos
+
+CleanFrame é um software livre distribuído sob a licença **GNU General Public License v3.0 (GPL-3.0)**.
+
+O projeto é mantido por **sfairmm** ([g00gle.lags@gmail.com](mailto:g00gle.lags@gmail.com)) e deriva respeitosamente de grandes trabalhos da comunidade:
+- **Orchis Theme** por Vince Liuice ([@vinceliuice](https://github.com/vinceliuice))
+- **Materia Theme** por nana-4 ([@nana-4](https://github.com/nana-4))
+- **Firefox GNOME Theme** por Rafael Mardojai e Sai Kurogetsu
+- **Adwaita / GNOME Shell** por GNOME Design Team / Red Hat, Inc.
+
+Veja a lista completa de contribuições e notas legais em [CREDITS.md](CREDITS.md) e [COPYING](COPYING).

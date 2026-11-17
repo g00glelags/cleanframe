@@ -1,10 +1,33 @@
+# OS & Editor files
+.DS_Store
 .DS_store
-.sass-cache
+.vscode/
+.idea/
+*~
+*.swp
+*.swo
+
+# Sass cache & temp
+.sass-cache/
 *-temp.scss
-.vscode
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Build & packaging artifacts
 build/
+dist/
+release/
+*.tar.xz
+*.tar.gz
+*.zip
+
+# Generated target CSS (compiled from SCSS)
 src/cinnamon/*.css
 src/gnome-shell/*/*.css
 src/gtk/*/*.css
-src/original
+
+# Upstream reference mirrors (if any kept locally)
+src/original/
 original/
