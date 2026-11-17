@@ -12,7 +12,8 @@ O **CleanFrame** foi adaptado, reestruturado e é mantido por:
 - **Marcos Sfair Mariani** (`sfairmm`)
 - **E-mail:** [g00gle.lags@gmail.com](mailto:g00gle.lags@gmail.com)
 - **Telegram:** [@sfairmm](https://t.me/sfairmm)
-- **Repositório:** [https://codeberg.org/g00gle_lags/cleanframe](https://codeberg.org/g00gle_lags/cleanframe)
+- **Repositório GitHub:** [https://github.com/g00glelags/cleanframe](https://github.com/g00glelags/cleanframe)
+- **Espelho Codeberg:** [https://codeberg.org/g00gle_lags/cleanframe](https://codeberg.org/g00gle_lags/cleanframe)
 
 ### Principais contribuições, modificações e inovações introduzidas no CleanFrame:
 - **Filosofia estritamente Light-Only:** Remoção de variantes dark para garantir foco absoluto na legibilidade, contraste e eliminação de falhas de cor.

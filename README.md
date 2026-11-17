@@ -15,7 +15,8 @@ O objetivo do CleanFrame não é ser o tema "mais bonito" ou repleto de efeitos 
 - **Autor:** Marcos Sfair Mariani (`sfairmm`)
 - **E-mail:** [g00gle.lags@gmail.com](mailto:g00gle.lags@gmail.com)
 - **Telegram:** [@sfairmm](https://t.me/sfairmm)
-- **Repositório:** [https://codeberg.org/g00gle_lags/cleanframe](https://codeberg.org/g00gle_lags/cleanframe)
+- **Repositório GitHub:** [https://github.com/g00glelags/cleanframe](https://github.com/g00glelags/cleanframe)
+- **Espelho Codeberg:** [https://codeberg.org/g00gle_lags/cleanframe](https://codeberg.org/g00gle_lags/cleanframe)
 
 ---
 
