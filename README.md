@@ -1,6 +1,11 @@
+<p align="center">
+  <img src="images/logo/cleanframe-banner.png" alt="CleanFrame Theme Banner" width="800">
+</p>
+
 # CleanFrame Theme
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL_v3-blue.svg)](COPYING)
+[![OpenDesktop / Pling](https://img.shields.io/badge/OpenDesktop-Download%20Theme-00b4d8.svg)](https://www.opendesktop.org/p/2382045)
 [![Theme: Predominantemente Light](https://img.shields.io/badge/Theme-Predominantemente_Light-success.svg)](#principios)
 [![Target: Cinnamon & GTK+](https://img.shields.io/badge/Target-Cinnamon_%26_GTK%2B-blueviolet.svg)](#escopo)
 [![Status: Cinnamon Exhaustively Tested](https://img.shields.io/badge/Cinnamon-Exaustivamente_Testado-brightgreen.svg)](#status-de-testes-e-ambientes)
@@ -12,10 +17,11 @@ O objetivo do CleanFrame não é ser o tema "mais bonito" ou repleto de efeitos 
 
 ---
 
-### Mantenedor / Autor da Adaptação:
+### Mantenedor / Links Oficiais:
 - **Autor:** Marcos Sfair Mariani (`sfairmm`)
 - **E-mail:** [g00gle.lags@gmail.com](mailto:g00gle.lags@gmail.com)
 - **Telegram:** [@sfairmm](https://t.me/sfairmm)
+- **OpenDesktop / Pling:** [https://www.opendesktop.org/p/2382045](https://www.opendesktop.org/p/2382045)
 - **Repositório GitHub:** [https://github.com/g00glelags/cleanframe](https://github.com/g00glelags/cleanframe)
 - **Espelho Codeberg:** [https://codeberg.org/g00gle_lags/cleanframe](https://codeberg.org/g00gle_lags/cleanframe)
 

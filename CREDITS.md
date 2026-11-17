@@ -12,6 +12,7 @@ O **CleanFrame** foi adaptado, reestruturado e é mantido por:
 - **Marcos Sfair Mariani** (`sfairmm`)
 - **E-mail:** [g00gle.lags@gmail.com](mailto:g00gle.lags@gmail.com)
 - **Telegram:** [@sfairmm](https://t.me/sfairmm)
+- **OpenDesktop / Pling:** [https://www.opendesktop.org/p/2382045](https://www.opendesktop.org/p/2382045)
 - **Repositório GitHub:** [https://github.com/g00glelags/cleanframe](https://github.com/g00glelags/cleanframe)
 - **Espelho Codeberg:** [https://codeberg.org/g00gle_lags/cleanframe](https://codeberg.org/g00gle_lags/cleanframe)
 
