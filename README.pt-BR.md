@@ -9,6 +9,7 @@
 # CleanFrame Theme
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL_v3-blue.svg)](COPYING)
+[![GitHub Release](https://img.shields.io/github/v/release/g00glelags/cleanframe?color=success&label=Release)](https://github.com/g00glelags/cleanframe/releases/latest)
 [![OpenDesktop / Pling](https://img.shields.io/badge/OpenDesktop-Download%20Theme-00b4d8.svg)](https://www.opendesktop.org/p/2382045)
 [![Theme: Predominantemente Light](https://img.shields.io/badge/Theme-Predominantemente_Light-success.svg)](#principios)
 [![Target: Cinnamon & GTK+](https://img.shields.io/badge/Target-Cinnamon_%26_GTK%2B-blueviolet.svg)](#escopo)
