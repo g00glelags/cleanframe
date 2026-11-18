@@ -32,6 +32,26 @@ O objetivo do CleanFrame não é ser o tema "mais bonito" ou repleto de efeitos 
 
 ---
 
+## Prévia & Capturas de Tela
+
+<p align="center">
+  <img src="images/cleanframe-window.jpeg" alt="Design de Janela do CleanFrame" width="850">
+</p>
+
+<p align="center">
+  <img src="images/cleanframe-page.jpeg" alt="Ambiente de Trabalho CleanFrame" width="850">
+</p>
+
+<p align="center">
+  <img src="images/screenshot.png" alt="Captura de Tela do CleanFrame" width="850">
+</p>
+
+<p align="center">
+  <img src="images/screenshot-3.png" alt="Detalhes de Widgets e Diálogos" width="850">
+</p>
+
+---
+
 ## Status de Testes e Ambientes (Transparência Comunitária)
 
 Para garantir total clareza e transparência para a comunidade sobre o que foi validado na prática:

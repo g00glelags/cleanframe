@@ -32,6 +32,26 @@ The primary goal of CleanFrame is not to be flashy with heavy transparencies or 
 
 ---
 
+## Preview & Screenshots
+
+<p align="center">
+  <img src="images/cleanframe-window.jpeg" alt="CleanFrame Window Design" width="850">
+</p>
+
+<p align="center">
+  <img src="images/cleanframe-page.jpeg" alt="CleanFrame Desktop Environment" width="850">
+</p>
+
+<p align="center">
+  <img src="images/screenshot.png" alt="CleanFrame Workspace" width="850">
+</p>
+
+<p align="center">
+  <img src="images/screenshot-3.png" alt="CleanFrame Widget and Dialog Details" width="850">
+</p>
+
+---
+
 ## Test Status and Environments (Community Transparency)
 
 To maintain full transparency with the community regarding our actual test coverage:
