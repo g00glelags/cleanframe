@@ -1695,23 +1695,33 @@ treeview.view {
     color: $divider;
   }
 
-  // FIXME: box-shadow, background-color and background-image are not available here.
+  // GtkTreeView drag & drop indicator:
+  // Render a clean insertion line for .before / .after positions, and an enclosing
+  // frame for .into, without painting a massive opaque frame over labels/icons.
   &:drop(active) {
     border-style: solid none;
-
-    // Fill the whole drop destination area in GTK3 treeviews.
-    // Text readability is preserved by the row/cell/label drop overrides below.
-    border-width: 9999px;
-
-    // Use the theme app-selection palette for drop targets so folder names
-    // remain readable in file managers (Thunar/Nemo) and the highlight stays
-    // aligned with current theme colors.
-    border-color: $file_dnd_target_fill;
+    border-width: 2px;
+    border-color: $file_dnd_target_outline;
     color: $file_dnd_target_fg;
+    background-color: transparent;
 
-    &.after { border-top-style: none; }
+    &.after {
+      border-style: none none solid none;
+      border-width: 0 0 2px 0;
+    }
 
-    &.before { border-bottom-style: none; }
+    &.before {
+      border-style: solid none none none;
+      border-width: 2px 0 0 0;
+    }
+
+    &.into,
+    &:not(.before):not(.after) {
+      border-style: solid;
+      border-width: 1px;
+      border-color: $file_dnd_target_outline;
+      background-color: rgba($file_dnd_target_bg, 0.35);
+    }
   }
 
   &.expander {
@@ -1832,7 +1842,6 @@ menubar,
 // Generic GTK3 drop-target readability patch for file/list/icon views.
 // Some apps (e.g. Thunar/Nemo) style the actual destination on row/cell nodes
 // and may bypass app-specific window class selectors.
-treeview.view:drop(active),
 treeview.view cell:drop(active),
 treeview.view.cell:drop(active),
 iconview.view:drop(active),
@@ -1846,7 +1855,32 @@ row:drop(active) {
   text-shadow: none !important;
 }
 
-treeview.view:drop(active) *,
+// Treeview drop insertion lines stay transparent and retain precise border indicators
+treeview.view:drop(active).before,
+treeview.view:drop(active).after {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+treeview.view:drop(active).before {
+  border-style: solid none none none !important;
+  border-width: 2px 0 0 0 !important;
+  border-color: $file_dnd_target_outline !important;
+}
+
+treeview.view:drop(active).after {
+  border-style: none none solid none !important;
+  border-width: 0 0 2px 0 !important;
+  border-color: $file_dnd_target_outline !important;
+}
+
+treeview.view:drop(active).into {
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-color: $file_dnd_target_outline !important;
+  background-color: rgba($file_dnd_target_bg, 0.35) !important;
+}
+
 treeview.view cell:drop(active) *,
 treeview.view.cell:drop(active) *,
 iconview.view:drop(active) *,

@@ -18,6 +18,9 @@ quando aplicavel.
 
 ### Fixed
 
+- Correção do indicador de arrasto (*drag-and-drop*) na barra lateral de atalhos e listas do Thunar (`GtkTreeView`): remoção do hack de borda de 9999px que cobria os rótulos e itens com um bloco cinza monolítico, substituindo por uma linha indicadora limpa e precisa de 2px no topo (`.before`) e na base (`.after`) com fundo transparente.
+- Destino de soltura no Thunar, Nemo e GTK3 genérico aperfeiçoado: para soltura dentro de pastas (`.into`), utiliza moldura suave com preenchimento translúcido sem encobrir texto ou ícones.
+- Atualização da cor do indicador de soltura e borda de destino (`$drag-drop-target-outline`) para verde vibrante (`#35A854`), proporcionando contraste nítido e feedback visual imediato.
 - Correção de emuladores de terminal baseados em VTE (GNOME Terminal, XFCE Terminal, Tilix) que ficavam pretos/escuros por falta de estilo de fallback no GTK; adicionadas regras explícitas de fundo claro (`$base`) e texto preto (`$text`) em `vte-terminal` e perfil padrão light no GNOME Terminal (`CleanFrame Light`).
 - Correção da cor e contorno do nome do usuário no menu do Cinnamon (`.user-widget-label` e `.appmenu-sidebar-user-box`), definindo preto puro (`$black`) e `text-shadow: none` para eliminar texto branco ilegível e aberrações cromáticas em fundo claro.
 - Suporte e estilização completa para o menu moderno do Cinnamon 6+ (`menu@cinnamon.org`) cobrindo as classes `.appmenu-*` (sidebar, categorias, botões de aplicativos, favoritos, busca e botões do sistema), restaurando a legibilidade e o alinhamento visual.

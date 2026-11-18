@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/logo/cleanframe-banner.png" alt="CleanFrame Theme Banner" width="800">
+  <img src="images/cleanframe-banner.jpeg" alt="CleanFrame Theme Banner" width="800">
 </p>
 
 <p align="center">
